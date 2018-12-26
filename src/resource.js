@@ -6,6 +6,7 @@ var res = {
     mapa1_tmx: "res/mapa1.tmx",
     caballero_png: "res/caballero.png",
     caballero_plist: "res/caballero.plist",
+    entrenador_plist: "res/entrenador.plist",
 };
 
 var g_resources = [];
