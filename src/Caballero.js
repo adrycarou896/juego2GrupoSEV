@@ -24,7 +24,7 @@ ctor:function (space, posicion, layer) {
     this.layer = layer;
 
     // Crear Sprite - Cuerpo y forma
-    this.sprite = new cc.PhysicsSprite("#entrenador_quieto_01.png");
+    this.sprite = new cc.PhysicsSprite("#jugador_quieto_01.png");
     // Cuerpo dinamico, SI le afectan las fuerzas
     this.body = new cp.Body(5, Infinity);
 
@@ -50,7 +50,7 @@ ctor:function (space, posicion, layer) {
     // Crear animación - quieto
     var framesAnimacion = [];
     for (var i = 1; i <= 2; i++) {
-        var str = "entrenador_quieto_0" + i + ".png";
+        var str = "jugador_quieto_0" + i + ".png";
         var frame = cc.spriteFrameCache.getSpriteFrame(str);
         framesAnimacion.push(frame);
     }
@@ -61,7 +61,7 @@ ctor:function (space, posicion, layer) {
     // Crear animación - derecha
     var framesAnimacion = [];
     for (var i = 1; i <= 2; i++) {
-        var str = "entrenador_derecha_0" + i + ".png";
+        var str = "jugador_derecha_0" + i + ".png";
         var frame = cc.spriteFrameCache.getSpriteFrame(str);
         framesAnimacion.push(frame);
     }
@@ -72,7 +72,7 @@ ctor:function (space, posicion, layer) {
     // Crear animación - izquierda
     var framesAnimacion = [];
     for (var i = 1; i <= 2; i++) {
-        var str = "entrenador_izquierda_0" + i + ".png";
+        var str = "jugador_izquierda_0" + i + ".png";
         var frame = cc.spriteFrameCache.getSpriteFrame(str);
         framesAnimacion.push(frame);
     }
@@ -83,7 +83,7 @@ ctor:function (space, posicion, layer) {
     // Crear animación - arriba
     var framesAnimacion = [];
     for (var i = 1; i <= 2; i++) {
-        var str = "entrenador_arriba_0" + i + ".png";
+        var str = "jugador_arriba_0" + i + ".png";
         var frame = cc.spriteFrameCache.getSpriteFrame(str);
         framesAnimacion.push(frame);
     }
@@ -94,7 +94,7 @@ ctor:function (space, posicion, layer) {
     // Crear animación - abajo
     var framesAnimacion = [];
     for (var i = 1; i <= 2; i++) {
-        var str = "entrenador_abajo_0" + i + ".png";
+        var str = "jugador_abajo_0" + i + ".png";
         var frame = cc.spriteFrameCache.getSpriteFrame(str);
         framesAnimacion.push(frame);
     }

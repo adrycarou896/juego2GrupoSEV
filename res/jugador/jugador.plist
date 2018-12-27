@@ -4,7 +4,7 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>entrenador_abajo_01.png</key>
+			<key>jugador_abajo_01.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{34,-2},{32,39}}</string>
@@ -18,7 +18,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_abajo_02.png</key>
+			<key>jugador_abajo_02.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{102,-2},{32,39}}</string>
@@ -32,7 +32,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_arriba_01.png</key>
+			<key>jugador_arriba_01.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{37,95},{32,39}}</string>
@@ -46,7 +46,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_arriba_02.png</key>
+			<key>jugador_arriba_02.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{68,95},{32,39}}</string>
@@ -60,7 +60,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_derecha_01.png</key>
+			<key>jugador_derecha_01.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{37,63},{32,39}}</string>
@@ -74,7 +74,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_derecha_02.png</key>
+			<key>jugador_derecha_02.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{68,63},{32,39}}</string>
@@ -88,7 +88,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_izquierda_01.png</key>
+			<key>jugador_izquierda_01.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{37,31},{32,39}}</string>
@@ -102,7 +102,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_izquierda_02.png</key>
+			<key>jugador_izquierda_02.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{68,31},{32,39}}</string>
@@ -116,7 +116,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_quieto_01.png</key>
+			<key>jugador_quieto_01.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,-2},{32,39}}</string>
@@ -130,7 +130,7 @@
 				<string>{32,39}</string>
 			</dict>
 
-			<key>entrenador_quieto_02.png</key>
+			<key>jugador_quieto_02.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{0,-2},{32,39}}</string>
@@ -153,7 +153,7 @@
 			<key>size</key>
 			<string>{128,256}</string>
 			<key>textureFileName</key>
-			<string>entrenador.png</string>
+			<string>jugador.png</string>
 			</dict>
 		</dict>
 </plist>

@@ -11,7 +11,7 @@ var GameLayer = cc.Layer.extend({
        this._super();
        var size = cc.winSize;
 
-       cc.spriteFrameCache.addSpriteFrames(res.entrenador_plist);
+       cc.spriteFrameCache.addSpriteFrames(res.jugador_plist);
 
        // Inicializar Space (sin gravedad)
        this.space = new cp.Space();
