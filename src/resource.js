@@ -5,6 +5,7 @@ var res = {
     tiles16_png: "res/mapas/tiles16.png",
     mapa1_tmx: "res/mapas/mapa1.tmx",
     jugador_plist: "res/jugador/jugador.plist",
+    eevee_plist: "res/pokemon/eevee.plist",
 };
 
 var g_resources = [];

@@ -44,6 +44,8 @@ ctor:function (space, posicion, layer) {
         this.sprite.getContentSize().width,
         this.sprite.getContentSize().height);
 
+    this.shape.setCollisionType(tipoJugador);
+
     this.shape.setFriction(1);
     this.shape.setElasticity(0);
 

@@ -1,8 +1,12 @@
 var controles = {};
 var teclas = [];
 
+var tipoJugador = 1;
+var tipoEnemigo = 2;
+
 var GameLayer = cc.Layer.extend({
     caballero:null,
+    enemigos: [],
     space:null,
     mapa:null,
     mapaAncho:0,
@@ -12,6 +16,7 @@ var GameLayer = cc.Layer.extend({
        var size = cc.winSize;
 
        cc.spriteFrameCache.addSpriteFrames(res.jugador_plist);
+       cc.spriteFrameCache.addSpriteFrames(res.eevee_plist);
 
        // Inicializar Space (sin gravedad)
        this.space = new cp.Space();
@@ -25,6 +30,13 @@ var GameLayer = cc.Layer.extend({
 
        this.caballero = new Jugador(this.space,
               cc.p(50,150), this);
+
+       var eevee = new Eevee(this.space, cc.p(70,150), this);
+       this.enemigos.push(eevee);
+
+        //jugador enemigo
+        this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
+            null, this.collisionJugadorConEnemigo.bind(this), null, null);
 
        cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -60,6 +72,11 @@ var GameLayer = cc.Layer.extend({
 
        this.setPosition(cc.p( - posicionXCamara , - posicionYCamara));
 
+    },
+    collisionJugadorConEnemigo:function (arbiter, space){
+        var shapes = arbiter.getShapes();
+        var enemigo = shapes[1];
+        console.log("ENEMIGO -> "+enemigo);
     },
     cargarMapa:function () {
        this.mapa = new cc.TMXTiledMap(res.mapa1_tmx);

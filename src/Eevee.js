@@ -1,7 +1,7 @@
 var vida = 10;
 var nivel = 1;
 
-var Pikachu = cc.Class.extend({
+var Eevee = cc.Class.extend({
     space:null,
     sprite:null,
     shape:null,
@@ -13,7 +13,7 @@ var Pikachu = cc.Class.extend({
         this.layer = layer;
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#pikachu_quieto_01.png");
+        this.sprite = new cc.PhysicsSprite("#eevee_01.png");
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(5, Infinity);
 
@@ -30,19 +30,18 @@ var Pikachu = cc.Class.extend({
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height);
 
+        this.shape.setCollisionType(tipoEnemigo);
+
         this.shape.setFriction(1);
         this.shape.setElasticity(0);
 
         // forma dinamica
         this.space.addShape(this.shape);
 
-        // ejecutar la animación
-        this.animacion = this.aQuietoAbajo;
-
         //Animaciones
 
         //---------
-        
+
         layer.addChild(this.sprite,10);
 
     },
