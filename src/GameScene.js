@@ -3,9 +3,10 @@ var teclas = [];
 
 var tipoJugador = 1;
 var tipoEnemigo = 2;
+var tipoLimite = 3;
 
 var GameLayer = cc.Layer.extend({
-    caballero:null,
+    jugador:null,
     enemigos: [],
     space:null,
     mapa:null,
@@ -28,11 +29,20 @@ var GameLayer = cc.Layer.extend({
        this.cargarMapa();
        this.scheduleUpdate();
 
-       this.caballero = new Jugador(this.space,
-              cc.p(50,150), this);
+       var grupoJugador = this.mapa.getObjectGroup("Jugador");
+       var arrayJugador = grupoJugador.getObjects();
+       this.jugador = new Jugador(this.space,
+              cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
 
        var eevee = new Eevee(this.space, cc.p(70,150), this);
        this.enemigos.push(eevee);
+
+        // COLISIONES
+        // Zona de escuchadores de colisiones
+
+        // Colisión Suelo y Jugador
+        this.space.addCollisionHandler(tipoLimite, tipoJugador,
+            null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
 
         //jugador enemigo
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
@@ -48,13 +58,15 @@ var GameLayer = cc.Layer.extend({
 
     },
     update:function (dt) {
-       this.space.step(dt);
+
        this.procesarControles();
-       this.caballero.actualizar();
+       this.jugador.actualizar();
+
+        this.space.step(dt);
 
        // Mover cámara
-       var posicionXCamara = this.caballero.body.p.x - this.getContentSize().width/2;
-       var posicionYCamara = this.caballero.body.p.y - this.getContentSize().height/2;
+       var posicionXCamara = this.jugador.body.p.x - this.getContentSize().width/2;
+       var posicionYCamara = this.jugador.body.p.y - this.getContentSize().height/2;
 
        if ( posicionXCamara < 0 ){
           posicionXCamara = 0;
@@ -164,9 +176,21 @@ var GameLayer = cc.Layer.extend({
                 break;
         }
     },
+
+
     procesarControles:function(){
-        this.caballero.moverX(controles.moverX);
-        this.caballero.moverY(controles.moverY);
+        this.jugador.moverX(controles.moverX);
+        this.jugador.moverY(controles.moverY);
+    },
+
+
+    collisionSueloConJugador:function (arbiter, space) {
+        this.jugador.tocaSuelo();
+    },
+
+
+    finCollisionSueloConJugador:function (arbiter, space) {
+        this.jugador.estado = estadoCaminando;
     }
 });
 
