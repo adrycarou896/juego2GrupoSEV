@@ -133,7 +133,7 @@
 			<key>jugador_quieto_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,-2},{32,39}}</string>
+				<string>{{0,32},{32,39}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -143,7 +143,33 @@
 				<key>sourceSize</key>
 				<string>{32,39}</string>
 			</dict>
-
+			
+			<key>jugador_quieto_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,64},{32,39}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{32,39}}</string>
+				<key>sourceSize</key>
+				<string>{32,39}</string>
+			</dict>
+			<key>jugador_quieto_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,96},{32,39}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{32,39}}</string>
+				<key>sourceSize</key>
+				<string>{32,39}</string>
+			</dict>
 		</dict>
 
 		<key>metadata</key>

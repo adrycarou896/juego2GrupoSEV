@@ -5,14 +5,17 @@ var abajo = 4;
 
 var estadoCaminando = 0;
 
-var Caballero = cc.Class.extend({
+var Jugador = cc.Class.extend({
     space:null,
     sprite:null,
     shape:null,
     body:null,
     layer:null,
-    orientacion:derecha,
-    aQuieto:null,
+    orientacion:abajo,
+    aQuietoAbajo:null,
+    aQuietoIzquierda:null,
+    aQuietoDerecha:null,
+    aQuietoArriba:null,
     aDerecha:null,
     aIzquierda:null,
     aArriba:null,
@@ -47,15 +50,44 @@ ctor:function (space, posicion, layer) {
     // forma dinamica
     this.space.addShape(this.shape);
 
-    // Crear animación - quieto
+    // Crear animación - quieto abajo
     var framesAnimacion = [];
-    for (var i = 1; i <= 2; i++) {
-        var str = "jugador_quieto_0" + i + ".png";
-        var frame = cc.spriteFrameCache.getSpriteFrame(str);
-        framesAnimacion.push(frame);
-    }
+
+    var str = "jugador_quieto_01.png";
+    var frame = cc.spriteFrameCache.getSpriteFrame(str);
+    framesAnimacion.push(frame);
     var animacion = new cc.Animation(framesAnimacion, 0.2);
-    this.aQuieto =
+    this.aQuietoAbajo =
+        new cc.RepeatForever(new cc.Animate(animacion));
+
+    // Crear animación - quieto izquierda
+    var framesAnimacion = [];
+
+    var str = "jugador_quieto_02.png";
+    var frame = cc.spriteFrameCache.getSpriteFrame(str);
+    framesAnimacion.push(frame);
+    var animacion = new cc.Animation(framesAnimacion, 0.2);
+    this.aQuietoIzquierda =
+        new cc.RepeatForever(new cc.Animate(animacion));
+
+    // Crear animación - quieto derecha
+    var framesAnimacion = [];
+
+    var str = "jugador_quieto_03.png";
+    var frame = cc.spriteFrameCache.getSpriteFrame(str);
+    framesAnimacion.push(frame);
+    var animacion = new cc.Animation(framesAnimacion, 0.2);
+    this.aQuietoDerecha =
+        new cc.RepeatForever(new cc.Animate(animacion));
+
+    // Crear animación - quieto arriba
+    var framesAnimacion = [];
+
+    var str = "jugador_quieto_04.png";
+    var frame = cc.spriteFrameCache.getSpriteFrame(str);
+    framesAnimacion.push(frame);
+    var animacion = new cc.Animation(framesAnimacion, 0.2);
+    this.aQuietoArriba =
         new cc.RepeatForever(new cc.Animate(animacion));
 
     // Crear animación - derecha
@@ -103,7 +135,7 @@ ctor:function (space, posicion, layer) {
         new cc.RepeatForever(new cc.Animate(animacion));
 
     // ejecutar la animación
-    this.animacion = this.aQuieto;
+    this.animacion = this.aQuietoAbajo;
 
     layer.addChild(this.sprite,10);
 
@@ -112,24 +144,28 @@ actualizar:function(){
     switch ( this.estado ){
         case estadoCaminando:
             if ( this.body.vx > 0.001){
+                this.orientacion = derecha;
                 if ( this.animacion != this.aDerecha){
                     this.animacion = this.aDerecha;
                     this.sprite.stopAllActions();
                     this.sprite.runAction(this.animacion);
                 }
             } else if (this.body.vx < -0.001){
+                this.orientacion = izquierda;
                 if ( this.animacion != this.aIzquierda){
                     this.animacion = this.aIzquierda;
                     this.sprite.stopAllActions();
                     this.sprite.runAction(this.animacion);
                 }
             } else if ( this.body.vy > 0.001){
+                this.orientacion = arriba;
                 if ( this.animacion != this.aArriba){
                     this.animacion = this.aArriba;
                     this.sprite.stopAllActions();
                     this.sprite.runAction(this.animacion);
                 }
             } else if (this.body.vy < -0.001){
+                this.orientacion = abajo;
                 if ( this.animacion != this.aAbajo){
                     this.animacion = this.aAbajo;
                     this.sprite.stopAllActions();
@@ -137,11 +173,20 @@ actualizar:function(){
                 }
             }
             else {
-                if ( this.animacion != this.aQuieto){
-                    this.animacion = this.aQuieto;
-                    this.sprite.stopAllActions();
-                    this.sprite.runAction(this.animacion);
+                if(this.orientacion == arriba){
+                    this.animacion = this.aQuietoArriba;
                 }
+                else if(this.orientacion == izquierda){
+                    this.animacion = this.aQuietoIzquierda;
+                }
+                else if(this.orientacion == derecha){
+                    this.animacion = this.aQuietoDerecha;
+                }
+                else{
+                    this.animacion = this.aQuietoAbajo;
+                }
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.animacion);
             }
         break;
         /** añadir otros estados, disparar, etc **/

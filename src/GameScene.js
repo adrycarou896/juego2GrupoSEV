@@ -23,7 +23,7 @@ var GameLayer = cc.Layer.extend({
        this.cargarMapa();
        this.scheduleUpdate();
 
-       this.caballero = new Caballero(this.space,
+       this.caballero = new Jugador(this.space,
               cc.p(50,150), this);
 
        cc.eventManager.addListener({
