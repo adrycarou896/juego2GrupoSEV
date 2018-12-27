@@ -29,14 +29,6 @@ var GameLayer = cc.Layer.extend({
        this.cargarMapa();
        this.scheduleUpdate();
 
-       var grupoJugador = this.mapa.getObjectGroup("Jugador");
-       var arrayJugador = grupoJugador.getObjects();
-       this.jugador = new Jugador(this.space,
-              cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
-
-       var eevee = new Eevee(this.space, cc.p(70,150), this);
-       this.enemigos.push(eevee);
-
         // COLISIONES
         // Zona de escuchadores de colisiones
 
@@ -44,9 +36,9 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoLimite, tipoJugador,
             null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
 
-        //jugador enemigo
+        //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
-            null, this.collisionJugadorConEnemigo.bind(this), null, null);
+            null, null, this.collisionJugadorConEnemigo.bind(this), null);
 
        cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -86,9 +78,9 @@ var GameLayer = cc.Layer.extend({
 
     },
     collisionJugadorConEnemigo:function (arbiter, space){
+        console.log("COLISION CON ENEMIGO");
         var shapes = arbiter.getShapes();
         var enemigo = shapes[1];
-        console.log("ENEMIGO -> "+enemigo);
     },
     cargarMapa:function () {
        this.mapa = new cc.TMXTiledMap(res.mapa_tmx);
@@ -122,9 +114,23 @@ var GameLayer = cc.Layer.extend({
                   this.space.addStaticShape(shapeLimite);
               }
         }
+
+        //Jugador
+        var grupoJugador = this.mapa.getObjectGroup("Jugador");
+        var arrayJugador = grupoJugador.getObjects();
+        this.jugador = new Jugador(this.space,
+            cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
+
+        //ENemigos salvajes
+        var grupoEnemigosSalvajes = this.mapa.getObjectGroup("EnemigoSalvaje");
+        var enemigosSavajesArray = grupoEnemigosSalvajes.getObjects();
+        for (var i = 0; i < enemigosSavajesArray.length; i++) {
+            var enemigo = new Eevee(this.space,
+                cc.p(enemigosSavajesArray[i]["x"],enemigosSavajesArray[i]["y"]),this);
+            this.enemigos.push(enemigo);
+        }
     },
     procesarKeyPressed:function(keyCode){
-        console.log("procesarKeyPressed "+keyCode);
         var posicion = teclas.indexOf(keyCode);
         if ( posicion == -1 ) {
             teclas.push(keyCode);
@@ -150,7 +156,6 @@ var GameLayer = cc.Layer.extend({
         }
     },
     procesarKeyReleased(keyCode){
-        console.log("procesarKeyReleased "+keyCode);
         var posicion = teclas.indexOf(keyCode);
         teclas.splice(posicion, 1);
         switch (keyCode ){
@@ -185,6 +190,7 @@ var GameLayer = cc.Layer.extend({
 
 
     collisionSueloConJugador:function (arbiter, space) {
+        console.log("LIMITITEEEEEE");
         this.jugador.tocaSuelo();
     },
 
