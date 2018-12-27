@@ -14,6 +14,6 @@
         "src/resource.js",
         "src/app.js",
         "src/GameScene.js",
-        "src/Caballero.js"
+        "src/Jugador.js"
     ]
 }
