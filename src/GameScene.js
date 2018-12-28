@@ -80,9 +80,13 @@ var GameLayer = cc.Layer.extend({
 
     },
     collisionJugadorConEnemigo:function (arbiter, space){
-        console.log("COLISION CON ENEMIGO");
         var shapes = arbiter.getShapes();
-        var enemigo = shapes[1];
+        var shapeEnemigo = shapes[1];
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if (this.enemigos[j].shape == shapeEnemigo) {
+                this.getParent().addChild(new LuchaLayer(this.enemigos[j]));
+            }
+        }
     },
     cargarMapa:function () {
        this.mapa = new cc.TMXTiledMap(res.mapa);
@@ -191,7 +195,43 @@ var GameLayer = cc.Layer.extend({
     }
 });
 
+var LuchaLayer = cc.Layer.extend({
+    jugador:null,
+    enemigo:null,
+    space:null,
+    mapa:null,
+    mapaAncho:0,
+    mapaAlto:0,
+    ctor:function (enemigo) {
+        this._super();
+        var size = cc.winSize;
 
+        cc.spriteFrameCache.addSpriteFrames(res.eevee_ataque_plist);
+
+        // Inicializar Space (sin gravedad)
+        this.space = new cp.Space();
+
+        this.enemigo = enemigo;
+        // Fondo
+        this.spriteFondo = cc.Sprite.create(res.fondo_lucha_1);
+        this.spriteFondo.setPosition(cc.p(size.width/2 , size.height/2));
+        this.spriteFondo.setScale( size.width / this.spriteFondo.width );
+        this.addChild(this.spriteFondo);
+
+        this.enemigo.cambiarAModoLucha(this.space, cc.p(600,250), this);
+        //this.cargarMapa();
+        //this.scheduleUpdate();
+
+        return true;
+
+    },
+    update:function (dt) {
+
+    },
+    cargarMapa:function () {
+
+    }
+});
 
 var GameScene = cc.Scene.extend({
     onEnter:function () {

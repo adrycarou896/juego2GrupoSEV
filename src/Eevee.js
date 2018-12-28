@@ -1,3 +1,6 @@
+var parado = 1;
+var luchando = 2;
+
 var Eevee = cc.Class.extend({
     space:null,
     sprite:null,
@@ -5,12 +8,28 @@ var Eevee = cc.Class.extend({
     body:null,
     layer:null,
     animacion:null,
+    estado: parado,
     ctor:function (space, posicion, layer) {
-        this.space = space;
-        this.layer = layer;
 
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_01.png");
+        this.incluirEnVista(space,posicion,layer);
+
+    },
+    actualizar:function(){
+
+    },
+    cambiarAModoLucha:function (space, posicion, layer) {
+
+        // Crear Sprite - Cuerpo y forma
+        this.sprite = new cc.PhysicsSprite("#eevee_ataque_01.png");
+        this.incluirEnVista(space,posicion,layer);
+
+    },
+    incluirEnVista:function(space, posicion, layer){
+        this.space = space;
+        this.layer = layer;
+
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(5, Infinity);
 
@@ -40,9 +59,5 @@ var Eevee = cc.Class.extend({
         //---------
 
         layer.addChild(this.sprite,10);
-
-    },
-    actualizar:function(){
-
     }
 });
