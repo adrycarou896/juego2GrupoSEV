@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/res/mapas/mapa.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/res/mapas/mapa.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Eevee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eevee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Jugador.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jugador.js" afterDir="false" />
     </list>
@@ -25,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1824">
-              <caret line="114" column="47" selection-start-line="114" selection-start-column="47" selection-end-line="114" selection-end-column="47" />
+            <state relative-caret-position="484">
+              <caret line="230" selection-start-line="230" selection-end-line="230" />
             </state>
           </provider>
         </entry>
@@ -34,8 +36,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Jugador.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="42" column="32" lean-forward="true" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+            <state relative-caret-position="621">
+              <caret line="252" selection-start-line="252" selection-end-line="252" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Eevee.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-28">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -75,6 +86,9 @@
       <find>fric</find>
       <find>cargar</find>
       <find>update</find>
+      <find>tipoLimi</find>
+      <find>tipoEne</find>
+      <find>tipoEn</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\alegn\Desktop\FACULTAD\SEV\juego2GrupoSEV</dir>
@@ -99,10 +113,10 @@
         <option value="$PROJECT_DIR$/res/mapas/mapa2.tmx" />
         <option value="$PROJECT_DIR$/src/Enemigo.js" />
         <option value="$PROJECT_DIR$/src/Caballero.js" />
-        <option value="$PROJECT_DIR$/src/Eevee.js" />
         <option value="$PROJECT_DIR$/project.json" />
         <option value="$PROJECT_DIR$/res/mapas/mapa3.tmx" />
         <option value="$PROJECT_DIR$/src/resource.js" />
+        <option value="$PROJECT_DIR$/src/Eevee.js" />
         <option value="$PROJECT_DIR$/src/Jugador.js" />
         <option value="$PROJECT_DIR$/src/GameScene.js" />
       </list>
@@ -152,7 +166,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../InfiniteRunner" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Juego1GrupoSEV" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -375,12 +389,12 @@
       <workItem from="1545996550673" duration="1788000" />
       <workItem from="1545998363424" duration="1615000" />
       <workItem from="1546000394234" duration="253000" />
-      <workItem from="1546000943207" duration="3489000" />
+      <workItem from="1546000943207" duration="8041000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40340000" />
+    <option name="totallyTimeSpent" value="44892000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="400" y="0" width="1344" height="947" extended-state="0" />
@@ -457,13 +471,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Eevee.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.cocos-project.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -504,17 +511,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Eevee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/boton_jugar.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Jugador.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="42" column="32" lean-forward="true" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+        <state relative-caret-position="621">
+          <caret line="252" selection-start-line="252" selection-end-line="252" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1824">
-          <caret line="114" column="47" selection-start-line="114" selection-start-column="47" selection-end-line="114" selection-end-column="47" />
+        <state relative-caret-position="484">
+          <caret line="230" selection-start-line="230" selection-end-line="230" />
         </state>
       </provider>
     </entry>

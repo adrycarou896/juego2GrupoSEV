@@ -22,6 +22,7 @@ var Jugador = cc.Class.extend({
     aAbajo:null,
     animacion:null, // Actual
     estado: estadoCaminando,
+    capturados: [],
 
     ctor:function (space, posicion, layer) {
         this.space = space;
@@ -235,6 +236,22 @@ var Jugador = cc.Class.extend({
             if ( movimientoY == 0 ){
                  this.body.vy = 0;
             }
+    },
+
+
+    entrarGimnasio(){
+        var pokemonNivel2 = 0;
+        for(var i= 0; i<this.capturados.length; i++){
+            if(this.capturados[i].nivel >= 2 )
+                pokemonNivel2 ++;
+        }
+
+        if(pokemonNivel2 >= 2){
+            //Todo
+        }
+        else{
+
+        }
     }
 
 });

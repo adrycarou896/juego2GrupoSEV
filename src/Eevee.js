@@ -5,6 +5,7 @@ var Eevee = cc.Class.extend({
     body:null,
     layer:null,
     animacion:null,
+    nivel: 1,
     ctor:function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;

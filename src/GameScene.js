@@ -3,6 +3,7 @@ var teclas = [];
 
 var tipoJugador = 1;
 var tipoEnemigo = 2;
+var tipoGimnasio = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 
@@ -13,6 +14,7 @@ var GameLayer = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
+    gimnasio: null,
     ctor:function () {
        this._super();
        var size = cc.winSize;
@@ -35,8 +37,8 @@ var GameLayer = cc.Layer.extend({
         // Zona de escuchadores de colisiones
 
         // Colisión Suelo y Jugador
-        //this.space.addCollisionHandler(tipoLimite, tipoJugador,
-         //   null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
+        this.space.addCollisionHandler(tipoGimnasio, tipoJugador,
+            null, null, this.colisionConGimnasio.bind(this), this.finColisionConGimnasio.bind(this));
 
         //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
@@ -117,6 +119,28 @@ var GameLayer = cc.Layer.extend({
               }
         }
 
+        var lineasGimnasio = this.mapa.getObjectGroup("Gimnasio");
+        var arrayGimnasio = lineasGimnasio.getObjects();
+        for (var i = 0; i < arrayGimnasio.length; i++) {
+            var limite = arrayGimnasio[i];
+            var puntos = limite.polylinePoints;
+            for(var j = 0; j < puntos.length - 1; j++){
+                var bodyLimite = new cp.StaticBody();
+
+                var shapeLimite = new cp.SegmentShape(bodyLimite,
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j].x),
+                        parseInt(limite.y) - parseInt(puntos[j].y)),
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j + 1].x),
+                        parseInt(limite.y) - parseInt(puntos[j + 1].y)),
+                    1);
+
+                shapeLimite.setFriction(1);
+                shapeLimite.setElasticity(0);
+                shapeLimite.setCollisionType(tipoGimnasio);
+                this.space.addStaticShape(shapeLimite);
+            }
+        }
+
         //Jugador
         var grupoJugador = this.mapa.getObjectGroup("Jugador");
         var arrayJugador = grupoJugador.getObjects();
@@ -188,7 +212,24 @@ var GameLayer = cc.Layer.extend({
     procesarControles:function(){
         this.jugador.moverX(controles.moverX);
         this.jugador.moverY(controles.moverY);
+    },
+
+
+    colisionConGimnasio:function (arbiter, space) {
+        console.log("ENTRA EN EL GIMNASIOOOOOOOOOOOOOOOOOOOOOOO");
+        this.jugador.entrarGimnasio();
+    },
+
+
+    finColisionConGimnasio:function (arbiter, space) {
+
     }
+
+});
+
+var LayerGimnasio = cc.Layer.extend({
+
+
 });
 
 
