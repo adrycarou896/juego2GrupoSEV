@@ -86,7 +86,7 @@ var GameLayer = cc.Layer.extend({
         var enemigo = shapes[1];
     },
     cargarMapa:function () {
-       this.mapa = new cc.TMXTiledMap(res.mapa_tmx);
+       this.mapa = new cc.TMXTiledMap(res.mapa);
        // Añadirlo a la Layer
        this.addChild(this.mapa);
        // Ancho del mapa
