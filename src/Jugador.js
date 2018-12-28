@@ -4,7 +4,6 @@ var arriba = 3;
 var abajo = 4;
 
 var estadoCaminando = 0;
-var estadoChoque = 1;
 
 var Jugador = cc.Class.extend({
     space:null,
@@ -236,10 +235,6 @@ var Jugador = cc.Class.extend({
             if ( movimientoY == 0 ){
                  this.body.vy = 0;
             }
-    },
-
-    tocaSuelo: function(){
-        this.estado = estadoChoque;
     }
 
 });

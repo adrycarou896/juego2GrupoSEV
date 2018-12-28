@@ -3,7 +3,6 @@ var teclas = [];
 
 var tipoJugador = 1;
 var tipoEnemigo = 2;
-var tipoLimite = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 
@@ -36,8 +35,8 @@ var GameLayer = cc.Layer.extend({
         // Zona de escuchadores de colisiones
 
         // Colisión Suelo y Jugador
-        this.space.addCollisionHandler(tipoLimite, tipoJugador,
-            null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
+        //this.space.addCollisionHandler(tipoLimite, tipoJugador,
+         //   null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
 
         //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
@@ -114,8 +113,6 @@ var GameLayer = cc.Layer.extend({
 
                   shapeLimite.setFriction(1);
                   shapeLimite.setElasticity(0);
-
-                  shapeLimite.setCollisionType(tipoLimite);
                   this.space.addStaticShape(shapeLimite);
               }
         }
@@ -191,17 +188,6 @@ var GameLayer = cc.Layer.extend({
     procesarControles:function(){
         this.jugador.moverX(controles.moverX);
         this.jugador.moverY(controles.moverY);
-    },
-
-
-    collisionSueloConJugador:function (arbiter, space) {
-        console.log("LIMITITEEEEEE");
-        this.jugador.tocaSuelo();
-    },
-
-
-    finCollisionSueloConJugador:function (arbiter, space) {
-        this.jugador.estado = estadoCaminando;
     }
 });
 
