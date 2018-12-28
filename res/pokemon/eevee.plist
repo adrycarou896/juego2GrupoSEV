@@ -22,10 +22,14 @@
 		<key>metadata</key>
 		<dict>
 			<key>format</key>
-			<integer>1</integer>
+			<integer>2</integer>
+			<key>realTextureFileName</key>
+            <string>eevee_imagen.png</string>
 			<key>size</key>
 			<string>{33,39}</string>
-			<key>textureFileName</key>
+			<key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:3d70b2498d34a6ce27ecd669974329db:d7e2a12efd5d53dc799168586e11d70e:b8e96a3b0eea864d9c309cc779337e95$</string>
+            <key>textureFileName</key>
 			<string>eevee_imagen.png</string>
 		</dict>
 	</dict>

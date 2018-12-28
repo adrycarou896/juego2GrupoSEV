@@ -147,7 +147,7 @@
 			<key>jugador_quieto_03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,63},{32,39}}</string>
+				<string>{{0,62},{32,39}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>

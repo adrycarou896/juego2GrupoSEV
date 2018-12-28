@@ -32,9 +32,12 @@ var Jugador = cc.Class.extend({
         this.sprite = new cc.PhysicsSprite("#jugador_quieto_01.png");
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(5, Infinity);
+        /*this.body = new cp.Body(5, cp.momentForBox(1,
+            this.sprite.getContentSize().width,
+            this.sprite.getContentSize().height));*/
 
         this.body.setPos(posicion);
-        //body.w_limit = 0.02;
+        //this.body.w_limit = 0.02;
         this.body.setAngle(0);
         this.sprite.setBody(this.body);
 
@@ -192,12 +195,7 @@ var Jugador = cc.Class.extend({
                     this.sprite.stopAllActions();
                     this.sprite.runAction(this.animacion);
                 }
-            break;
-            case estadoChoque:
-                this.body.vy = 0;
-                this.body.vx = 0;
-
-            break;
+                break;
             /** añadir otros estados, disparar, etc **/
         }
     },

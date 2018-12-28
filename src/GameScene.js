@@ -4,6 +4,8 @@ var teclas = [];
 var tipoJugador = 1;
 var tipoEnemigo = 2;
 var tipoLimite = 3;
+var tipoEnemigoDerecha = 4;
+var tipoEnemigoIzquierda = 5;
 
 var GameLayer = cc.Layer.extend({
     jugador:null,
@@ -18,13 +20,14 @@ var GameLayer = cc.Layer.extend({
 
        cc.spriteFrameCache.addSpriteFrames(res.jugador_plist);
        cc.spriteFrameCache.addSpriteFrames(res.eevee_plist);
+       cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.caballero_plist);
 
        // Inicializar Space (sin gravedad)
        this.space = new cp.Space();
-       /**
-       this.depuracion = new cc.PhysicsDebugNode(this.space);
-       this.addChild(this.depuracion, 10);
-       **/
+
+       //this.depuracion = new cc.PhysicsDebugNode(this.space);
+       //this.addChild(this.depuracion, 10);
 
        this.cargarMapa();
        this.scheduleUpdate();
@@ -111,6 +114,8 @@ var GameLayer = cc.Layer.extend({
 
                   shapeLimite.setFriction(1);
                   shapeLimite.setElasticity(0);
+
+                  shapeLimite.setCollisionType(tipoLimite);
                   this.space.addStaticShape(shapeLimite);
               }
         }
@@ -121,7 +126,7 @@ var GameLayer = cc.Layer.extend({
         this.jugador = new Jugador(this.space,
             cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
 
-        //ENemigos salvajes
+        //Enemigos salvajes
         var grupoEnemigosSalvajes = this.mapa.getObjectGroup("EnemigoSalvaje");
         var enemigosSavajesArray = grupoEnemigosSalvajes.getObjects();
         for (var i = 0; i < enemigosSavajesArray.length; i++) {

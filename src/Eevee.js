@@ -1,6 +1,3 @@
-var vida = 10;
-var nivel = 1;
-
 var Eevee = cc.Class.extend({
     space:null,
     sprite:null,
