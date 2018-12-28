@@ -6,12 +6,15 @@ var res = {
     jugador_plist: "res/jugador/jugador.plist",
     eevee_png: "res/pokemon/eevee_imagen.png",
     eevee_plist: "res/pokemon/eevee.plist",
+    eevee_ataque_png: "res/pokemon/eevee_ataque.png",
+    eevee_ataque_plist: "res/pokemon/eevee_ataque.plist",
     animacion_cuervo_png: "res/animacion_cuervo.png",
     animacion_cuervo_plist: "res/animacion_cuervo.plist",
     caballero_png: "res/jugador/caballero.png",
     caballero_plist: "res/jugador/caballero.plist",
     tiles_mapa: "res/mapas/tiles-mapa.png",
-    mapa: "res/mapas/mapa.tmx"
+    mapa: "res/mapas/mapa.tmx",
+    fondo_lucha_1: "res/fondoLucha/fondo1.png"
 };
 
 var g_resources = [];
