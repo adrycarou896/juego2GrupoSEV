@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/mapas/tiles-mapa.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa1.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa2.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/sample_map_original.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/tiles16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/mapas/mapa3.tmx" beforeDir="false" />
     </list>
     <ignored path="RPG.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -435,12 +425,12 @@
       <workItem from="1545996550673" duration="1788000" />
       <workItem from="1545998363424" duration="1615000" />
       <workItem from="1546000394234" duration="253000" />
-      <workItem from="1546000943207" duration="2321000" />
+      <workItem from="1546000943207" duration="2929000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39172000" />
+    <option name="totallyTimeSpent" value="39780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="400" y="0" width="1344" height="947" extended-state="0" />
