@@ -14,7 +14,10 @@ var res = {
     caballero_plist: "res/jugador/caballero.plist",
     tiles_mapa: "res/mapas/tiles-mapa.png",
     mapa: "res/mapas/mapa.tmx",
-    fondo_lucha_1: "res/fondoLucha/fondo1.png"
+    fondo_lucha_1: "res/fondoLucha/fondo1.png",
+    fondo_mensaje_prohibido_gimnasio: "res/fondoMensajes/mensaje_prohibido_gimnasio.png",
+    inside_tiles: "res/mapas/inside_tiles.png",
+    mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx"
 };
 
 var g_resources = [];

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="6">
+ <tileset firstgid="1" name="WNmOTBH" tilewidth="16" tileheight="16" tilecount="4000" columns="16">
+  <image source="inside_tiles.png" width="256" height="4000"/>
+ </tileset>
+ <layer name="PatronFondo" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7DCHNa/mIrYm0B6SVVVVVVV1dcBvNPyHA==
+  </data>
+ </layer>
+ <layer name="PatronDecoracion" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt11lsFWUYBuABWs54ji2RlsU1EXBtQVlcW9B7EL0H1HvWe9Z7aEFEb6AFZdFEiwuLJtKqoECiuKFA4kpb2qpAAi2La3i8IDTVzpyZHDjE8CVP5p+TnO9/v2T+OW0QJK/Z2SCYw1zmMZ8F2eL1+ac2ZoJgE5vZwiu8mon+zkJ7LWIxS1jKshT7J+lTLdNYqjKX1uO4j/vZxnZ2sJN3eDdmjuX2WkEd9axkVYo50vSpka2WyUzhMR5nDx/xMXvZx/6YOdbaax0NNLKeDSnmSNNnqmzTeILpPMlTHORrvuEQhzkSM8dr9nqdJrbyBm+mmCNNnxmyzWQWT/MMz9JGO8fooJOumDnes9cummnhfT7guTAIVvM8a3ih17rv5y+G/feJqtmyzWEu85jPArrp4QxnOcf5mDk+sdenHOAzPucLXpLtZTayic291n0/3xL23yeqFsq2iMUsYSnLGKRfCaUMJkMYRvf61l7f8T0/8CM/8Zbvvc02trOj17rv5zvD/vtE1XKZV1BHPStZRYV+lQxjOCMYGTNHMWutzOtooJH1bIh5fq7Vtfq/1VHnvZU22rPx91VUJ7heqTplr9N005ONv6+hNsH1StWAXBAMZBAlufj7qbJNy+Z/vdzVVOpvFG6QbSgVVObi72fINjOb/zWqWss9r7RzjA466eJnfuFXjnOCk+X/7tFshhZul20UoxmTi78v5Pk4LVc3PZzhLOc4z2/8zh/8yV/8/R9zXKzxsk1gIpNy8feFPB8Dh3heKaGUwWQIuY4sOa6njPIh/fdK+r4q5PkYKlcFlQxjOCMYyY3cxM3cwq3cFjFH0vdVIc/HKLlGM4Y7uJO7uJt7uJcqqhnLuIg5kr6vCnk+Jsg1kUk8wIM8xMM8wqPUUMtkpkTMkfR9dbX+fiR9X11tvx8XK+n7qpDno9hV5/+m+jB6XczKN1+DdWMYvS5m5ZuvyXprGL1OWh+WBcFu9rCXfewvS9cr33zN1i1h9DppfSnzVxzkEIc5knKOy5Ev3zoqcyttdNBJV8o58qkLANJLxg==
+  </data>
+ </layer>
+ <objectgroup name="Limites">
+  <object id="1" x="141" y="477">
+   <polyline points="0,0 0,-86 46,-86 47,-262 -142,-262 -140,-350 -83,-351 -81,-478 82,-477 81,-429 64,-429 65,-360 162,-359 162,-376 353,-376 353,-357 450,-357 450,-478 599,-478 599,-347 659,-347 658,-272 470,-273 471,-242 471,-231 442,-230 443,-213 471,-213 472,-98 519,-98 518,2 658,3 660,-480 -141,-478 -143,4 0,2"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Mostrador">
+  <object id="3" x="379" y="106">
+   <polyline points="0,0 33,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Entrenador">
+  <object id="4" x="379" y="46" width="33" height="29"/>
+  <object id="5" x="382" y="436" width="33" height="29"/>
+ </objectgroup>
+ <objectgroup name="Jugador"/>
+</map>

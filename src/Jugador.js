@@ -23,6 +23,7 @@ var Jugador = cc.Class.extend({
     animacion:null, // Actual
     estado: estadoCaminando,
     capturados: [],
+    layerMensajeProhibidoGimnasio: null,
 
     ctor:function (space, posicion, layer) {
         this.space = space;
@@ -250,7 +251,10 @@ var Jugador = cc.Class.extend({
             //Todo
         }
         else{
-
+            if(this.layerMensajeProhibidoGimnasio == null){
+                this.layerMensajeProhibidoGimnasio =  new LayerGimnasio(this, true);
+                this.layer.getParent().addChild(this.layerMensajeProhibidoGimnasio);
+            }
         }
     }
 

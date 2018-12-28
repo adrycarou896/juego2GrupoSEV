@@ -81,6 +81,9 @@ var GameLayer = cc.Layer.extend({
        this.setPosition(cc.p( - posicionXCamara , - posicionYCamara));
 
     },
+
+
+
     collisionJugadorConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         var shapeEnemigo = shapes[1];
@@ -90,6 +93,10 @@ var GameLayer = cc.Layer.extend({
             }
         }
     },
+
+
+
+
     cargarMapa:function () {
        this.mapa = new cc.TMXTiledMap(res.mapa);
        // Añadirlo a la Layer
@@ -160,6 +167,10 @@ var GameLayer = cc.Layer.extend({
             this.enemigos.push(enemigo);
         }
     },
+
+
+
+
     procesarKeyPressed:function(keyCode){
         var posicion = teclas.indexOf(keyCode);
         if ( posicion == -1 ) {
@@ -185,6 +196,10 @@ var GameLayer = cc.Layer.extend({
             }
         }
     },
+
+
+
+
     procesarKeyReleased(keyCode){
         var posicion = teclas.indexOf(keyCode);
         teclas.splice(posicion, 1);
@@ -220,19 +235,46 @@ var GameLayer = cc.Layer.extend({
 
 
     colisionConGimnasio:function (arbiter, space) {
-        console.log("ENTRA EN EL GIMNASIOOOOOOOOOOOOOOOOOOOOOOO");
         this.jugador.entrarGimnasio();
     },
 
 
     finColisionConGimnasio:function (arbiter, space) {
-
+        this.getParent().removeChild(this.jugador.layerMensajeProhibidoGimnasio);
+        this.jugador.layerMensajeProhibidoGimnasio = null;
     }
 
 });
 
 var LayerGimnasio = cc.Layer.extend({
 
+    ctor:function (jugador, prohibido) {
+        this._super();
+        var size = cc.winSize;
+
+
+        // Inicializar Space (sin gravedad)
+        this.space = new cp.Space();
+
+        // Fondo
+        if(prohibido) {
+            this.spriteFondo = cc.Sprite.create(res.fondo_mensaje_prohibido_gimnasio);
+            this.spriteFondo.setPosition(cc.p(size.width - (Math.abs(jugador.body.p.x - size.width)) - (this.spriteFondo.width),
+                size.height - (Math.abs(size.height - jugador.body.p.y)) + this.spriteFondo.height));
+        }
+        else{
+            this.spriteFondo = cc.Sprite.create(res.fondo_mensaje_prohibido_gimnasio);
+            this.spriteFondo.setPosition(cc.p(size.width - (Math.abs(jugador.body.p.x - size.width)) - (this.spriteFondo.width),
+                size.height - (Math.abs(size.height - jugador.body.p.y)) + this.spriteFondo.height));
+        }
+        this.addChild(this.spriteFondo);
+
+        return true;
+
+    },
+    update:function (dt) {
+
+    }
 
 });
 
