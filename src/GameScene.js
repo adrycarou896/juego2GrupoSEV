@@ -153,18 +153,13 @@ var GameLayer = cc.Layer.extend({
     },
 
 
-    /*procesarControles:function(){
-        this.jugador.moverX(controles.moverX);
-        this.jugador.moverY(controles.moverY);
-    }*/
-
-
     colisionConGimnasio:function (arbiter, space) {
         this.jugador.entrarGimnasio();
     },
 
 
     finColisionConGimnasio:function (arbiter, space) {
+        this.getParent().removeChild(this.jugador.layer);
         //this.getParent().removeChild(this.jugador.layerGimnasio);
         //this.jugador.layerGimnasio = null;
     }
@@ -288,7 +283,11 @@ var LayerGimnasio = cc.Layer.extend({
             this.space.addCollisionHandler(tipoSalirGimnasio, tipoJugador,
                 null, null, this.colisionSalirGimnasio.bind(this), this.finColisionSalirGimnasio.bind(this));
 
-
+            cc.eventManager.addListener({
+                event: cc.EventListener.KEYBOARD,
+                onKeyPressed: procesarKeyPressed.bind(this),
+                onKeyReleased: procesarKeyReleased.bind(this)
+            }, this);
         }
 
         return true;
@@ -403,9 +402,6 @@ var LayerGimnasio = cc.Layer.extend({
 
 
     }
-
-
-
 
 });
 
