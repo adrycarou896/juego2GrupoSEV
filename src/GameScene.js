@@ -16,7 +16,7 @@ var GameLayer = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
-    ctor:function () {
+    ctor:function (jugador) {
        this._super();
        var size = cc.winSize;
 
@@ -31,7 +31,7 @@ var GameLayer = cc.Layer.extend({
        //this.depuracion = new cc.PhysicsDebugNode(this.space);
        //this.addChild(this.depuracion, 10);
 
-       this.cargarMapa();
+       this.cargarMapa(jugador);
        this.scheduleUpdate();
 
         // COLISIONES
@@ -81,7 +81,7 @@ var GameLayer = cc.Layer.extend({
 
 
 
-    cargarMapa:function () {
+    cargarMapa:function (jugador) {
        this.mapa = new cc.TMXTiledMap(res.mapa);
        // Añadirlo a la Layer
        this.addChild(this.mapa);
@@ -137,10 +137,17 @@ var GameLayer = cc.Layer.extend({
         }
 
         //Jugador
-        var grupoJugador = this.mapa.getObjectGroup("Jugador");
-        var arrayJugador = grupoJugador.getObjects();
-        this.jugador = new Jugador(this.space,
-            cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
+        if(jugador == null) {
+            var grupoJugador = this.mapa.getObjectGroup("Jugador");
+            var arrayJugador = grupoJugador.getObjects();
+            this.jugador = new Jugador(this.space,
+                cc.p(arrayJugador[0]["x"], arrayJugador[0]["y"]), this);
+        }
+        else{
+            this.jugador = new Jugador(this.space,
+                cc.p(775, 750), this);
+            this.jugador.capturados = jugador.capturados;
+        }
 
         //Enemigos salvajes
         var grupoEnemigosSalvajes = this.mapa.getObjectGroup("EnemigoSalvaje");
@@ -160,8 +167,6 @@ var GameLayer = cc.Layer.extend({
 
     finColisionConGimnasio:function (arbiter, space) {
         this.getParent().removeChild(this.jugador.layer);
-        //this.getParent().removeChild(this.jugador.layerGimnasio);
-        //this.jugador.layerGimnasio = null;
     }
 
 });
@@ -248,6 +253,8 @@ function moverCamara(jugador, contentSize, mapaAncho, mapaAlto, layer){
     layer.setPosition(cc.p( - posicionXCamara , - posicionYCamara));
 }
 
+
+
 var LayerGimnasio = cc.Layer.extend({
     jugador:null,
     space:null,
@@ -296,6 +303,9 @@ var LayerGimnasio = cc.Layer.extend({
 
     colisionSalirGimnasio:function(){
 
+        var layer =  new GameLayer(this.jugador);
+        this.jugador.layer.getParent().addChild(layer);
+        this.jugador.layer.getParent().removeChild(this.jugador.layer);
 
     },
 
@@ -405,6 +415,9 @@ var LayerGimnasio = cc.Layer.extend({
 
 });
 
+
+
+
 var LuchaLayer = cc.Layer.extend({
     jugador:null,
     enemigo:null,
@@ -446,7 +459,7 @@ var LuchaLayer = cc.Layer.extend({
 var GameScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        var layer = new GameLayer();
+        var layer = new GameLayer(null);
         this.addChild(layer);
     }
 });
