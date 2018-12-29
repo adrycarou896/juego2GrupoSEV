@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="6">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="9">
  <tileset firstgid="1" name="WNmOTBH" tilewidth="16" tileheight="16" tilecount="4000" columns="16">
   <image source="inside_tiles.png" width="256" height="4000"/>
  </tileset>
@@ -25,7 +25,13 @@
  </objectgroup>
  <objectgroup name="Entrenador">
   <object id="4" x="379" y="46" width="33" height="29"/>
-  <object id="5" x="382" y="436" width="33" height="29"/>
  </objectgroup>
- <objectgroup name="Jugador"/>
+ <objectgroup name="Jugador">
+  <object id="6" x="383" y="421" width="33" height="29"/>
+ </objectgroup>
+ <objectgroup name="Salir">
+  <object id="8" x="386" y="478.667">
+   <polyline points="0,0 30,0"/>
+  </object>
+ </objectgroup>
 </map>
