@@ -43,6 +43,18 @@ var Pikachu = cc.Class.extend({
         // forma dinamica
         this.space.addShape(this.shape);
 
+        var framesAnimacion = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "pikachu_idle_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.5);
+        this.animacion =
+            new cc.RepeatForever(new cc.Animate(animacion));
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+
         layer.addChild(this.sprite,10);
 
     },
