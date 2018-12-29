@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/res/fondoMensajes/pantalla_desbloqueo_poder_congelacion.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/res/mapas/mapa.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Jugador.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jugador.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resource.js" afterDir="false" />
-    </list>
+    <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="" />
     <ignored path="RPG.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -445,12 +438,12 @@
       <workItem from="1545998363424" duration="1615000" />
       <workItem from="1546000394234" duration="253000" />
       <workItem from="1546000943207" duration="8041000" />
-      <workItem from="1546016267395" duration="6287000" />
+      <workItem from="1546016267395" duration="6318000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51179000" />
+    <option name="totallyTimeSpent" value="51210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="401" y="0" width="1344" height="946" extended-state="0" />
