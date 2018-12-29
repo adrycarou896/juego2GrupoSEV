@@ -30,7 +30,7 @@
   <object id="4" x="379" y="46" width="33" height="29"/>
  </objectgroup>
  <objectgroup name="Jugador">
-  <object id="6" x="383" y="421" width="33" height="29"/>
+  <object id="6" x="400" y="421" width="33" height="29"/>
  </objectgroup>
  <objectgroup name="Salir">
   <object id="8" x="386" y="474.667">
