@@ -258,10 +258,10 @@ function procesarKeyReleasedInscripcionTorneo(keyCode){
     var posicion = teclas.indexOf(keyCode);
     teclas.splice(posicion, 1);
     switch (keyCode){
-        case 115 || 83://s
+        case 83://s
             console.log("has pulsado siiiiiiiii")
             break;
-        case 110 || 78: //n
+        case 78: //n
             console.log("has pulsado nooooooo")
             break;
     }
@@ -291,12 +291,7 @@ var LayerInscripcionTorneo = cc.Layer.extend({
         return true;
     }
 
-
-
 });
-
-
-
 
 var LayerGimnasio = cc.Layer.extend({
     jugador:null,
