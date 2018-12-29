@@ -222,7 +222,6 @@ function procesarKeyReleased(keyCode){
                 controles.moverY = 0;
             }
             break;
-
     }
 }
 
@@ -274,7 +273,6 @@ var LayerInscripcionTorneo = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
 
-        this.space = new cp.Space();
         // Fondo
         var spriteFondoTitulo= new cc.Sprite(res.mensaje_inscripcion_torneo);
         // Asigno posición central
@@ -289,12 +287,11 @@ var LayerInscripcionTorneo = cc.Layer.extend({
             onKeyReleased: procesarKeyReleasedInscripcionTorneo.bind(this)
         }, this);
 
+
         return true;
     }
+
 });
-
-
-
 
 var LayerGimnasio = cc.Layer.extend({
     jugador:null,

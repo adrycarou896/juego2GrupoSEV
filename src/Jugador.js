@@ -263,6 +263,7 @@ var Jugador = cc.Class.extend({
 
 
     inscribirTorneo(){
+        console.log("esta en colision con el mostradorrrrrrr")
         if(this.layerInscripcionTorneo == null){
             this.layerInscripcionTorneo = new LayerInscripcionTorneo();
             this.layer.getParent().addChild(this.layerInscripcionTorneo);
