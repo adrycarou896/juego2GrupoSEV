@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/GameScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Jugador.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jugador.js" afterDir="false" />
-    </list>
+    <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="" />
     <ignored path="RPG.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,10 +19,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
+            <state relative-caret-position="956">
               <caret line="264" column="13" lean-forward="true" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
             </state>
           </provider>
@@ -40,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Jugador.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="269" column="30" selection-start-line="269" selection-start-column="30" selection-end-line="269" selection-end-column="30" />
+            <state relative-caret-position="380">
+              <caret line="254" column="43" lean-forward="true" selection-start-line="254" selection-start-column="43" selection-end-line="254" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -123,9 +120,9 @@
         <option value="$PROJECT_DIR$/project.json" />
         <option value="$PROJECT_DIR$/src/resource.js" />
         <option value="$PROJECT_DIR$/src/resource.js" />
-        <option value="$PROJECT_DIR$/src/Jugador.js" />
-        <option value="$PROJECT_DIR$/src/Jugador.js" />
         <option value="$PROJECT_DIR$/src/GameScene.js" />
+        <option value="$PROJECT_DIR$/src/Jugador.js" />
+        <option value="$PROJECT_DIR$/src/Jugador.js" />
       </list>
     </option>
   </component>
@@ -414,16 +411,15 @@
       <workItem from="1546000943207" duration="8041000" />
       <workItem from="1546016267395" duration="6287000" />
       <workItem from="1546028994466" duration="7479000" />
-      <workItem from="1546077974623" duration="14627000" />
+      <workItem from="1546077974623" duration="15072000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73285000" />
+    <option name="totallyTimeSpent" value="73730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="398" y="0" width="1347" height="946" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16781083" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -574,17 +570,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Jugador.js">
+    <entry file="file://$PROJECT_DIR$/src/GameScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="269" column="30" selection-start-line="269" selection-start-column="30" selection-end-line="269" selection-end-column="30" />
+        <state relative-caret-position="956">
+          <caret line="264" column="13" lean-forward="true" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameScene.js">
+    <entry file="file://$PROJECT_DIR$/src/Jugador.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="264" column="13" lean-forward="true" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
+        <state relative-caret-position="380">
+          <caret line="254" column="43" lean-forward="true" selection-start-line="254" selection-start-column="43" selection-end-line="254" selection-end-column="43" />
         </state>
       </provider>
     </entry>
