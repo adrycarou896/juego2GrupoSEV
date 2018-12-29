@@ -7,6 +7,7 @@ var Eevee = cc.Class.extend({
     shape:null,
     body:null,
     layer:null,
+    animacion_idle:null,
     animacion:null,
     nivel: 1,
     estado: parado,
@@ -14,7 +15,10 @@ var Eevee = cc.Class.extend({
 
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_01.png");
+
         this.incluirEnVista(space,posicion,layer);
+
+        layer.addChild(this.sprite,10);
 
     },
     actualizar:function(){
@@ -23,8 +27,25 @@ var Eevee = cc.Class.extend({
     cambiarAModoLucha:function (space, posicion, layer) {
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#eevee_ataque_01.png");
+        this.sprite = new cc.PhysicsSprite("#eevee_idle_01.png");
+
         this.incluirEnVista(space,posicion,layer);
+
+        var framesAnimacion = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "eevee_idle_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.5);
+        this.animacion_idle =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        layer.addChild(this.sprite,10);
+
+        this.animacion = this.animacion_idle;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
 
     },
     incluirEnVista:function(space, posicion, layer){
@@ -55,10 +76,8 @@ var Eevee = cc.Class.extend({
         // forma dinamica
         this.space.addShape(this.shape);
 
-        //Animaciones
+        //this.sprite.stopAllActions();
+        //this.sprite.runAction(this.animacion);
 
-        //---------
-
-        layer.addChild(this.sprite,10);
     }
 });
