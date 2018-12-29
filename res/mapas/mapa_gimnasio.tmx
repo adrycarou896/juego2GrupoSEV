@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="9">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="11">
  <tileset firstgid="1" name="WNmOTBH" tilewidth="16" tileheight="16" tilecount="4000" columns="16">
   <image source="inside_tiles.png" width="256" height="4000"/>
  </tileset>
@@ -17,6 +17,9 @@
   <object id="1" x="141" y="477">
    <polyline points="0,0 0,-86 46,-86 47,-262 -142,-262 -140,-350 -83,-351 -81,-478 82,-477 81,-429 64,-429 65,-360 162,-359 162,-376 353,-376 353,-357 450,-357 450,-478 599,-478 599,-347 659,-347 658,-272 470,-273 471,-242 471,-231 442,-230 443,-213 471,-213 472,-98 519,-98 518,2 658,3 660,-480 -141,-478 -143,4 0,2"/>
   </object>
+  <object id="10" x="144" y="479.333">
+   <polyline points="0,0 514.667,-0.666667"/>
+  </object>
  </objectgroup>
  <objectgroup name="Mostrador">
   <object id="3" x="379" y="106">
@@ -30,7 +33,7 @@
   <object id="6" x="383" y="421" width="33" height="29"/>
  </objectgroup>
  <objectgroup name="Salir">
-  <object id="8" x="386" y="478.667">
+  <object id="8" x="386" y="474.667">
    <polyline points="0,0 30,0"/>
   </object>
  </objectgroup>

@@ -259,10 +259,11 @@ var LayerGimnasio = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
+
+
     ctor:function (jugador, prohibido) {
         this._super();
         var size = cc.winSize;
-
 
         // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
@@ -295,7 +296,8 @@ var LayerGimnasio = cc.Layer.extend({
     },
 
     colisionSalirGimnasio:function(){
-        
+
+
     },
 
 
@@ -397,10 +399,8 @@ var LayerGimnasio = cc.Layer.extend({
         var arrayJugador = grupoJugador.getObjects();
         this.jugador = new Jugador(this.space,
             cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
-        /*this.jugador = jugador;
-        this.jugador.body.p.x = arrayJugador[0]["x"];
-        this.jugador.body.p.y = arrayJugador[0]["y"];
-        this.jugador.space = this.space;*/
+        this.jugador.capturados = jugador.capturados;
+
 
     }
 
