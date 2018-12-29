@@ -4,18 +4,31 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>eevee_ataque_01.png</key>
+			<key>eevee_idle_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{33,39}}</string>
+				<string>{{0,0},{65,62}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{33,39}}</string>
+				<string>{{0,0},{73,62}}</string>
 				<key>sourceSize</key>
-				<string>{33,39}</string>
+				<string>{73,62}</string>
+			</dict>
+			<key>eevee_idle_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{66,0},{65,62}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{65,62}}</string>
+				<key>sourceSize</key>
+				<string>{65,62}</string>
 			</dict>
 		</dict>
 
@@ -24,13 +37,13 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>realTextureFileName</key>
-            <string>eevee_ataque.png</string>
+            <string>eevee_idle.png</string>
 			<key>size</key>
-			<string>{33,39}</string>
+			<string>{127,62}</string>
 			<key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:3d70b2498d34a6ce27ecd669974329db:d7e2a12efd5d53dc799168586e11d70e:b8e96a3b0eea864d9c309cc779337e95$</string>
             <key>textureFileName</key>
-			<string>eevee_ataque.png</string>
+			<string>eevee_idle.png</string>
 		</dict>
 	</dict>
 </plist>
