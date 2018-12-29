@@ -7,15 +7,28 @@
 			<key>pikachu_idle_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{211,221}}</string>
+				<string>{{-5,0},{211,210}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{211,221}}</string>
+				<string>{{0,0},{211,119}}</string>
 				<key>sourceSize</key>
-				<string>{211,221}</string>
+				<string>{211,119}</string>
+			</dict>
+			<key>pikachu_idle_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{200,0},{211,210}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{211,119}}</string>
+				<key>sourceSize</key>
+				<string>{211,119}</string>
 			</dict>
 		</dict>
 
@@ -26,7 +39,7 @@
 			<key>realTextureFileName</key>
             <string>pikachu_idle.png</string>
 			<key>size</key>
-			<string>{211,221}</string>
+			<string>{400,119}</string>
 			<key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:3d70b2498d34a6ce27ecd669974329db:d7e2a12efd5d53dc799168586e11d70e:b8e96a3b0eea864d9c309cc779337e95$</string>
             <key>textureFileName</key>
