@@ -8,6 +8,8 @@ var res = {
     eevee_plist: "res/pokemon/eevee.plist",
     eevee_idle_png: "res/pokemon/eevee_idle.png",
     eevee_idle_plist: "res/pokemon/eevee_idle.plist",
+    pikachu_idle_png: "res/pokemon/pikachu_idle.png",
+    pikachu_idle_plist: "res/pokemon/pikachu_idle.plist",
     animacion_cuervo_png: "res/animacion_cuervo.png",
     animacion_cuervo_plist: "res/animacion_cuervo.plist",
     caballero_png: "res/jugador/caballero.png",

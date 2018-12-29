@@ -429,6 +429,7 @@ var LuchaLayer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
 
+        cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
 
         // Inicializar Space (sin gravedad)
@@ -440,6 +441,8 @@ var LuchaLayer = cc.Layer.extend({
         this.spriteFondo.setPosition(cc.p(size.width/2 , size.height/2));
         this.spriteFondo.setScale( size.width / this.spriteFondo.width );
         this.addChild(this.spriteFondo);
+
+        new Pikachu(this.space,cc.p(230,115),this);
 
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
         //this.cargarMapa();
