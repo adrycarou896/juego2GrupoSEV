@@ -17,7 +17,7 @@
   <object id="6" x="400" y="421" width="33" height="29"/>
  </objectgroup>
  <objectgroup name="Mostrador">
-  <object id="3" x="391" y="107">
+  <object id="3" x="391" y="111">
    <polyline points="0,0 33,0"/>
   </object>
  </objectgroup>
