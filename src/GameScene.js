@@ -254,6 +254,49 @@ function moverCamara(jugador, contentSize, mapaAncho, mapaAlto, layer){
 }
 
 
+function procesarKeyReleasedInscripcionTorneo(keyCode){
+    var posicion = teclas.indexOf(keyCode);
+    teclas.splice(posicion, 1);
+    switch (keyCode){
+        case 115 || 83://s
+            console.log("has pulsado siiiiiiiii")
+            break;
+        case 110 || 78: //n
+            console.log("has pulsado nooooooo")
+            break;
+    }
+}
+
+var LayerInscripcionTorneo = cc.Layer.extend({
+    space: null,
+    ctor:function () {
+        this._super();
+        var size = cc.winSize;
+
+        // Fondo
+        var spriteFondoTitulo= new cc.Sprite(res.mensaje_inscripcion_torneo);
+        // Asigno posición central
+        spriteFondoTitulo.setPosition(cc.p(size.width / 2, size.height / 2));
+
+        // Añado Sprite a la escena
+        this.addChild(spriteFondoTitulo);
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: procesarKeyReleasedInscripcionTorneo.bind(this),
+            onKeyReleased: procesarKeyReleasedInscripcionTorneo.bind(this)
+        }, this);
+
+
+        return true;
+    }
+
+
+
+});
+
+
+
 
 var LayerGimnasio = cc.Layer.extend({
     jugador:null,
@@ -261,6 +304,7 @@ var LayerGimnasio = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
+    personaMostrador: null,
 
 
     ctor:function (jugador, prohibido) {
@@ -290,6 +334,9 @@ var LayerGimnasio = cc.Layer.extend({
             this.space.addCollisionHandler(tipoSalirGimnasio, tipoJugador,
                 null, null, this.colisionSalirGimnasio.bind(this), this.finColisionSalirGimnasio.bind(this));
 
+            this.space.addCollisionHandler(tipoMostrador, tipoJugador,
+                null, null, this.colisionConMostrador.bind(this), this.finColisionConMostrador.bind(this));
+
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyPressed: procesarKeyPressed.bind(this),
@@ -299,6 +346,16 @@ var LayerGimnasio = cc.Layer.extend({
 
         return true;
 
+    },
+
+
+    colisionConMostrador:function(){
+        this.jugador.inscribirTorneo();
+    },
+
+    finColisionConMostrador:function(){
+        this.getParent().removeChild(this.jugador.layerInscripcionTorneo);
+        this.jugador.layerInscripcionTorneo = null;
     },
 
     colisionSalirGimnasio:function(){
@@ -409,6 +466,7 @@ var LayerGimnasio = cc.Layer.extend({
         this.jugador = new Jugador(this.space,
             cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
         this.jugador.capturados = jugador.capturados;
+
 
 
     }

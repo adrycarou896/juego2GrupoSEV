@@ -17,7 +17,9 @@ var res = {
     fondo_lucha_1: "res/fondoLucha/fondo1.png",
     fondo_mensaje_prohibido_gimnasio: "res/fondoMensajes/mensaje_prohibido_gimnasio.png",
     inside_tiles: "res/mapas/inside_tiles.png",
-    mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx"
+    mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx",
+    mensaje_inscripcion_torneo: "res/fondoMensajes/mensaje_apuntar_torneo.png"
+
 };
 
 var g_resources = [];

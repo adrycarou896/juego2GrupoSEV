@@ -24,6 +24,7 @@ var Jugador = cc.Class.extend({
     estado: estadoCaminando,
     capturados: [],
     layerGimnasio: null,
+    layerInscripcionTorneo: null,
 
     ctor:function (space, posicion, layer) {
         this.space = space;
@@ -255,6 +256,17 @@ var Jugador = cc.Class.extend({
                 this.layerGimnasio =  new LayerGimnasio(this, false);
                 this.layer.getParent().addChild(this.layerGimnasio);
             }
+        }
+    },
+
+
+
+
+    inscribirTorneo(){
+        console.log("esta en colision con el mostradorrrrrrr")
+        if(this.layerInscripcionTorneo == null){
+            this.layerInscripcionTorneo = new LayerInscripcionTorneo();
+            this.layer.getParent().addChild(this.layerInscripcionTorneo);
         }
     }
 
