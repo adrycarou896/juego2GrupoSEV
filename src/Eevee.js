@@ -52,8 +52,8 @@ var Eevee = cc.Class.extend({
         this.space = space;
         this.layer = layer;
 
-        // Cuerpo dinamico, SI le afectan las fuerzas
-        this.body = new cp.Body(5, Infinity);
+        // Cuerpo dinamico, NO le afectan las fuerzas
+        this.body = new cp.Body(Infinity, Infinity);
 
         this.body.setPos(posicion);
         //body.w_limit = 0.02;

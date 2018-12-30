@@ -20,7 +20,10 @@ var res = {
     fondo_mensaje_prohibido_gimnasio: "res/fondoMensajes/mensaje_prohibido_gimnasio.png",
     inside_tiles: "res/mapas/inside_tiles.png",
     mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx",
-    mensaje_inscripcion_torneo: "res/fondoMensajes/mensaje_apuntar_torneo.png"
+    mensaje_inscripcion_torneo: "res/fondoMensajes/mensaje_apuntar_torneo.png",
+    video: "res/video.mp4",
+    disparo_jugador_png: "res/pokemon/disparo_jugador.png",
+    disparo_jugador_plist : "res/pokemon/disparo_jugador.plist",
 
 };
 
