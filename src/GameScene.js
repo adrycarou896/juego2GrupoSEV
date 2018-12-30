@@ -77,7 +77,9 @@ var GameLayer = cc.Layer.extend({
         //console.log("tam->"+this.enemigos.length);
         for (var j = 0; j < this.enemigos.length; j++) {
             if (this.enemigos[j].shape == shapeEnemigo) {
-                this.getParent().addChild(new LuchaLayer(this.enemigos[j], this.jugador, this));
+                var layerLucha = new LuchaLayer(this.enemigos[j], this.jugador, this);
+                this.getParent().addChild(layerLucha);
+                this.getParent().addChild(new MenuLuchaLayer(layerLucha.pokemonJugador,layerLucha));
             }
         }
     },
@@ -495,7 +497,7 @@ var LuchaLayer = cc.Layer.extend({
 
         this.jugador = jugador;
         this.layer = layer;
-        console.log("nombre de la layer: " +  this.layer.nombre)
+        console.log("nombre de la layer: " +  this.layer.nombre);
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
@@ -503,13 +505,7 @@ var LuchaLayer = cc.Layer.extend({
 
         this.seleccionarPokemonAtaque();
 
-        //var nuevoEnemigo = new Eevee(this.space,
-        //    cc.p(0,0),this);
-        //nuevoEnemigo.nivel = enemigo.nivel;
-        //nuevoEnemigo.vida = enemigo.vida;
-
         this.enemigo = enemigo;
-        //this.enemigo = nuevoEnemigo;
 
         // Fondo
         this.spriteFondo = cc.Sprite.create(res.fondo_lucha_1);
@@ -517,20 +513,13 @@ var LuchaLayer = cc.Layer.extend({
         this.spriteFondo.setScale( size.width / this.spriteFondo.width );
         this.addChild(this.spriteFondo);
 
-
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
 
-        //this.cargarMapa();
         this.scheduleUpdate();
 
         //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
             null, null, this.collisionDisparoConEnemigo.bind(this), this.finColisionDisparoConEnemigo.bind(this));
-
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: this.procesarKeyReleasedAtaque.bind(this)
-        }, this);
 
         return true;
 
@@ -560,19 +549,6 @@ var LuchaLayer = cc.Layer.extend({
     },
     cargarMapa:function () {
 
-    },
-    procesarKeyReleasedAtaque:function (keyCode){
-        var posicion = teclas.indexOf(keyCode);
-        teclas.splice(posicion, 1);
-        switch (keyCode){
-            case 83://s
-                console.log("has pulsado siiiiiiiii");
-                this.disparosJugador.push(new DisparoJugador(this,cc.p(230,115)));
-                break;
-            case 78: //n
-                console.log("has pulsado nooooooo");
-                break;
-        }
     },
     collisionDisparoConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
@@ -639,7 +615,6 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 console.log("escapeeee");
-                console.log("this.layer.layer.nombre: " + this.layer.layer.nombre);
                 this.layer.enemigo.finModoLucha();
                 this.layer.layer.jugador.body.p.x = 416;
                 this.layer.layer.jugador.body.p.y = 480;

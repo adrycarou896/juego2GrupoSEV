@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/res/mapas/mapa.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Eevee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eevee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.js" afterDir="false" />
     </list>
     <ignored path="RPG.iws" />
@@ -28,12 +26,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="2291" />
+          <entry key="js" value="2388" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="2291" />
+          <entry key="JavaScript" value="2388" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -58,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="644" column="55" selection-start-line="644" selection-start-column="55" selection-end-line="644" selection-end-column="55" />
+            <state relative-caret-position="316">
+              <caret line="81" column="91" selection-start-line="81" selection-start-column="91" selection-end-line="81" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -486,12 +484,12 @@
       <workItem from="1546016267395" duration="6287000" />
       <workItem from="1546028994466" duration="7479000" />
       <workItem from="1546077974623" duration="16805000" />
-      <workItem from="1546119730770" duration="13663000" />
+      <workItem from="1546119730770" duration="14309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89126000" />
+    <option name="totallyTimeSpent" value="89772000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="318" y="23" width="1122" height="840" extended-state="0" />
@@ -645,8 +643,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="644" column="55" selection-start-line="644" selection-start-column="55" selection-end-line="644" selection-end-column="55" />
+        <state relative-caret-position="316">
+          <caret line="81" column="91" selection-start-line="81" selection-start-column="91" selection-end-line="81" selection-end-column="91" />
         </state>
       </provider>
     </entry>
