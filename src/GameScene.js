@@ -478,6 +478,7 @@ var LuchaLayer = cc.Layer.extend({
     layer: null,
     nombre: "LuchaLayer",
     formasEliminar: [],
+    tiempoEfecto:0,
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -547,6 +548,15 @@ var LuchaLayer = cc.Layer.extend({
             }
         }
         this.formasEliminar = [];
+
+        if (this.tiempoEfecto > 0){
+            this.tiempoEfecto = this.tiempoEfecto - dt;
+
+        }
+        if (this.tiempoEfecto < 0) {
+            this.enemigo.cambiarAAnimacionDeLucha();
+            this.tiempoEfecto = 0;
+        }
     },
     cargarMapa:function () {
 
@@ -554,6 +564,8 @@ var LuchaLayer = cc.Layer.extend({
     collisionDisparoConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
+        this.enemigo.impactado();
+        this.tiempoEfecto = 1;
         console.log("COLISIONNN");
     },
     finColisionDisparoConEnemigo:function(){
