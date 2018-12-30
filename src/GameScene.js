@@ -75,7 +75,7 @@ var GameLayer = cc.Layer.extend({
         var shapeEnemigo = shapes[1];
         for (var j = 0; j < this.enemigos.length; j++) {
             if (this.enemigos[j].shape == shapeEnemigo) {
-                this.getParent().addChild(new LuchaLayer(this.enemigos[j], this.jugador));
+                this.getParent().addChild(new LuchaLayer(this.enemigos[j], this.jugador, this));
             }
         }
     },
@@ -480,7 +480,8 @@ var LuchaLayer = cc.Layer.extend({
     mapaAlto:0,
     pokemonJugador: null,
     disparosJugador: [],
-    ctor:function (enemigo, jugador) {
+    layer: null,
+    ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
 
@@ -488,26 +489,13 @@ var LuchaLayer = cc.Layer.extend({
         this.space = new cp.Space();
 
         this.jugador = jugador;
+        this.layer = layer;
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
 
-        //El pokemon que entre en combate será el primero de la lista de capturados del jugador
-        //que tenga vida mayor que 0
-        for(var i=0; i<this.jugador.capturados.length; i++){
-            if(this.jugador.capturados[i].vida > 0){
-                this.pokemonJugador = this.jugador.capturados[i];
-                break;
-            }
-        }
-
-        if("Pikachu" == this.pokemonJugador.name){
-            var pokemon = new Pikachu(this.space,cc.p(230,115),this);
-            pokemon.vida = this.pokemonJugador.vida;
-            pokemon.nivel = this.pokemonJugador.nivel;
-            this.pokemonJugador = pokemon;
-        }
+        this.seleccionarPokemonAtaque();
 
         this.enemigo = enemigo;
 
@@ -523,7 +511,7 @@ var LuchaLayer = cc.Layer.extend({
 
         //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
-            null, null, this.collisionDisparoConEnemigo.bind(this), null);
+            null, null, this.collisionDisparoConEnemigo.bind(this), this.finColisionDisparoConEnemigo.bind(this));
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -533,43 +521,24 @@ var LuchaLayer = cc.Layer.extend({
         return true;
 
     },
-    update:function (dt) {
-        
+    seleccionarPokemonAtaque:function(){
+        for(var i=0; i<this.jugador.capturados.length; i++){
+            if(this.jugador.capturados[i].vida > 0){
+                this.pokemonJugador = this.jugador.capturados[i];
+                break;
+            }
+        }
+        this.crearPokemonJugador();
     },
-    cargarMapa:function () {
-
-    }
-});
-
-
-var MenuLuchaLayer = cc.Layer.extend({
-    space:null,
-    mapa:null,
-    mapaAncho:0,
-    mapaAlto:0,
-    pokemonJugador: null,
-    jugador: null,
-    ctor:function (jugador) {
-        this._super();
-        var size = cc.winSize;
-
-        // Inicializar Space (sin gravedad)
-        this.space = new cp.Space();
-
-        this.jugador = jugador;
-
-        // Fondo
-        this.spriteFondo = cc.Sprite.create(res.mensaje_ataques_pikachu);
-        this.spriteFondo.setPosition(cc.p(size.width - (Math.abs(jugador.body.p.x - size.width)) - (this.spriteFondo.width),
-            size.height - (Math.abs(size.height - jugador.body.p.y)) + this.spriteFondo.height));
-        this.addChild(this.spriteFondo);
-
-
-        return true;
-
+    crearPokemonJugador:function(){
+        if("Pikachu" == this.pokemonJugador.name){
+            var pokemon = new Pikachu(this.space,cc.p(230,115),this);
+            pokemon.vida = this.pokemonJugador.vida;
+            pokemon.nivel = this.pokemonJugador.nivel;
+            this.pokemonJugador = pokemon;
+        }
     },
     update:function (dt) {
-
         for(i=0; i < this.disparosJugador.length; i++){
             this.disparosJugador[i].actualizar();
         }
@@ -595,7 +564,75 @@ var MenuLuchaLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         var shapeEnemigo = shapes[1];
         console.log("COLISIONNN");
+    },
+    finColisionDisparoConEnemigo:function(){
+        //this.seleccionarPokemonAtaque();
+        this.getParent().addChild(new MenuLuchaLayer(this.jugador, this.pokemonJugador, this.disparosJugador, this));
     }
+
+});
+
+
+var MenuLuchaLayer = cc.Layer.extend({
+    space: null,
+    mapa: null,
+    mapaAncho: 0,
+    mapaAlto: 0,
+    pokemonJugador: null,
+    jugador: null,
+    disparosJugador: [],
+    layer: null,
+    ctor: function (jugador, pokemonJugador, disparosJugador, layer) {
+        this._super();
+        var size = cc.winSize;
+
+        // Inicializar Space (sin gravedad)
+        this.space = new cp.Space();
+
+        this.jugador = jugador;
+        this.pokemonJugador = pokemonJugador;
+        this.layer = layer;
+
+        // Fondo
+        this.spriteFondo = cc.Sprite.create(res.mensaje_ataques_pikachu);
+        this.spriteFondo.setPosition(cc.p(650,75));
+        this.addChild(this.spriteFondo);
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyReleased: this.procesarKeyReleasedSeleccionAtaque.bind(this)
+        }, this);
+
+
+        return true;
+
+    },
+    update: function (dt) {
+
+
+    },
+    procesarKeyReleasedSeleccionAtaque:function (keyCode){
+        var posicion = teclas.indexOf(keyCode);
+        teclas.splice(posicion, 1);
+        switch (keyCode){
+            case 49://1
+                console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[0]);
+                this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
+                this.getParent().removeChild(this);
+                break;
+            case 50: //2
+                console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[1]);
+                this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
+                this.getParent().removeChild(this);
+                break;
+            case 27: //esc
+                console.log("escapeeee");
+                //this.layer.layer.jugador.body.p.x = 730;
+                this.getParent().removeChild(this.layer);
+                this.getParent().removeChild(this);
+        }
+    }
+
 });
 
 

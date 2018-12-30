@@ -13,6 +13,7 @@ var Pikachu = cc.Class.extend({
     estado: parado,
     vida: 100,
     name: "Pikachu",
+    ataques: ["Rayo", "Chispazo"],
     ctor:function (space, posicion, layer) {
 
         // Crear Sprite - Cuerpo y forma
