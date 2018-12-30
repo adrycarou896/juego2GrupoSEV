@@ -16,6 +16,7 @@ var Eevee = cc.Class.extend({
     animacion:null,
     nivel: 1,
     estado: parado,
+    vida: 100,
     ctor:function (space, posicion, layer) {
 
         // Crear Sprite - Cuerpo y forma
@@ -93,6 +94,7 @@ var Eevee = cc.Class.extend({
         this.sprite = this.spriteAnterior;
         this.space = this.spaceAnterior;
         this.layer = this.layerAnterior;
+        console.log("layerAnterior: " + this.layerAnterior.nombre)
         this.body = this.bodyAnterior;
         this.shape = this.shapeAnterior;
     }

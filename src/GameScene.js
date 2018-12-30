@@ -17,6 +17,7 @@ var GameLayer = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
+    nombre: "GameLayer",
     ctor:function (jugador) {
        this._super();
        var size = cc.winSize;
@@ -273,6 +274,7 @@ function procesarKeyReleasedInscripcionTorneo(keyCode){
 
 var LayerInscripcionTorneo = cc.Layer.extend({
     space: null,
+    nombre: "LayerInscripcionTorneo",
     ctor:function () {
         this._super();
         var size = cc.winSize;
@@ -303,6 +305,7 @@ var LayerGimnasio = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
+    nombre: "LayerGimnasio",
     personaMostrador: null,
 
 
@@ -482,6 +485,7 @@ var LuchaLayer = cc.Layer.extend({
     pokemonJugador: null,
     disparosJugador: [],
     layer: null,
+    nombre: "LuchaLayer",
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -491,6 +495,7 @@ var LuchaLayer = cc.Layer.extend({
 
         this.jugador = jugador;
         this.layer = layer;
+        console.log("nombre de la layer: " +  this.layer.nombre)
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
@@ -498,7 +503,13 @@ var LuchaLayer = cc.Layer.extend({
 
         this.seleccionarPokemonAtaque();
 
+        //var nuevoEnemigo = new Eevee(this.space,
+        //    cc.p(0,0),this);
+        //nuevoEnemigo.nivel = enemigo.nivel;
+        //nuevoEnemigo.vida = enemigo.vida;
+
         this.enemigo = enemigo;
+        //this.enemigo = nuevoEnemigo;
 
         // Fondo
         this.spriteFondo = cc.Sprite.create(res.fondo_lucha_1);
@@ -583,6 +594,7 @@ var MenuLuchaLayer = cc.Layer.extend({
     mapaAlto: 0,
     pokemonJugador: null,
     layer: null,
+    nombre: "MenuLuchaLayer",
     ctor: function ( pokemonJugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -627,6 +639,10 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 console.log("escapeeee");
+                console.log("this.layer.layer.nombre: " + this.layer.layer.nombre);
+                this.layer.enemigo.finModoLucha();
+                this.layer.layer.jugador.body.p.x = 416;
+                this.layer.layer.jugador.body.p.y = 480;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
         }
