@@ -567,7 +567,7 @@ var LuchaLayer = cc.Layer.extend({
     },
     finColisionDisparoConEnemigo:function(){
         //this.seleccionarPokemonAtaque();
-        this.getParent().addChild(new MenuLuchaLayer(this.jugador, this.pokemonJugador, this.disparosJugador, this));
+        this.getParent().addChild(new MenuLuchaLayer(this.pokemonJugador,this));
     }
 
 });
@@ -579,17 +579,14 @@ var MenuLuchaLayer = cc.Layer.extend({
     mapaAncho: 0,
     mapaAlto: 0,
     pokemonJugador: null,
-    jugador: null,
-    disparosJugador: [],
     layer: null,
-    ctor: function (jugador, pokemonJugador, disparosJugador, layer) {
+    ctor: function ( pokemonJugador, layer) {
         this._super();
         var size = cc.winSize;
 
         // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
 
-        this.jugador = jugador;
         this.pokemonJugador = pokemonJugador;
         this.layer = layer;
 
@@ -627,13 +624,13 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 console.log("escapeeee");
-                //this.layer.layer.jugador.body.p.x = 730;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
         }
     }
 
 });
+
 
 
 var GameScene = cc.Scene.extend({
