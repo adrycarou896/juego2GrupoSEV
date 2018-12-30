@@ -14,8 +14,10 @@ var Pikachu = cc.Class.extend({
     vida: 100,
     name: "Pikachu",
     ataques: ["Rayo", "Chispazo"],
-    ctor:function (space, posicion, layer) {
+    ctor:function () {
 
+    },
+    mostrar(space, posicion, layer){
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#pikachu_idle_01.png");
 
@@ -57,7 +59,6 @@ var Pikachu = cc.Class.extend({
         this.sprite.runAction(this.animacion);
 
         layer.addChild(this.sprite,10);
-
     },
     actualizar:function(){
 
