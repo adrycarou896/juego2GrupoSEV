@@ -57,7 +57,6 @@ var GameLayer = cc.Layer.extend({
        return true;
 
     },
-
     update:function (dt) {
 
        procesarControles(this.jugador);
@@ -68,9 +67,6 @@ var GameLayer = cc.Layer.extend({
         moverCamara(this.jugador, this.getContentSize(), this.mapaAncho, this.mapaAlto, this);
 
     },
-
-
-
     collisionJugadorConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         var shapeEnemigo = shapes[1];
@@ -84,10 +80,6 @@ var GameLayer = cc.Layer.extend({
             }
         }
     },
-
-
-
-
     cargarMapa:function (jugador) {
        this.mapa = new cc.TMXTiledMap(res.mapa);
        // Añadirlo a la Layer
@@ -485,6 +477,7 @@ var LuchaLayer = cc.Layer.extend({
     disparosJugador: [],
     layer: null,
     nombre: "LuchaLayer",
+    formasEliminar: [],
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -541,13 +534,26 @@ var LuchaLayer = cc.Layer.extend({
             this.disparosJugador[i].actualizar();
         }
         this.space.step(dt);
+
+        // Eliminar formas:
+        for (var i = 0; i < this.formasEliminar.length; i++) {
+            var shape = this.formasEliminar[i];
+
+            for (var j = 0; j < this.disparosJugador.length; j++) {
+                if (this.disparosJugador[j].shape == shape) {
+                    this.disparosJugador[j].eliminar();
+                    this.disparosJugador.splice(j, 1);
+                }
+            }
+        }
+        this.formasEliminar = [];
     },
     cargarMapa:function () {
 
     },
     collisionDisparoConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
-        var shapeEnemigo = shapes[1];
+        this.formasEliminar.push(shapes[0]);
         console.log("COLISIONNN");
     },
     finColisionDisparoConEnemigo:function(){
@@ -610,6 +616,7 @@ var MenuLuchaLayer = cc.Layer.extend({
             case 49://1
                 console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[0]);
                 this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
+                //this.layer.pokemonJugador.vida = 0;
                 this.getParent().removeChild(this);
                 break;
             case 50: //2
