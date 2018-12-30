@@ -24,6 +24,7 @@ var GameLayer = cc.Layer.extend({
        cc.spriteFrameCache.addSpriteFrames(res.eevee_plist);
        cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
        cc.spriteFrameCache.addSpriteFrames(res.caballero_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
 
        // Inicializar Space (sin gravedad)
        this.space = new cp.Space();
@@ -73,7 +74,7 @@ var GameLayer = cc.Layer.extend({
         var shapeEnemigo = shapes[1];
         for (var j = 0; j < this.enemigos.length; j++) {
             if (this.enemigos[j].shape == shapeEnemigo) {
-                this.getParent().addChild(new LuchaLayer(this.enemigos[j]));
+                this.getParent().addChild(new LuchaLayer(this.enemigos[j], this.jugador));
             }
         }
     },
@@ -142,6 +143,7 @@ var GameLayer = cc.Layer.extend({
             var arrayJugador = grupoJugador.getObjects();
             this.jugador = new Jugador(this.space,
                 cc.p(arrayJugador[0]["x"], arrayJugador[0]["y"]), this);
+            this.jugador.capturados.push(new Pikachu(this.space, cc.p(-230,-115), this));
         }
         else{
             this.jugador = new Jugador(this.space,
@@ -478,28 +480,81 @@ var LuchaLayer = cc.Layer.extend({
     mapa:null,
     mapaAncho:0,
     mapaAlto:0,
-    ctor:function (enemigo) {
+    pokemonJugador: null,
+    ctor:function (enemigo, jugador) {
         this._super();
         var size = cc.winSize;
-
-        cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
-        cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
 
         // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
 
+        this.jugador = jugador;
+
+        cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
+
+        //El pokemon que entre en combate será el primero de la lista de capturados del jugador
+        //que tenga vida mayor que 0
+        for(var i=0; i<this.jugador.capturados.length; i++){
+            if(this.jugador.capturados[i].vida > 0){
+                this.pokemonJugador = this.jugador.capturados[i];
+                break;
+            }
+        }
+
+        if("Pikachu" == this.pokemonJugador.name){
+            var pokemon = new Pikachu(this.space,cc.p(230,115),this);
+            pokemon.vida = this.pokemonJugador.vida;
+            pokemon.nivel = this.pokemonJugador.nivel;
+            this.pokemonJugador = pokemon;
+        }
+
         this.enemigo = enemigo;
+
         // Fondo
         this.spriteFondo = cc.Sprite.create(res.fondo_lucha_1);
         this.spriteFondo.setPosition(cc.p(size.width/2 , size.height/2));
         this.spriteFondo.setScale( size.width / this.spriteFondo.width );
         this.addChild(this.spriteFondo);
 
-        new Pikachu(this.space,cc.p(230,115),this);
-
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
         //this.cargarMapa();
         //this.scheduleUpdate();
+
+        return true;
+
+    },
+    update:function (dt) {
+        
+    },
+    cargarMapa:function () {
+
+    }
+});
+
+
+var MenuLuchaLayer = cc.Layer.extend({
+    space:null,
+    mapa:null,
+    mapaAncho:0,
+    mapaAlto:0,
+    pokemonJugador: null,
+    jugador: null,
+    ctor:function (jugador) {
+        this._super();
+        var size = cc.winSize;
+
+        // Inicializar Space (sin gravedad)
+        this.space = new cp.Space();
+
+        this.jugador = jugador;
+
+        // Fondo
+        this.spriteFondo = cc.Sprite.create(res.mensaje_ataques_pikachu);
+        this.spriteFondo.setPosition(cc.p(size.width - (Math.abs(jugador.body.p.x - size.width)) - (this.spriteFondo.width),
+            size.height - (Math.abs(size.height - jugador.body.p.y)) + this.spriteFondo.height));
+        this.addChild(this.spriteFondo);
+
 
         return true;
 
@@ -511,6 +566,8 @@ var LuchaLayer = cc.Layer.extend({
 
     }
 });
+
+
 
 var GameScene = cc.Scene.extend({
     onEnter:function () {

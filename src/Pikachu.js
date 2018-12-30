@@ -11,6 +11,8 @@ var Pikachu = cc.Class.extend({
     animacion:null,
     nivel: 1,
     estado: parado,
+    vida: 100,
+    name: "Pikachu",
     ctor:function (space, posicion, layer) {
 
         // Crear Sprite - Cuerpo y forma
