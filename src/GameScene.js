@@ -73,6 +73,7 @@ var GameLayer = cc.Layer.extend({
     collisionJugadorConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         var shapeEnemigo = shapes[1];
+        //console.log("tam->"+this.enemigos.length);
         for (var j = 0; j < this.enemigos.length; j++) {
             if (this.enemigos[j].shape == shapeEnemigo) {
                 this.getParent().addChild(new LuchaLayer(this.enemigos[j], this.jugador, this));
@@ -505,7 +506,9 @@ var LuchaLayer = cc.Layer.extend({
         this.spriteFondo.setScale( size.width / this.spriteFondo.width );
         this.addChild(this.spriteFondo);
 
+
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
+
         //this.cargarMapa();
         this.scheduleUpdate();
 
