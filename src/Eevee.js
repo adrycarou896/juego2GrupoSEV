@@ -3,10 +3,15 @@ var luchando = 2;
 
 var Eevee = cc.Class.extend({
     space:null,
+    spaceAnterior:null,
     sprite:null,
+    spriteAnterior:null,
     shape:null,
+    shapeAnterior:null,
     body:null,
+    bodyAnterior:null,
     layer:null,
+    layerAnterior:null,
     animacion_idle:null,
     animacion:null,
     nivel: 1,
@@ -16,9 +21,16 @@ var Eevee = cc.Class.extend({
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_01.png");
 
-        this.incluirEnVista(space,posicion,layer);
+        this.incluirEnVista(space, posicion, layer);
 
         layer.addChild(this.sprite,10);
+
+        //Guardamos los datos
+        this.spriteAnterior = this.sprite;
+        this.spaceAnterior = this.space;
+        this.layerAnterior = this.layer;
+        this.bodyAnterior = this.body;
+        this.shapeAnterior = this.shape;
 
     },
     actualizar:function(){
@@ -29,7 +41,7 @@ var Eevee = cc.Class.extend({
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_idle_01.png");
 
-        this.incluirEnVista(space,posicion,layer);
+        this.incluirEnVista(space, posicion, layer);
 
         var framesAnimacion = [];
         for (var i = 1; i <= 2; i++) {
@@ -76,8 +88,12 @@ var Eevee = cc.Class.extend({
         // forma dinamica
         this.space.addShape(this.shape);
 
-        //this.sprite.stopAllActions();
-        //this.sprite.runAction(this.animacion);
-
+    },
+    finModoLucha:function () {
+        this.sprite = this.spriteAnterior;
+        this.space = this.spaceAnterior;
+        this.layer = this.layerAnterior;
+        this.body = this.bodyAnterior;
+        this.shape = this.shapeAnterior;
     }
 });

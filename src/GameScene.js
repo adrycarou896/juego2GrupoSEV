@@ -73,6 +73,7 @@ var GameLayer = cc.Layer.extend({
     collisionJugadorConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         var shapeEnemigo = shapes[1];
+        //console.log("tam->"+this.enemigos.length);
         for (var j = 0; j < this.enemigos.length; j++) {
             if (this.enemigos[j].shape == shapeEnemigo) {
                 this.getParent().addChild(new LuchaLayer(this.enemigos[j], this.jugador, this));
@@ -505,7 +506,9 @@ var LuchaLayer = cc.Layer.extend({
         this.spriteFondo.setScale( size.width / this.spriteFondo.width );
         this.addChild(this.spriteFondo);
 
+
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
+
         //this.cargarMapa();
         this.scheduleUpdate();
 
@@ -567,7 +570,7 @@ var LuchaLayer = cc.Layer.extend({
     },
     finColisionDisparoConEnemigo:function(){
         //this.seleccionarPokemonAtaque();
-        this.getParent().addChild(new MenuLuchaLayer(this.jugador, this.pokemonJugador, this.disparosJugador, this));
+        this.getParent().addChild(new MenuLuchaLayer(this.jugador, this.pokemonJugador, this.disparosJugador, this.enemigo, this));
     }
 
 });
@@ -582,12 +585,15 @@ var MenuLuchaLayer = cc.Layer.extend({
     jugador: null,
     disparosJugador: [],
     layer: null,
-    ctor: function (jugador, pokemonJugador, disparosJugador, layer) {
+    enemigo: null,
+    ctor: function (jugador, pokemonJugador, disparosJugador, enemigo, layer) {
         this._super();
         var size = cc.winSize;
 
         // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
+
+        this.enemigo = enemigo;
 
         this.jugador = jugador;
         this.pokemonJugador = pokemonJugador;
@@ -627,6 +633,7 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 console.log("escapeeee");
+                //this.enemigo.finModoLucha();
                 //this.layer.layer.jugador.body.p.x = 730;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
