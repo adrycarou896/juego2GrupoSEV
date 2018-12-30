@@ -16,6 +16,7 @@
         "src/GameScene.js",
         "src/Jugador.js",
         "src/Eevee.js",
-        "src/Pikachu.js"
+        "src/Pikachu.js",
+        "src/DisparoJugador.js"
     ]
 }

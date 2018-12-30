@@ -6,6 +6,7 @@ var tipoEnemigo = 2;
 var tipoGimnasio = 3;
 var tipoMostrador = 4;
 var tipoSalirGimnasio = 5;
+var tipoDisparo = 6;
 //var tipoEnemigoDerecha = 4;
 //var tipoEnemigoIzquierda = 5;
 
@@ -470,9 +471,6 @@ var LayerGimnasio = cc.Layer.extend({
 
 });
 
-
-
-
 var LuchaLayer = cc.Layer.extend({
     jugador:null,
     enemigo:null,
@@ -481,6 +479,7 @@ var LuchaLayer = cc.Layer.extend({
     mapaAncho:0,
     mapaAlto:0,
     pokemonJugador: null,
+    disparosJugador: [],
     ctor:function (enemigo, jugador) {
         this._super();
         var size = cc.winSize;
@@ -492,6 +491,7 @@ var LuchaLayer = cc.Layer.extend({
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
 
         //El pokemon que entre en combate será el primero de la lista de capturados del jugador
         //que tenga vida mayor que 0
@@ -519,7 +519,16 @@ var LuchaLayer = cc.Layer.extend({
 
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
         //this.cargarMapa();
-        //this.scheduleUpdate();
+        this.scheduleUpdate();
+
+        //Colisión jugador con enemigo
+        this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
+            null, null, this.collisionDisparoConEnemigo.bind(this), null);
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: this.procesarKeyReleasedAtaque.bind(this)
+        }, this);
 
         return true;
 
@@ -561,12 +570,33 @@ var MenuLuchaLayer = cc.Layer.extend({
     },
     update:function (dt) {
 
+        for(i=0; i < this.disparosJugador.length; i++){
+            this.disparosJugador[i].actualizar();
+        }
+        this.space.step(dt);
     },
     cargarMapa:function () {
 
+    },
+    procesarKeyReleasedAtaque:function (keyCode){
+        var posicion = teclas.indexOf(keyCode);
+        teclas.splice(posicion, 1);
+        switch (keyCode){
+            case 83://s
+                console.log("has pulsado siiiiiiiii");
+                this.disparosJugador.push(new DisparoJugador(this,cc.p(230,115)));
+                break;
+            case 78: //n
+                console.log("has pulsado nooooooo");
+                break;
+        }
+    },
+    collisionDisparoConEnemigo:function (arbiter, space){
+        var shapes = arbiter.getShapes();
+        var shapeEnemigo = shapes[1];
+        console.log("COLISIONNN");
     }
 });
-
 
 
 var GameScene = cc.Scene.extend({

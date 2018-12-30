@@ -22,7 +22,7 @@ var Pikachu = cc.Class.extend({
         this.layer = layer;
 
         // Cuerpo dinamico, SI le afectan las fuerzas
-        this.body = new cp.Body(5, Infinity);
+        this.body = new cp.Body(Infinity, Infinity);
 
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
@@ -36,8 +36,6 @@ var Pikachu = cc.Class.extend({
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height);
-
-        this.shape.setCollisionType(tipoEnemigo);
 
         this.shape.setFriction(1);
         this.shape.setElasticity(0);

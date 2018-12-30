@@ -21,7 +21,10 @@ var res = {
     inside_tiles: "res/mapas/inside_tiles.png",
     mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx",
     mensaje_inscripcion_torneo: "res/fondoMensajes/mensaje_apuntar_torneo.png",
-    mensaje_ataques_pikachu: "res/fondoMensajes/mensaje_ataques_pikachu.png"
+    mensaje_ataques_pikachu: "res/fondoMensajes/mensaje_ataques_pikachu.png",
+    video: "res/video.mp4",
+    disparo_jugador_png: "res/pokemon/disparo_jugador.png",
+    disparo_jugador_plist : "res/pokemon/disparo_jugador.plist",
 
 };
 
