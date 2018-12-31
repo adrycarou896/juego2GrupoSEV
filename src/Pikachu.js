@@ -39,7 +39,7 @@ var Pikachu = cc.Class.extend({
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height);
-
+        this.shape.setCollisionType(tipoJugadorPokemon);
         this.shape.setFriction(1);
         this.shape.setElasticity(0);
 

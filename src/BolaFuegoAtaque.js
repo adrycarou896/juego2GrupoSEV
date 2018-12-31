@@ -20,7 +20,7 @@ var BolaFuegoAtaque = cc.Class.extend({
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width - 16,
             this.sprite.getContentSize().height - 16);
-        //this.shape.setCollisionType(tipoDisparo);
+        this.shape.setCollisionType(tipoDisparoEnemigo);
         // forma dinamica
         gameLayer.space.addShape(this.shape);
         // añadir sprite a la capa
@@ -29,7 +29,7 @@ var BolaFuegoAtaque = cc.Class.extend({
 
         // Crear animación
         var framesAnimacion = [];
-        for (var i = 1; i <= 1; i++) {
+        for (var i = 1; i <= 3; i++) {
             var str = "bola_fuego_0"+i+".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
@@ -45,13 +45,13 @@ var BolaFuegoAtaque = cc.Class.extend({
         this.sprite.runAction(actionAnimacionBucle);
 
         // Impulso inicial
-        this.body.applyImpulse(cp.v(500, 350), cp.v(10, 15));
+        this.body.applyImpulse(cp.v(-500, -550), cp.v(10, 15));
 
         this.gameLayer = gameLayer;
 
     },
     actualizar: function (){
-        this.body.vx = 500;
+        this.body.vx = -500;
     },
     eliminar: function (){
         // quita la forma

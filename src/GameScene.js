@@ -7,6 +7,8 @@ var tipoGimnasio = 3;
 var tipoMostrador = 4;
 var tipoSalirGimnasio = 5;
 var tipoDisparo = 6;
+var tipoJugadorPokemon = 7;
+var tipoDisparoEnemigo = 8;
 //var tipoEnemigoDerecha = 4;
 //var tipoEnemigoIzquierda = 5;
 
@@ -501,7 +503,6 @@ var LuchaLayer = cc.Layer.extend({
 
         this.enemigo = enemigo;
 
-
         // Fondo
         this.spriteFondo = cc.Sprite.create(res.fondo_lucha_1);
         this.spriteFondo.setPosition(cc.p(size.width/2 , size.height/2));
@@ -512,9 +513,13 @@ var LuchaLayer = cc.Layer.extend({
 
         this.scheduleUpdate();
 
-        //Colisión jugador con enemigo
+        //Colisión disparo jugador con enemigo
         this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
             null, null, this.collisionDisparoConEnemigo.bind(this), this.finColisionDisparoConEnemigo.bind(this));
+
+        //Colision disparo enemigo con jugador
+        this.space.addCollisionHandler(tipoDisparoEnemigo, tipoJugadorPokemon,
+            null, null, this.collisionDisparoEnemigoConJugadorPokemon.bind(this), this.finColisionDisparoConEnemigo.bind(this));
 
         return true;
 
@@ -583,6 +588,13 @@ var LuchaLayer = cc.Layer.extend({
                     this.disparosJugador.splice(j, 1);
                 }
             }
+
+            for (var j = 0; j < this.disparosEnemigo.length; j++) {
+                if (this.disparosEnemigo[j].shape == shape) {
+                    this.disparosEnemigo[j].eliminar();
+                    this.disparosEnemigo.splice(j, 1);
+                }
+            }
         }
         this.formasEliminar = [];
 
@@ -612,6 +624,13 @@ var LuchaLayer = cc.Layer.extend({
         this.formasEliminar.push(shapes[0]);
         this.enemigo.impactado();
         this.tiempoEfecto = 1;
+        console.log("COLISIONNN");
+    },
+    collisionDisparoEnemigoConJugadorPokemon:function (arbiter, space){
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
+        //this.enemigo.impactado();
+        //this.tiempoEfecto = 1;
         console.log("COLISIONNN");
     }
 
