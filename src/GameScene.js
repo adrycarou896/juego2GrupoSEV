@@ -315,6 +315,7 @@ function procesarKeyReleasedInscripcionTorneo(keyCode){
     }
 }
 
+
 var LayerInscripcionTorneo = cc.Layer.extend({
     space: null,
     nombre: "LayerInscripcionTorneo",
@@ -339,6 +340,59 @@ var LayerInscripcionTorneo = cc.Layer.extend({
 
         return true;
     }
+
+});
+
+
+var LayerSolicitarCuracion = cc.Layer.extend({
+    space: null,
+    nombre: "LayerSolicitarCuracion",
+    jugador: null,
+    layer: null,
+    ctor:function (jugador) {
+        this._super();
+        var size = cc.winSize;
+
+        this.jugador = jugador;
+        this.layer = this.jugador.layer;
+
+        // Fondo
+        var spriteFondoTitulo= new cc.Sprite(res.mensaje_curar_pokemon);
+        // Asigno posición central
+        spriteFondoTitulo.setPosition(cc.p(550, 375-spriteFondoTitulo.height/2));
+
+        // Añado Sprite a la escena
+        this.addChild(spriteFondoTitulo);
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: this.procesarKeyReleasedSolicitarCuracion.bind(this),
+            onKeyReleased: this.procesarKeyReleasedSolicitarCuracion.bind(this)
+        }, this);
+
+
+        return true;
+    },
+
+    procesarKeyReleasedSolicitarCuracion: function(keyCode){
+    var posicion = teclas.indexOf(keyCode);
+    teclas.splice(posicion, 1);
+    switch (keyCode){
+        case 83://s
+            this.jugador.curarPokemon();
+            var mensaje = new MensajesLayer(3, this, this.jugador);
+            this.getParent().addChild(mensaje);
+            this.getParent().removeChild(this);
+            mensaje.mostrar();
+            break;
+        case 78: //n
+            var mensaje = new MensajesLayer(4, this, this.jugador);
+            this.getParent().addChild(mensaje);
+            this.getParent().removeChild(this);
+            mensaje.mostrar();
+            break;
+    }
+}
 
 });
 
@@ -542,8 +596,8 @@ var CentroPokemonLayer = cc.Layer.extend({
         this.cargarMapaCentroPokemon(jugador);
         this.scheduleUpdate();
 
-        //this.space.addCollisionHandler(tipoMostrador, tipoJugador,
-          //  null, null, this.colisionConMostrador.bind(this), this.finColisionConMostrador.bind(this));
+        this.space.addCollisionHandler(tipoMostrador, tipoJugador,
+            null, null, this.colisionConMostrador.bind(this), this.finColisionConMostrador.bind(this));
 
         this.space.addCollisionHandler(tipoSalir, tipoJugador,
             null, null, this.colisionSalirCentroPokemon.bind(this), this.finColisionSalirCentroPokemon.bind(this));
@@ -665,12 +719,12 @@ var CentroPokemonLayer = cc.Layer.extend({
     },
 
     colisionConMostrador:function(){
-        this.jugador.inscribirTorneo();
+        this.jugador.solicitarCuracion();
     },
 
     finColisionConMostrador:function(){
-        this.getParent().removeChild(this.jugador.layerInscripcionTorneo);
-        this.jugador.layerInscripcionTorneo = null;
+        this.getParent().removeChild(this.jugador.layerSolicitarCuracion);
+        this.jugador.layerSolicitarCuracion = null;
     },
 
     colisionSalirCentroPokemon:function(){
@@ -680,7 +734,6 @@ var CentroPokemonLayer = cc.Layer.extend({
         this.jugador.layer.getParent().removeChild(this.jugador.layer);
 
     },
-
 
     finColisionSalirCentroPokemon:function(){
 
@@ -782,14 +835,14 @@ var LuchaLayer = cc.Layer.extend({
             this.getParent().addChild(layerLucha);
 
             if(!opcion){
-                var mensaje = new MensajesLayer(2, layerLucha);
+                var mensaje = new MensajesLayer(2, layerLucha, this.jugador);
                 this.getParent().addChild(mensaje);
                 mensaje.mostrar();
             }
             else {
 
                 //Aviso cambio de pokemon
-                var mensaje = new MensajesLayer(1, layerLucha, opcion);
+                var mensaje = new MensajesLayer(1, layerLucha, this.jugador);
                 this.getParent().addChild(mensaje);
                 mensaje.mostrar();
 
@@ -888,11 +941,13 @@ var MensajesLayer = cc.Layer.extend({
     layer: null,
     nombre: "MensajesLayer",
     mensaje: 0,
-    ctor: function (mensaje, layer) {
+    jugador: null,
+    ctor: function (mensaje, layer, jugador) {
         this._super();
 
         // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
+        this.jugador = jugador;
         this.layer = layer;
         this.mensaje = mensaje;
         return true;
@@ -902,14 +957,24 @@ var MensajesLayer = cc.Layer.extend({
         switch (this.mensaje) {
             case 1:
                 this.spriteFondo = cc.Sprite.create(res.mensaje_pokemon_caido_combate);
+                this.spriteFondo.setPosition(cc.p(650,75));
                 break;
             case 2:
                 this.spriteFondo = cc.Sprite.create(res.mensaje_pokemon_derrotados);
+                this.spriteFondo.setPosition(cc.p(650,75));
+                break;
+            case 3:
+                this.spriteFondo = cc.Sprite.create(res.mensaje_pokemon_curados);
+                this.spriteFondo.setPosition(cc.p(550, 375-this.spriteFondo.height/2));
+                break;
+            case 4:
+                this.spriteFondo = cc.Sprite.create(res.mensaje_hasta_otra);
+                this.spriteFondo.setPosition(cc.p(550, 375-this.spriteFondo.height/2));
                 break;
 
         }
 
-        this.spriteFondo.setPosition(cc.p(650,75));
+
         this.addChild(this.spriteFondo);
 
         setTimeout(this.eliminar.bind(this), 3000);
@@ -931,6 +996,19 @@ var MensajesLayer = cc.Layer.extend({
                 this.layer.layer.jugador.body.p.x = 416;
                 this.layer.layer.jugador.body.p.y = 480;
                 this.getParent().removeChild(this.layer);
+                this.getParent().removeChild(this);
+                break;
+            case 3: //pokemon curados
+                //this.layer.colisionSalirCentroPokemon();
+                var layer =  new GameLayer(this.jugador, 2);
+                this.getParent().addChild(layer);
+                this.getParent().removeChild(this.jugador.layer);
+                this.getParent().removeChild(this);
+                break;
+            case 4: //hasta otra
+                var layer =  new GameLayer(this.jugador, 2);
+                this.getParent().addChild(layer);
+                this.getParent().removeChild(this.jugador.layer);
                 this.getParent().removeChild(this);
                 break;
 

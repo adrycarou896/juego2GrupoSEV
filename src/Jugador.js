@@ -26,6 +26,7 @@ var Jugador = cc.Class.extend({
     layerGimnasio: null,
     layerInscripcionTorneo: null,
     layerCentroPokemon: null,
+    layerSolicitarCuracion: null,
 
     ctor:function (space, posicion, layer) {
         this.space = space;
@@ -265,7 +266,6 @@ var Jugador = cc.Class.extend({
 
 
     entrarCentroPokemon(){
-
         if(this.layerCentroPokemon == null){
             this.layerCentroPokemon =  new CentroPokemonLayer(this);
             this.layer.getParent().addChild(this.layerCentroPokemon);
@@ -279,6 +279,21 @@ var Jugador = cc.Class.extend({
         if(this.layerInscripcionTorneo == null){
             this.layerInscripcionTorneo = new LayerInscripcionTorneo();
             this.layer.getParent().addChild(this.layerInscripcionTorneo);
+        }
+    },
+
+
+    solicitarCuracion(){
+        if(this.layerSolicitarCuracion == null){
+            this.layerSolicitarCuracion = new LayerSolicitarCuracion(this);
+            this.layer.getParent().addChild(this.layerSolicitarCuracion);
+        }
+    },
+
+
+    curarPokemon(){
+        for(var i=0; i<this.capturados.length; i++){
+            this.capturados[i].vida = 100;
         }
     }
 
