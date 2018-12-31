@@ -60,6 +60,34 @@ var Pikachu = cc.Class.extend({
 
         layer.addChild(this.sprite,10);
     },
+    impactado:function(){
+        var framesAnimacion = [];
+        for (var i = 3; i <= 4; i++) {
+            var str = "pikachu_idle_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.05);
+        this.animacion =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+    },
+    cambiarAAnimacionDeLucha:function(){
+        var framesAnimacion = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "pikachu_idle_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.5);
+        this.animacion =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+    },
     actualizar:function(){
 
     }

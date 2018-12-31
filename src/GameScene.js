@@ -482,6 +482,7 @@ var LuchaLayer = cc.Layer.extend({
     nombre: "LuchaLayer",
     formasEliminar: [],
     tiempoEfecto:0,
+    tiempoEfectoPokemonJugador:0,
     tiempoDisparoEnemigo:0,
     ctor:function (enemigo, jugador, layer) {
         this._super();
@@ -615,6 +616,15 @@ var LuchaLayer = cc.Layer.extend({
             this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
             this.tiempoDisparoEnemigo = 0;
         }
+
+        if (this.tiempoEfectoPokemonJugador > 0){
+            this.tiempoEfectoPokemonJugador = this.tiempoEfectoPokemonJugador - dt;
+
+        }
+        if (this.tiempoEfectoPokemonJugador < 0) {
+            this.pokemonJugador.cambiarAAnimacionDeLucha();
+            this.tiempoEfectoPokemonJugador = 0;
+        }
     },
     cargarMapa:function () {
 
@@ -629,8 +639,8 @@ var LuchaLayer = cc.Layer.extend({
     collisionDisparoEnemigoConJugadorPokemon:function (arbiter, space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
-        //this.enemigo.impactado();
-        //this.tiempoEfecto = 1;
+        this.pokemonJugador.impactado();
+        this.tiempoEfectoPokemonJugador = 1;
         console.log("COLISIONNN");
     }
 
