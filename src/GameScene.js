@@ -600,7 +600,7 @@ var LuchaLayer = cc.Layer.extend({
             this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
         }
         if(this.tiempoDisparoEnemigo < 0){
-            this.disparosEnemigo.push(new BolaFuegoAtaque(this,this.enemigo.body.getPos()));
+            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
             this.tiempoDisparoEnemigo = 0;
         }
     },
