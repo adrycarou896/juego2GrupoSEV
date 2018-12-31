@@ -7,7 +7,7 @@
 			<key>eevee_idle_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{65,62}}</string>
+				<string>{{2,0},{65,62}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -20,7 +20,33 @@
 			<key>eevee_idle_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{66,0},{65,62}}</string>
+				<string>{{67,0},{65,62}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{65,62}}</string>
+				<key>sourceSize</key>
+				<string>{65,62}</string>
+			</dict>
+			<key>eevee_idle_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{130,0},{65,62}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{65,62}}</string>
+				<key>sourceSize</key>
+				<string>{65,62}</string>
+			</dict>
+			<key>eevee_idle_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{235,0},{100,62}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -39,7 +65,7 @@
 			<key>realTextureFileName</key>
             <string>eevee_idle.png</string>
 			<key>size</key>
-			<string>{127,62}</string>
+			<string>{300,62}</string>
 			<key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:3d70b2498d34a6ce27ecd669974329db:d7e2a12efd5d53dc799168586e11d70e:b8e96a3b0eea864d9c309cc779337e95$</string>
             <key>textureFileName</key>
