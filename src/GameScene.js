@@ -5,10 +5,11 @@ var tipoJugador = 1;
 var tipoEnemigo = 2;
 var tipoGimnasio = 3;
 var tipoMostrador = 4;
-var tipoSalirGimnasio = 5;
+var tipoSalir = 5;
 var tipoDisparo = 6;
 var tipoJugadorPokemon = 7;
 var tipoDisparoEnemigo = 8;
+var tipoCentroPokemon = 9;
 //var tipoEnemigoDerecha = 4;
 //var tipoEnemigoIzquierda = 5;
 
@@ -20,9 +21,12 @@ var GameLayer = cc.Layer.extend({
     mapaAncho:0,
     mapaAlto:0,
     nombre: "GameLayer",
-    ctor:function (jugador) {
+    saleDe: 0,
+    ctor:function (jugador, saleDe) {
        this._super();
        var size = cc.winSize;
+
+        this.saleDe = saleDe;
 
        cc.spriteFrameCache.addSpriteFrames(res.jugador_plist);
        cc.spriteFrameCache.addSpriteFrames(res.eevee_plist);
@@ -46,6 +50,9 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoGimnasio, tipoJugador,
             null, null, this.colisionConGimnasio.bind(this), this.finColisionConGimnasio.bind(this));
 
+        this.space.addCollisionHandler(tipoCentroPokemon, tipoJugador,
+            null, null, this.colisionConCentroPokemon.bind(this), this.finColisionConCentroPokemon.bind(this));
+
         //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
             null, null, this.collisionJugadorConEnemigo.bind(this), null);
@@ -64,9 +71,9 @@ var GameLayer = cc.Layer.extend({
        procesarControles(this.jugador);
        this.jugador.actualizar();
 
-        this.space.step(dt);
+       this.space.step(dt);
 
-        moverCamara(this.jugador, this.getContentSize(), this.mapaAncho, this.mapaAlto, this);
+       moverCamara(this.jugador, this.getContentSize(), this.mapaAncho, this.mapaAlto, this);
 
     },
     collisionJugadorConEnemigo:function (arbiter, space){
@@ -137,6 +144,29 @@ var GameLayer = cc.Layer.extend({
             }
         }
 
+
+        var lineasCentroPokemon = this.mapa.getObjectGroup("CentroPokemon");
+        var arrayCentroPokemon = lineasCentroPokemon.getObjects();
+        for (var i = 0; i < arrayCentroPokemon.length; i++) {
+            var limite = arrayCentroPokemon[i];
+            var puntos = limite.polylinePoints;
+            for(var j = 0; j < puntos.length - 1; j++){
+                var bodyLimite = new cp.StaticBody();
+
+                var shapeLimite = new cp.SegmentShape(bodyLimite,
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j].x),
+                        parseInt(limite.y) - parseInt(puntos[j].y)),
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j + 1].x),
+                        parseInt(limite.y) - parseInt(puntos[j + 1].y)),
+                    1);
+
+                shapeLimite.setFriction(1);
+                shapeLimite.setElasticity(0);
+                shapeLimite.setCollisionType(tipoCentroPokemon);
+                this.space.addStaticShape(shapeLimite);
+            }
+        }
+
         //Jugador
         if(jugador == null) {
             var grupoJugador = this.mapa.getObjectGroup("Jugador");
@@ -145,8 +175,14 @@ var GameLayer = cc.Layer.extend({
                 cc.p(arrayJugador[0]["x"], arrayJugador[0]["y"]), this);
         }
         else{
-            this.jugador = new Jugador(this.space,
-                cc.p(775, 750), this);
+            if(this.saleDe == 1) { //Sale del gimnasio
+                this.jugador = new Jugador(this.space,
+                    cc.p(775, 750), this);
+            }
+            else if(this.saleDe == 2) { //Sale del Centro Pokemon
+                this.jugador = new Jugador(this.space,
+                    cc.p(685, 608), this);
+            }
             this.jugador.capturados = jugador.capturados;
         }
 
@@ -167,6 +203,15 @@ var GameLayer = cc.Layer.extend({
 
 
     finColisionConGimnasio:function (arbiter, space) {
+        this.getParent().removeChild(this.jugador.layer);
+    },
+
+    colisionConCentroPokemon:function (arbiter, space) {
+        this.jugador.entrarCentroPokemon();
+    },
+
+
+    finColisionConCentroPokemon:function (arbiter, space) {
         this.getParent().removeChild(this.jugador.layer);
     }
 
@@ -260,10 +305,12 @@ function procesarKeyReleasedInscripcionTorneo(keyCode){
     teclas.splice(posicion, 1);
     switch (keyCode){
         case 83://s
-            console.log("has pulsado siiiiiiiii")
+            console.log("has pulsado siiiiiiiii");
+            //Todo
             break;
         case 78: //n
-            console.log("has pulsado nooooooo")
+            console.log("has pulsado nooooooo");
+            //Todo
             break;
     }
 }
@@ -294,6 +341,10 @@ var LayerInscripcionTorneo = cc.Layer.extend({
     }
 
 });
+
+
+
+
 
 var LayerGimnasio = cc.Layer.extend({
     jugador:null,
@@ -326,7 +377,7 @@ var LayerGimnasio = cc.Layer.extend({
             this.cargarMapaGimnasio(jugador);
             this.scheduleUpdate();
 
-            this.space.addCollisionHandler(tipoSalirGimnasio, tipoJugador,
+            this.space.addCollisionHandler(tipoSalir, tipoJugador,
                 null, null, this.colisionSalirGimnasio.bind(this), this.finColisionSalirGimnasio.bind(this));
 
             this.space.addCollisionHandler(tipoMostrador, tipoJugador,
@@ -355,7 +406,7 @@ var LayerGimnasio = cc.Layer.extend({
 
     colisionSalirGimnasio:function(){
 
-        var layer =  new GameLayer(this.jugador);
+        var layer =  new GameLayer(this.jugador, 1);
         this.jugador.layer.getParent().addChild(layer);
         this.jugador.layer.getParent().removeChild(this.jugador.layer);
 
@@ -450,7 +501,7 @@ var LayerGimnasio = cc.Layer.extend({
 
                 shapeLimite.setFriction(1);
                 shapeLimite.setElasticity(0);
-                shapeLimite.setCollisionType(tipoSalirGimnasio);
+                shapeLimite.setCollisionType(tipoSalir);
                 this.space.addStaticShape(shapeLimite);
             }
         }
@@ -467,6 +518,186 @@ var LayerGimnasio = cc.Layer.extend({
     }
 
 });
+
+
+
+
+
+
+
+var CentroPokemonLayer = cc.Layer.extend({
+    jugador:null,
+    space:null,
+    mapa:null,
+    mapaAncho:0,
+    mapaAlto:0,
+    nombre: "CentroPokemonLayer",
+    ctor:function (jugador) {
+
+        this._super();
+
+        this.space = new cp.Space();
+        this.jugador = jugador;
+
+        this.cargarMapaCentroPokemon(jugador);
+        this.scheduleUpdate();
+
+        //this.space.addCollisionHandler(tipoMostrador, tipoJugador,
+          //  null, null, this.colisionConMostrador.bind(this), this.finColisionConMostrador.bind(this));
+
+        this.space.addCollisionHandler(tipoSalir, tipoJugador,
+            null, null, this.colisionSalirCentroPokemon.bind(this), this.finColisionSalirCentroPokemon.bind(this));
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: procesarKeyPressed.bind(this),
+            onKeyReleased: procesarKeyReleased.bind(this)
+        }, this);
+
+
+    },
+
+    update:function (dt) {
+        procesarControles(this.jugador);
+        this.jugador.actualizar();
+
+        this.space.step(dt);
+
+        moverCamara(this.jugador, this.getContentSize(), this.mapaAncho, this.mapaAlto, this);
+
+    },
+
+
+    cargarMapaCentroPokemon:function(jugador){
+
+        this.mapa = new cc.TMXTiledMap(res.mapa_centro_pokemon);
+
+        this.addChild(this.mapa);
+        // Ancho del mapa
+        this.mapaAncho = this.mapa.getContentSize().width;
+        this.mapaAlto = this.mapa.getContentSize().height;
+
+        // Solicitar los objeto dentro de la capa Limites
+        var grupoLimites = this.mapa.getObjectGroup("Limites");
+        var limitesArray = grupoLimites.getObjects();
+
+        // Los objetos de la capa limites
+        // formas estáticas de Chipmunk ( SegmentShape ).
+        for (var i = 0; i < limitesArray.length; i++) {
+            var limite = limitesArray[i];
+            var puntos = limite.polylinePoints;
+            for(var j = 0; j < puntos.length - 1; j++){
+                var bodyLimite = new cp.StaticBody();
+
+                var shapeLimite = new cp.SegmentShape(bodyLimite,
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j].x),
+                        parseInt(limite.y) - parseInt(puntos[j].y)),
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j + 1].x),
+                        parseInt(limite.y) - parseInt(puntos[j + 1].y)),
+                    1);
+
+                shapeLimite.setFriction(1);
+                shapeLimite.setElasticity(0);
+                this.space.addStaticShape(shapeLimite);
+            }
+        }
+
+        var lineasMostrador = this.mapa.getObjectGroup("Mostrador");
+        var arrayMostrador = lineasMostrador.getObjects();
+        for (var i = 0; i < arrayMostrador.length; i++) {
+            var limite = arrayMostrador[i];
+            var puntos = limite.polylinePoints;
+            for(var j = 0; j < puntos.length - 1; j++){
+                var bodyLimite = new cp.StaticBody();
+
+                var shapeLimite = new cp.SegmentShape(bodyLimite,
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j].x),
+                        parseInt(limite.y) - parseInt(puntos[j].y)),
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j + 1].x),
+                        parseInt(limite.y) - parseInt(puntos[j + 1].y)),
+                    1);
+
+                shapeLimite.setFriction(1);
+                shapeLimite.setElasticity(0);
+                shapeLimite.setCollisionType(tipoMostrador);
+                this.space.addStaticShape(shapeLimite);
+            }
+        }
+
+        var lineasSalir = this.mapa.getObjectGroup("Salir");
+        var arraySalir = lineasSalir.getObjects();
+        for (var i = 0; i < arraySalir.length; i++) {
+            var limite = arraySalir[i];
+            var puntos = limite.polylinePoints;
+            for(var j = 0; j < puntos.length - 1; j++){
+                var bodyLimite = new cp.StaticBody();
+
+                var shapeLimite = new cp.SegmentShape(bodyLimite,
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j].x),
+                        parseInt(limite.y) - parseInt(puntos[j].y)),
+                    cp.v(parseInt(limite.x) + parseInt(puntos[j + 1].x),
+                        parseInt(limite.y) - parseInt(puntos[j + 1].y)),
+                    1);
+
+                shapeLimite.setFriction(1);
+                shapeLimite.setElasticity(0);
+                shapeLimite.setCollisionType(tipoSalir);
+                this.space.addStaticShape(shapeLimite);
+            }
+        }
+
+        //Jugador
+        var grupoJugador = this.mapa.getObjectGroup("Jugador");
+        var arrayJugador = grupoJugador.getObjects();
+        this.jugador = new Jugador(this.space,
+            cc.p(arrayJugador[0]["x"],arrayJugador[0]["y"]), this);
+        this.jugador.capturados = jugador.capturados;
+
+        //Enfermera
+        var grupoEnfermera = this.mapa.getObjectGroup("Enfermera");
+        var arrayEnfermera = grupoEnfermera.getObjects();
+
+        this.spriteEnfermera = cc.Sprite.create(res.nurse_png);
+        this.spriteEnfermera.setPosition(cc.p(arrayEnfermera[0]["x"],arrayEnfermera[0]["y"]));
+        this.spriteEnfermera.setScale( 0.5 );
+        this.addChild(this.spriteEnfermera);
+
+    },
+
+    colisionConMostrador:function(){
+        this.jugador.inscribirTorneo();
+    },
+
+    finColisionConMostrador:function(){
+        this.getParent().removeChild(this.jugador.layerInscripcionTorneo);
+        this.jugador.layerInscripcionTorneo = null;
+    },
+
+    colisionSalirCentroPokemon:function(){
+
+        var layer =  new GameLayer(this.jugador, 2);
+        this.jugador.layer.getParent().addChild(layer);
+        this.jugador.layer.getParent().removeChild(this.jugador.layer);
+
+    },
+
+
+    finColisionSalirCentroPokemon:function(){
+
+    },
+
+
+
+});
+
+
+
+
+
+
+
+
+
 
 var LuchaLayer = cc.Layer.extend({
     jugador:null,
@@ -494,7 +725,6 @@ var LuchaLayer = cc.Layer.extend({
 
         this.jugador = jugador;
         this.layer = layer;
-        console.log("nombre de la layer: " +  this.layer.nombre);
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
@@ -782,7 +1012,7 @@ var MenuLuchaLayer = cc.Layer.extend({
 var GameScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        var layer = new GameLayer(null);
+        var layer = new GameLayer(null, 0);
         this.addChild(layer);
     }
 });

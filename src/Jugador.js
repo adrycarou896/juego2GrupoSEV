@@ -25,6 +25,7 @@ var Jugador = cc.Class.extend({
     capturados: [],
     layerGimnasio: null,
     layerInscripcionTorneo: null,
+    layerCentroPokemon: null,
 
     ctor:function (space, posicion, layer) {
         this.space = space;
@@ -262,6 +263,15 @@ var Jugador = cc.Class.extend({
         }
     },
 
+
+    entrarCentroPokemon(){
+
+        if(this.layerCentroPokemon == null){
+            this.layerCentroPokemon =  new CentroPokemonLayer(this);
+            this.layer.getParent().addChild(this.layerCentroPokemon);
+        }
+
+    },
 
 
 
