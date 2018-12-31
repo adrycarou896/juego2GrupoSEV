@@ -475,10 +475,12 @@ var LuchaLayer = cc.Layer.extend({
     mapaAlto:0,
     pokemonJugador: null,
     disparosJugador: [],
+    disparosEnemigo: [],
     layer: null,
     nombre: "LuchaLayer",
     formasEliminar: [],
     tiempoEfecto:0,
+    tiempoDisparoEnemigo:0,
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -493,6 +495,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_plist);
 
         this.seleccionarPokemonAtaque();
 
@@ -564,6 +567,10 @@ var LuchaLayer = cc.Layer.extend({
         for(i=0; i < this.disparosJugador.length; i++){
             this.disparosJugador[i].actualizar();
         }
+        for(i=0; i < this.disparosEnemigo.length; i++){
+            this.disparosEnemigo[i].actualizar();
+        }
+
         this.space.step(dt);
 
         // Eliminar formas:
@@ -586,6 +593,15 @@ var LuchaLayer = cc.Layer.extend({
         if (this.tiempoEfecto < 0) {
             this.enemigo.cambiarAAnimacionDeLucha();
             this.tiempoEfecto = 0;
+            this.tiempoDisparoEnemigo = 1;
+        }
+
+        if(this.tiempoDisparoEnemigo > 0){
+            this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
+        }
+        if(this.tiempoDisparoEnemigo < 0){
+            this.disparosEnemigo.push(new BolaFuegoAtaque(this,this.enemigo.body.getPos()));
+            this.tiempoDisparoEnemigo = 0;
         }
     },
     cargarMapa:function () {
