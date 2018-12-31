@@ -484,6 +484,7 @@ var LuchaLayer = cc.Layer.extend({
     tiempoEfecto:0,
     tiempoEfectoPokemonJugador:0,
     tiempoDisparoEnemigo:0,
+    menu: null,
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -566,7 +567,10 @@ var LuchaLayer = cc.Layer.extend({
             this.getParent().removeChild(this);
         }
         else {
-            this.getParent().addChild(new MenuLuchaLayer(this.pokemonJugador, this));
+            if(this.menu == null) {
+                this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
+                this.getParent().addChild(this.menu);
+            }
         }
     },
     update:function (dt) {
@@ -686,7 +690,11 @@ var MensajesLayer = cc.Layer.extend({
         switch (this.mensaje) {
             case 1:
                 this.getParent().removeChild(this);
-                this.layer.getParent().addChild(new MenuLuchaLayer(this.layer.pokemonJugador,this.layer));
+                if(this.layer.menu == null) {
+                    var menu = new MenuLuchaLayer(this.layer.pokemonJugador, this.layer);
+                    this.layer.menu = menu;
+                    this.layer.getParent().addChild(this.layer.menu);
+                }
                 break;
             case 2:
                 this.layer.enemigo.finModoLucha();
@@ -750,11 +758,13 @@ var MenuLuchaLayer = cc.Layer.extend({
                 this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
                 //this.layer.pokemonJugador.vida = 0;
                 this.getParent().removeChild(this);
+                this.layer.menu = null;
                 break;
             case 50: //2
                 console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[1]);
                 this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
                 this.getParent().removeChild(this);
+                this.layer.menu = null;
                 break;
             case 27: //esc
                 this.layer.enemigo.finModoLucha();
