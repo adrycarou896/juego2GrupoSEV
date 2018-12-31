@@ -25,6 +25,8 @@ var res = {
     video: "res/video.mp4",
     disparo_jugador_png: "res/pokemon/disparo_jugador.png",
     disparo_jugador_plist : "res/pokemon/disparo_jugador.plist",
+    bola_fuego_png: "res/pokemon/bola_fuego.png",
+    bola_fuego_plist: "res/pokemon/bola_fuego.plist",
 
 };
 
