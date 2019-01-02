@@ -10,7 +10,7 @@ var tipoDisparo = 6;
 var tipoJugadorPokemon = 7;
 var tipoDisparoEnemigo = 8;
 var tipoCentroPokemon = 9;
-
+var tipoPokeball = 10;
 //var tipoEnemigoDerecha = 4;
 //var tipoEnemigoIzquierda = 5;
 

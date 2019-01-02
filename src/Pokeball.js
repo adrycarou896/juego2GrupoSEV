@@ -39,7 +39,7 @@ var Pokeball = cc.Class.extend({
             this.sprite.getContentSize().width - 16,
             this.sprite.getContentSize().height - 16);
 
-        this.shape.setCollisionType(tipo);
+        this.shape.setCollisionType(tipoPokeball);
 
         // forma dinamica
         this.space.addShape(this.shape);
