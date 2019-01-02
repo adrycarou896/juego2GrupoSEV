@@ -17,8 +17,8 @@
         "src/Jugador.js",
         "src/Eevee.js",
         "src/Pikachu.js",
-        "src/DisparoJugador.js",
         "src/RayoAtaque.js",
+        "src/DisparoPikachuRayo.js",
         "src/BolaFuegoAtaque.js"
     ]
 }

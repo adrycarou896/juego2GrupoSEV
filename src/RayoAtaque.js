@@ -3,9 +3,12 @@ var RayoAtaque = cc.Class.extend({
     sprite:null,
     shape:null,
     posicion: null,
+    eficacia: 40,
+    pokemon: null,
     activo: false,
-    ctor:function (gameLayer, posicion) {
+    ctor:function (gameLayer, posicion, pokemon) {
         this.posicion = posicion;
+        this.pokemon = pokemon;
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#rayo_01.png");
         // Cuerpo dinámico, SI le afectan las fuerzas
@@ -51,6 +54,9 @@ var RayoAtaque = cc.Class.extend({
 
         this.gameLayer = gameLayer;
 
+    },
+    daño: function(){
+        return this.eficacia*this.pokemon.nivel;
     },
     actualizar: function (){
         this.body.vx = 0;

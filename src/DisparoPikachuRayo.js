@@ -1,10 +1,13 @@
-var DisparoJugador = cc.Class.extend({
+var DisparoPikachuRayo = cc.Class.extend({
     gameLayer:null,
     sprite:null,
     shape:null,
     posicion: null,
-    ctor:function (gameLayer, posicion) {
-        this.posicion = posicion;
+    eficacia: 30,
+    pokemon: null,
+    ctor:function (gameLayer, posicion, pokemon) {
+            this.posicion = posicion;
+        this.pokemon = pokemon;
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#disparo_jugador_01.png");
         // Cuerpo dinámico, SI le afectan las fuerzas
@@ -47,9 +50,14 @@ var DisparoJugador = cc.Class.extend({
 
         // Impulso inicial
         this.body.applyImpulse(cp.v(500, 350), cp.v(10, 15));
+        //this.body.applyImpulse(cp.v(500, -350), cp.v(10, 15));
 
         this.gameLayer = gameLayer;
 
+
+    },
+    daño: function(){
+        return this.eficacia*this.pokemon.nivel;
     },
     actualizar: function (){
         this.body.vx = 500;

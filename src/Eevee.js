@@ -18,6 +18,7 @@ var Eevee = cc.Class.extend({
     estado: parado,
     vida: 100,
     posicion: null,
+    defensa: 3,
     ctor:function (space, posicion, layer) {
         this.posicion = posicion;
         // Crear Sprite - Cuerpo y forma
@@ -91,7 +92,7 @@ var Eevee = cc.Class.extend({
         this.space.addShape(this.shape);
 
     },
-    impactado:function(){
+    impactado:function(disparo){
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
             var str = "eevee_idle_0" + i + ".png";
@@ -105,6 +106,13 @@ var Eevee = cc.Class.extend({
         this.animacion = this.animacion_idle;
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+
+        console.log(this.vida);
+        this.vida -= this.recibeDaño(disparo.daño());
+        console.log("Vida de Eevee: " + this.vida);
+    },
+    recibeDaño: function(daño){
+      return daño-(this.defensa*this.nivel);
     },
     cambiarAAnimacionDeLucha:function(){
         var framesAnimacion = [];
