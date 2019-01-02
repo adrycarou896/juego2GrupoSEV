@@ -17,9 +17,10 @@ var Eevee = cc.Class.extend({
     nivel: 1,
     estado: parado,
     vida: 100,
+    posicion: null,
     defensa: 3,
     ctor:function (space, posicion, layer) {
-
+        this.posicion = posicion;
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_01.png");
 
