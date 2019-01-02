@@ -35,9 +35,18 @@ var res = {
     mensaje_curar_pokemon: "res/fondoMensajes/mensaje_curar_pokemon.png",
     mensaje_pokemon_curados: "res/fondoMensajes/mensaje_pokemon_curados.png",
     mensaje_hasta_otra: "res/fondoMensajes/mensaje_hasta_otra.png",
+<<<<<<< HEAD
     rayo_png: "res/pokemon/rayo.png",
     rayo_plist: "res/pokemon/rayo.plist",
     mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png"
+=======
+    mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png",
+    pokeball_png: "res/pokeball/pokeball.png",
+    pokeball_sprite: "res/pokeball/pokeball_sprite.png",
+    pokeball_plist: "res/pokeball/pokeball.plist",
+    pokeball_volando: "res/pokeball/pokeball_volando.png",
+    pokeball_volando_plist: "res/pokeball/pokeball_volando.plist"
+>>>>>>> 45e1051686c7f9797189f3831e9177f6304e4825
 
 };
 
