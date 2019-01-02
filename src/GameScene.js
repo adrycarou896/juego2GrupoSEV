@@ -23,7 +23,6 @@ var GameLayer = cc.Layer.extend({
     mapaAlto:0,
     nombre: "GameLayer",
     saleDe: 0,
-    pokeball: null,
     ctor:function (jugador, saleDe) {
        this._super();
        var size = cc.winSize;
@@ -35,8 +34,6 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.caballero_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
-        cc.spriteFrameCache.addSpriteFrames(res.pokeball_plist);
-        cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
 
        // Inicializar Space (sin gravedad)
        this.space = new cp.Space();
@@ -46,8 +43,6 @@ var GameLayer = cc.Layer.extend({
 
        this.cargarMapa(jugador);
        this.scheduleUpdate();
-
-        this.pokeball = new Pokeball(this.space, cc.p(510,464), this);
 
         // COLISIONES
         // Zona de escuchadores de colisiones
@@ -76,7 +71,6 @@ var GameLayer = cc.Layer.extend({
 
        procesarControles(this.jugador);
        this.jugador.actualizar();
-       this.pokeball.actualizar();
 
        this.space.step(dt);
 
@@ -776,6 +770,7 @@ var LuchaLayer = cc.Layer.extend({
     tiempoEfectoPokemonJugador:0,
     tiempoDisparoEnemigo:0,
     menu: null,
+    pokeball: null,
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -790,6 +785,10 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.pokeball_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
+
+        this.pokeball = new Pokeball(this.space, cc.p(510,464), this);
 
 
         this.seleccionarPokemonAtaque();
@@ -814,9 +813,22 @@ var LuchaLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoDisparoEnemigo, tipoJugadorPokemon,
             null, null, this.collisionDisparoEnemigoConJugadorPokemon.bind(this), this.finColisionDisparoConEnemigo.bind(this));
 
+        //Colisión pokeball con enemigo
+        this.space.addCollisionHandler(tipoPokeball, tipoEnemigo,
+            null, null, this.colisionPokeballEnemigo.bind(this), this.finColisionPokeballEnemigo.bind(this));
+
         return true;
 
     },
+
+    colisionPokeballEnemigo: function(){
+        this.pokeball.cambiarAModoCaptura();
+    },
+
+    finColisionPokeballEnemigo: function(){
+
+    },
+
     seleccionarPokemonAtaque:function(){
         for (var i = 0; i < this.jugador.capturados.length; i++) {
             if (this.jugador.capturados[i].vida > 0) {
