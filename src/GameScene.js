@@ -919,16 +919,24 @@ var LuchaLayer = cc.Layer.extend({
     collisionDisparoConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
-        this.enemigo.impactado();
+        this.enemigo.impactado(this.disparosJugador[0]);
+        if(this.enemigo.vida <= 0){
+            //todo
+            console.log("Enemigo derrotadoooo");
+            /*var mensaje = new MensajesLayer(3, this, this.jugador);
+            this.getParent().addChild(mensaje);
+            this.getParent().removeChild(this);
+            mensaje.mostrar();*/
+        }
         this.tiempoEfecto = 1;
-        console.log("COLISIONNN");
+        console.log("COLISION DISPARO CON ENEMIGO");
     },
     collisionDisparoEnemigoConJugadorPokemon:function (arbiter, space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
         this.pokemonJugador.impactado();
         this.tiempoEfectoPokemonJugador = 1;
-        console.log("COLISIONNN");
+        console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
     }
 
 });
@@ -971,6 +979,10 @@ var MensajesLayer = cc.Layer.extend({
                 this.spriteFondo = cc.Sprite.create(res.mensaje_hasta_otra);
                 this.spriteFondo.setPosition(cc.p(550, 375-this.spriteFondo.height/2));
                 break;
+            case 5:
+                this.spriteFondo = cc.Sprite.create(res.mensaje_ganar_combate);
+                this.spriteFondo.setPosition(cc.p(650, 75));
+                break;
 
         }
 
@@ -1010,6 +1022,9 @@ var MensajesLayer = cc.Layer.extend({
                 this.getParent().addChild(layer);
                 this.getParent().removeChild(this.jugador.layer);
                 this.getParent().removeChild(this);
+                break;
+            case 5:
+
                 break;
 
         }
@@ -1063,14 +1078,14 @@ var MenuLuchaLayer = cc.Layer.extend({
         switch (keyCode){
             case 49://1
                 console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[0]);
-                this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
-                //this.layer.pokemonJugador.vida = 0;
+                var disparo = new DisparoPikachuRayo(this.layer,cc.p(230,115),this.pokemonJugador);
+                this.layer.disparosJugador.push(disparo);
                 this.getParent().removeChild(this);
                 this.layer.menu = null;
                 break;
             case 50: //2
                 console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[1]);
-                this.layer.disparosJugador.push(new DisparoJugador(this.layer,cc.p(230,115)));
+                this.layer.disparosJugador.push(new DisparoPikachuRayo(this.layer,cc.p(230,115), this.pokemonJugador));
                 this.getParent().removeChild(this);
                 this.layer.menu = null;
                 break;
