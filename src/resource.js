@@ -29,7 +29,7 @@ var res = {
     bola_fuego_plist: "res/pokemon/bola_fuego.plist",
     mensaje_pokemon_caido_combate: "res/fondoMensajes/mensaje_pokemon_caido_combate.png",
     mensaje_pokemon_derrotados: "res/fondoMensajes/mensaje_pokemon_derrotados.png",
-    nurse_png: "res/extra/pokeball.png",
+    nurse_png: "res/extra/nurse.png",
     tiles_pokemon_centro: "res/mapas/tiles_pokemon_centro.png",
     mapa_centro_pokemon: "res/mapas/mapa_centro_pokemon.tmx",
     mensaje_curar_pokemon: "res/fondoMensajes/mensaje_curar_pokemon.png",

@@ -713,7 +713,7 @@ var CentroPokemonLayer = cc.Layer.extend({
 
         this.spriteEnfermera = cc.Sprite.create(res.nurse_png);
         this.spriteEnfermera.setPosition(cc.p(arrayEnfermera[0]["x"],arrayEnfermera[0]["y"]));
-        this.spriteEnfermera.setScale( 0.5 );
+        this.spriteEnfermera.setScale( 0.60 );
         this.addChild(this.spriteEnfermera);
 
     },
