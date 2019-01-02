@@ -150,7 +150,7 @@ var Jugador = cc.Class.extend({
 
         layer.addChild(this.sprite,10);
 
-        this.capturados.push(new Pikachu());
+        this.capturados.push(new Piplup());
         this.capturados.push(new Pikachu());
 
     },
