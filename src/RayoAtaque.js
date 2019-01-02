@@ -1,12 +1,13 @@
-var DisparoJugador = cc.Class.extend({
+var RayoAtaque = cc.Class.extend({
     gameLayer:null,
     sprite:null,
     shape:null,
     posicion: null,
+    activo: false,
     ctor:function (gameLayer, posicion) {
         this.posicion = posicion;
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#disparo_jugador_01.png");
+        this.sprite = new cc.PhysicsSprite("#rayo_01.png");
         // Cuerpo dinámico, SI le afectan las fuerzas
         this.body = new cp.Body(5, Infinity);
         this.body.setPos(posicion);
@@ -30,12 +31,12 @@ var DisparoJugador = cc.Class.extend({
 
         // Crear animación
         var framesAnimacion = [];
-        for (var i = 1; i <= 3; i++) {
-            var str = "disparo_jugador_0"+i+".png";
+        for (var i = 1; i <= 4; i++) {
+            var str = "rayo_0"+i+".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
-        var animacion = new cc.Animation(framesAnimacion, 0.2);
+        var animacion = new cc.Animation(framesAnimacion, 0.05);
         var actionAnimacionBucle =
             new cc.RepeatForever(new cc.Animate(animacion));
 
@@ -46,13 +47,13 @@ var DisparoJugador = cc.Class.extend({
         this.sprite.runAction(actionAnimacionBucle);
 
         // Impulso inicial
-        this.body.applyImpulse(cp.v(500, 350), cp.v(10, 15));
+        this.body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
 
         this.gameLayer = gameLayer;
 
     },
     actualizar: function (){
-        this.body.vx = 500;
+        this.body.vx = 0;
     },
     eliminar: function (){
         // quita la forma

@@ -34,8 +34,9 @@ var res = {
     mapa_centro_pokemon: "res/mapas/mapa_centro_pokemon.tmx",
     mensaje_curar_pokemon: "res/fondoMensajes/mensaje_curar_pokemon.png",
     mensaje_pokemon_curados: "res/fondoMensajes/mensaje_pokemon_curados.png",
-    mensaje_hasta_otra: "res/fondoMensajes/mensaje_hasta_otra.png"
-
+    mensaje_hasta_otra: "res/fondoMensajes/mensaje_hasta_otra.png",
+    rayo_png: "res/pokemon/rayo.png",
+    rayo_plist: "res/pokemon/rayo.plist"
 };
 
 var g_resources = [];
