@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" nextobjectid="34">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" nextobjectid="36">
  <tileset firstgid="1" name="tileset-wesley" tilewidth="16" tileheight="16" tilecount="2912" columns="52">
   <image source="tiles-mapa.png" width="832" height="896"/>
  </tileset>
@@ -29,36 +29,40 @@
   <object id="9" x="672" y="752">
    <polyline points="0,0 78.6667,0 80,80 -0.666667,80.6667 0,-0.666667"/>
   </object>
-  <object id="25" x="677" y="241">
-   <polyline points="0,0 15,3 17,7 38,9 43,16 44,76 -69,76 -69,62 -39,63 -38,14 -25,9 -12,9 -1,-3"/>
-  </object>
   <object id="31" x="721" y="174">
    <polyline points="0,0 95,1.5 95,-154 14.5,-153.5 14,-25.5 -1,-25.5 -1.5,-0.5 0,0"/>
   </object>
   <object id="33" x="807" y="349">
    <polyline points="0,0 19,0 19,8 0,8 0,-2"/>
   </object>
+  <object id="34" x="643.333" y="260.667">
+   <polyline points="0,0 -0.666667,45.3333 -31.3333,46 -31.3333,52.6667 74.6667,53.3333 74.6667,-6.66667 37.3333,-13.3333 0,-3.33333"/>
+  </object>
  </objectgroup>
  <objectgroup name="Jugador">
   <object id="1" x="871" y="359" width="33" height="29"/>
  </objectgroup>
  <objectgroup name="EnemigoSalvaje">
-  <object id="10" x="100" y="142.667" width="33" height="29"/>
-  <object id="12" x="165.333" y="200" width="33" height="29"/>
-  <object id="13" x="236" y="125.333" width="33" height="29"/>
-  <object id="14" x="280" y="204" width="33" height="29"/>
-  <object id="15" x="342.667" y="137.333" width="33" height="29"/>
-  <object id="16" x="156" y="304" width="33" height="29"/>
-  <object id="17" x="260" y="302.667" width="33" height="29"/>
-  <object id="18" x="85.3333" y="638.667" width="33" height="29"/>
-  <object id="19" x="181.333" y="726.667" width="33" height="29"/>
-  <object id="20" x="314.667" y="776" width="33" height="29"/>
-  <object id="21" x="270.667" y="660" width="33" height="29"/>
+  <object id="10" x="87" y="120.667" width="33" height="29"/>
+  <object id="12" x="83.333" y="211" width="33" height="29"/>
+  <object id="13" x="248" y="122.333" width="33" height="29"/>
+  <object id="14" x="271" y="207" width="33" height="29"/>
+  <object id="16" x="89" y="312" width="33" height="29"/>
+  <object id="17" x="279" y="311.667" width="33" height="29"/>
+  <object id="18" x="85.3333" y="613.667" width="33" height="29"/>
+  <object id="19" x="203.333" y="712.667" width="33" height="29"/>
+  <object id="20" x="326.667" y="828" width="33" height="29"/>
+  <object id="21" x="313.667" y="625" width="33" height="29"/>
   <object id="22" x="94.6667" y="824" width="33" height="29"/>
  </objectgroup>
  <objectgroup name="Gimnasio">
   <object id="29" x="767" y="178.5">
    <polyline points="0,0 18,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="CentroPokemon">
+  <object id="35" x="669.667" y="316.667">
+   <polyline points="0,0 19.3333,0"/>
   </object>
  </objectgroup>
 </map>

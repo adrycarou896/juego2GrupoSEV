@@ -20,7 +20,22 @@ var res = {
     fondo_mensaje_prohibido_gimnasio: "res/fondoMensajes/mensaje_prohibido_gimnasio.png",
     inside_tiles: "res/mapas/inside_tiles.png",
     mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx",
-    mensaje_inscripcion_torneo: "res/fondoMensajes/mensaje_apuntar_torneo.png"
+    mensaje_inscripcion_torneo: "res/fondoMensajes/mensaje_apuntar_torneo.png",
+    mensaje_ataques_pikachu: "res/fondoMensajes/mensaje_ataques_pikachu.png",
+    video: "res/video.mp4",
+    disparo_jugador_png: "res/pokemon/disparo_jugador.png",
+    disparo_jugador_plist: "res/pokemon/disparo_jugador.plist",
+    bola_fuego_png: "res/pokemon/bola_fuego.png",
+    bola_fuego_plist: "res/pokemon/bola_fuego.plist",
+    mensaje_pokemon_caido_combate: "res/fondoMensajes/mensaje_pokemon_caido_combate.png",
+    mensaje_pokemon_derrotados: "res/fondoMensajes/mensaje_pokemon_derrotados.png",
+    nurse_png: "res/extra/pokeball.png",
+    tiles_pokemon_centro: "res/mapas/tiles_pokemon_centro.png",
+    mapa_centro_pokemon: "res/mapas/mapa_centro_pokemon.tmx",
+    mensaje_curar_pokemon: "res/fondoMensajes/mensaje_curar_pokemon.png",
+    mensaje_pokemon_curados: "res/fondoMensajes/mensaje_pokemon_curados.png",
+    mensaje_hasta_otra: "res/fondoMensajes/mensaje_hasta_otra.png",
+    mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png"
 
 };
 
