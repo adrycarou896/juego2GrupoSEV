@@ -779,6 +779,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
 
         this.pokeball = new Pokeball(this.space, cc.p(510,464), this);
 
@@ -1111,7 +1112,7 @@ var MenuLuchaLayer = cc.Layer.extend({
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(230,115)));
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
-                this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(553,263)), this.pokemonJugador);//Limites para que el rayo haga efecto
+                this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(553,263), this.pokemonJugador));//Limites para que el rayo haga efecto
                 //this.layer.pokemonJugador.vida = 0;
                 //var disparo = new DisparoPikachuRayo(this.layer,cc.p(230,115),this.pokemonJugador);
                 //this.layer.disparosJugador.push(disparo);

@@ -65,7 +65,7 @@ var Pokeball = cc.Class.extend({
 
     },
     actualizar:function(){
-        this.body.vx = 300
+        this.body.vx = 500
     },
     cambiarAModoCaptura:function (space, posicion, layer) {
 
