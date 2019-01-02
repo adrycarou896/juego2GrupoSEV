@@ -35,7 +35,12 @@ var res = {
     mensaje_curar_pokemon: "res/fondoMensajes/mensaje_curar_pokemon.png",
     mensaje_pokemon_curados: "res/fondoMensajes/mensaje_pokemon_curados.png",
     mensaje_hasta_otra: "res/fondoMensajes/mensaje_hasta_otra.png",
-    mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png"
+    mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png",
+    pokeball_png: "res/pokeball/pokeball.png",
+    pokeball_sprite: "res/pokeball/pokeball_sprite.png",
+    pokeball_plist: "res/pokeball/pokeball.plist",
+    pokeball_volando: "res/pokeball/pokeball_volando.png",
+    pokeball_volando_plist: "res/pokeball/pokeball_volando.plist"
 
 };
 

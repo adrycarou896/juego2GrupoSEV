@@ -97,7 +97,7 @@
 			<key>size</key>
 			<string>{69,69}</string>
 			<key>textureFileName</key>
-			<string>pokeball.png</string>
+			<string>pokeball_sprite.png</string>
 			</dict>
 		</dict>
 </plist>
