@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/res/mapas/mapa_gimnasio.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/res/mapas/mapa_gimnasio.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Jugador.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jugador.js" afterDir="false" />
-    </list>
+    <list default="true" id="5f8840c6-3805-4992-b338-66b34ba641e7" name="Default" comment="" />
     <ignored path="RPG.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -415,16 +412,15 @@
       <workItem from="1546000943207" duration="8041000" />
       <workItem from="1546016267395" duration="6287000" />
       <workItem from="1546028994466" duration="7479000" />
-      <workItem from="1546077974623" duration="16805000" />
+      <workItem from="1546077974623" duration="16852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75463000" />
+    <option name="totallyTimeSpent" value="75510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="398" y="0" width="1347" height="946" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16781083" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -450,7 +446,6 @@
       <window_info anchor="right" id="Designer" order="4" />
       <window_info anchor="right" id="LuaJ" order="5" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info id="Favorites" order="4" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,20 +556,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
           <caret line="1629" selection-start-line="1629" selection-end-line="1629" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="135" column="13" lean-forward="true" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Jugador.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="254" column="43" lean-forward="true" selection-start-line="254" selection-start-column="43" selection-end-line="254" selection-end-column="43" />
         </state>
       </provider>
     </entry>
