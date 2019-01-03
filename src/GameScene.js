@@ -1223,7 +1223,8 @@ var MenuLuchaLayer = cc.Layer.extend({
                 this.layer.layer.jugador.body.p.y = 480;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
-            case 80:
+                break;
+            case 80: //p
                 this.layer.crearPokeball();
                 this.getParent().removeChild(this);
                 break;
