@@ -132,11 +132,14 @@ var Eevee = cc.Class.extend({
         this.sprite.runAction(this.animacion);
     },
     finModoLucha:function () {
+
         this.sprite = this.spriteAnterior;
         this.space = this.spaceAnterior;
         this.layer = this.layerAnterior;
-        console.log("layerAnterior: " + this.layerAnterior.nombre)
+        console.log("layerAnterior fin modo lucha: " + this.layerAnterior.nombre);
         this.body = this.bodyAnterior;
         this.shape = this.shapeAnterior;
+        this.space.removeShape(this.shape);
+        this.layer.removeChild(this.sprite);
     }
 });
