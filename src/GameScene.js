@@ -822,7 +822,9 @@ var LuchaLayer = cc.Layer.extend({
     },
 
     colisionPokeballEnemigo: function(){
+        this.removeChild(this.enemigo.sprite);
         this.pokeball.cambiarAModoCaptura(this.space, cc.p(600, 210), this );
+
     },
 
     finColisionPokeballEnemigo: function(){

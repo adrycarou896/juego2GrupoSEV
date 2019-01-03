@@ -66,42 +66,20 @@ var Pokeball = cc.Class.extend({
 
     },
     actualizar:function(){
- //       if(this.estado != capturando) {
+        if(this.estado != capturando) {
             this.body.vx = 500;
             this.body.vy = 150;
-/*        }
-        else{
-            this.body.vx = 0;
-            this.body.vy = 0;
-        }*/
+        }
     },
     cambiarAModoCaptura:function (space, posicion, layer) {
 
         this.space = space;
-        // Crear Sprite - Cuerpo y forma
-        //this.sprite = new cc.PhysicsSprite("#pokeball_1.png");
 
-
-        /*// Cuerpo dinamico, NO le afectan las fuerzas
-        this.body = new cp.Body(5, Infinity);
+        this.body = new cp.Body(Infinity, Infinity);
 
         this.body.setPos(posicion);
-        //body.w_limit = 0.02;
         this.body.setAngle(0);
-        this.sprite.setBody(this.body);*/
-
-        // Se añade el cuerpo al espacio
-        //this.space.addBody(this.body);
-
-        // forma
-        // forma 16px más pequeña que la imagen original
-        /*this.shape = new cp.BoxShape(this.body,
-            this.sprite.getContentSize().width - 16,
-            this.sprite.getContentSize().height - 16);*/
-
-        // forma dinamica
-        //this.space.addShape(this.shape);
-        //layer.addChild(this.sprite,10);
+        this.sprite.setBody(this.body);
 
         this.estado = capturando;
 
@@ -119,6 +97,8 @@ var Pokeball = cc.Class.extend({
         this.animacion = this.animacion_capturando;
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+
+
 
 
     },
