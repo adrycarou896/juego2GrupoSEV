@@ -100,7 +100,7 @@ var Pokeball = cc.Class.extend({
     calcularAtrapa:function(){
         if(this.enemigo.vida<= 50){
             var random = Math.random();
-            if(random >= 0.35){
+            if(random >= 0.9){
                 this.llena = true;
             }
             else{

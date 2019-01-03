@@ -774,6 +774,7 @@ var LuchaLayer = cc.Layer.extend({
     tiempoRayo:0,
     menu: null,
     pokeball: null,
+    mensaje: null,
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -911,7 +912,6 @@ var LuchaLayer = cc.Layer.extend({
             var mensaje = new MensajesLayer(5, this, this.jugador);
             this.getParent().addChild(mensaje);
             mensaje.mostrar();
-            //this.getParent().removeChild(this);
         }
         else {
             if(this != null) {
@@ -957,20 +957,22 @@ var LuchaLayer = cc.Layer.extend({
             if (this.pokeball.estado == llena) {
                 this.pokeball.cambiarAModoCerrada(this.space, cc.p(600, 210), this);
                 if(this.pokeball.finAnimaciones <= 0){
-                    var mensaje = new MensajesLayer(6, this, this.jugador);
-                    this.getParent().addChild(mensaje);
-                    this.getParent().removeChild(this);
-                    mensaje.mostrar();
+                    if(this.mensaje == null) {
+                        this.mensaje = new MensajesLayer(6, this, this.jugador);
+                        this.getParent().addChild(this.mensaje);
+                        this.mensaje.mostrar();
+                    }
                 }
 
             }
             else if (this.pokeball.estado == vacia) {
                 this.pokeball.cambiarAModoAbierta(this.space, cc.p(600, 210), this);
                 if(this.pokeball.finAnimaciones <= 0){
-                    var mensaje = new MensajesLayer(7, this, this.jugador);
-                    this.getParent().addChild(mensaje);
-                    this.getParent().removeChild(this);
-                    mensaje.mostrar();
+                    if(this.mensaje == null) {
+                        this.mensaje = new MensajesLayer(7, this, this.jugador);
+                        this.getParent().addChild(this.mensaje);
+                        this.mensaje.mostrar();
+                    }
                 }
             }
         }
@@ -1027,6 +1029,9 @@ var LuchaLayer = cc.Layer.extend({
     }
 
 });
+
+
+
 
 
 var MensajesLayer = cc.Layer.extend({
@@ -1131,23 +1136,11 @@ var MensajesLayer = cc.Layer.extend({
                 break;
             case 6:
                 this.layer.enemigo.finModoLucha();
-                this.layer.layer.jugador.body.p.x = 416;
-                this.layer.layer.jugador.body.p.y = 480;
-                if(this.layer.menu != null){
-                    this.getParent().removeChild(this.layer.menu);
-                }
-                this.getParent().removeChild(this.layer.layer.menuLuchaLayer);
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
             case 7:
                 this.layer.enemigo.finModoLucha();
-                this.layer.layer.jugador.body.p.x = 416;
-                this.layer.layer.jugador.body.p.y = 480;
-                if(this.layer.menu != null){
-                    this.getParent().removeChild(this.layer.menu);
-                }
-                this.getParent().removeChild(this.layer.layer.menuLuchaLayer);
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
@@ -1218,7 +1211,6 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 50: //2
                 this.layer.disparosJugador.push(this.pokemonJugador.ataque2(this.layer));
-                //this.layer.disparosJugador.push(new DisparoPikachuRayo(this.layer,cc.p(553,263), this.pokemonJugador));//Limites para que el rayo haga efecto
                 this.getParent().removeChild(this);
                 this.layer.menu = null;
                 break;
