@@ -1,5 +1,6 @@
 var capturando = 1;
 var volando = 2;
+var cerrada = 3;
 
 var Pokeball = cc.Class.extend({
     space:null,
@@ -50,7 +51,7 @@ var Pokeball = cc.Class.extend({
 
         var framesAnimacion = [];
         for (var i = 1; i <= 1; i++) {
-            var str = "sprites_" + ".png";
+            var str = "pokeball_" + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -66,11 +67,13 @@ var Pokeball = cc.Class.extend({
 
     },
     actualizar:function(){
-        if(this.estado != capturando) {
+        if(this.estado == volando) {
             this.body.vx = 500;
             this.body.vy = 150;
         }
     },
+
+
     cambiarAModoCaptura:function (space, posicion, layer) {
 
         this.space = space;
@@ -85,7 +88,7 @@ var Pokeball = cc.Class.extend({
 
         var framesAnimacion = [];
         for (var i = 2; i <= 7; i++) {
-            var str = "sprites_" + i + ".png";
+            var str = "pokeball_" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -97,9 +100,38 @@ var Pokeball = cc.Class.extend({
         this.animacion = this.animacion_capturando;
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
-
-
-
-
     },
+
+
+
+    cambiarAModoAtrapaPokemon: function(space, position, layer){
+        this.space = space;
+
+        var sprite = new cc.PhysicsSprite("#pokeball_cerrada.png");
+
+        this.sprite = sprite;
+
+        this.body = new cp.Body(Infinity, Infinity);
+
+        this.body.setPos(posicion);
+        this.body.setAngle(0);
+        this.sprite.setBody(this.body);
+
+        this.estado = cerrada;
+
+        var framesAnimacion = [];
+        for (var i = 2; i <= 7; i++) {
+            var str = "pokeball_" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.15);
+        this.animacion_capturando =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+
+        this.animacion = this.animacion_capturando;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+    }
 });
