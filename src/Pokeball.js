@@ -1,6 +1,7 @@
 var capturando = 1;
 var volando = 2;
-var cerrada = 3;
+var llena = 3;
+var vacia = 4;
 
 var Pokeball = cc.Class.extend({
     space:null,
@@ -17,7 +18,10 @@ var Pokeball = cc.Class.extend({
     animacion:null,
     animacion_volando: null,
     estado : volando,
-    ctor:function (space, posicion, layer) {
+    tiempoCaptura: 200,
+    enemigo: null,
+    llena: null,
+    ctor:function (space, posicion, layer, enemigo) {
 
         // Inicializar Space
         this.space = space;
@@ -25,6 +29,7 @@ var Pokeball = cc.Class.extend({
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#pokeball_volando.png");
 
+        this.enemigo = enemigo;
 
         // Cuerpo dinamico, NO le afectan las fuerzas
         this.body = new cp.Body(5, Infinity);
@@ -71,7 +76,37 @@ var Pokeball = cc.Class.extend({
             this.body.vx = 500;
             this.body.vy = 150;
         }
+        if(this.estado == capturando){
+            if(this.tiempoCaptura <= 0){
+                if(this.llena == true)
+                    this.estado = llena;
+                else
+                    this.estado = vacia;
+            }
+            else{
+                if(this.llena == null){
+                    this.calcularAtrapa();
+                }
+            }
+            this.tiempoCaptura--;
+        }
     },
+
+
+    calcularAtrapa:function(){
+        if(this.enemigo.vida<= 35){
+            var random = Math.random();
+            if(random >= 0.35){
+                this.llena = true;
+            }
+            else{
+                this.llena = false;
+            }
+        }
+        else
+            this.llena = false;
+    }
+    ,
 
 
     cambiarAModoCaptura:function (space, posicion, layer) {
@@ -104,10 +139,12 @@ var Pokeball = cc.Class.extend({
 
 
 
-    cambiarAModoAtrapaPokemon: function(space, position, layer){
+    cambiarAModoCerrada: function(space, posicion, layer){
         this.space = space;
 
         var sprite = new cc.PhysicsSprite("#pokeball_cerrada.png");
+
+        layer.removeChild(this.sprite);
 
         this.sprite = sprite;
 
@@ -117,11 +154,9 @@ var Pokeball = cc.Class.extend({
         this.body.setAngle(0);
         this.sprite.setBody(this.body);
 
-        this.estado = cerrada;
-
         var framesAnimacion = [];
-        for (var i = 2; i <= 7; i++) {
-            var str = "pokeball_" + i + ".png";
+        for (var i = 1; i <= 1; i++) {
+            var str = "pokeball_cerrada" + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -133,5 +168,39 @@ var Pokeball = cc.Class.extend({
         this.animacion = this.animacion_capturando;
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+        layer.addChild(this.sprite);
+
+    },
+
+    cambiarAModoAbierta: function(space, posicion, layer){
+        this.space = space;
+
+        var sprite = new cc.PhysicsSprite("#pokeball_abierta.png");
+
+        layer.removeChild(this.sprite);
+
+        this.sprite = sprite;
+
+        this.body = new cp.Body(Infinity, Infinity);
+
+        this.body.setPos(posicion);
+        this.body.setAngle(0);
+        this.sprite.setBody(this.body);
+
+        var framesAnimacion = [];
+        for (var i = 1; i <= 1; i++) {
+            var str = "pokeball_abierta" + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.15);
+        this.animacion_capturando =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+
+        this.animacion = this.animacion_capturando;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+        layer.addChild(this.sprite)
     }
 });
