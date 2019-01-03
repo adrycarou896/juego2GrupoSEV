@@ -806,7 +806,7 @@ var LuchaLayer = cc.Layer.extend({
 
         this.scheduleUpdate();
 
-        this.pokeball = new Pokeball(this.space, cc.p(300,150), this, this.enemigo);
+        //this.pokeball = new Pokeball(this.space, cc.p(300,150), this, this.enemigo);
 
         //Colisión disparo jugador con enemigo
         this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
@@ -946,12 +946,15 @@ var LuchaLayer = cc.Layer.extend({
             }
         }
         this.formasEliminar = [];
-        this.pokeball.actualizar();
-        if(this.pokeball.estado == llena){
-            this.pokeball.cambiarAModoCerrada(this.space, cc.p(600, 210), this);
-        }
-        else if(this.pokeball.estado == vacia){
-            this.pokeball.cambiarAModoAbierta(this.space, cc.p(600, 210), this);
+
+        if(this.pokeball != null) {
+            this.pokeball.actualizar();
+            if (this.pokeball.estado == llena) {
+                this.pokeball.cambiarAModoCerrada(this.space, cc.p(600, 210), this);
+            }
+            else if (this.pokeball.estado == vacia) {
+                this.pokeball.cambiarAModoAbierta(this.space, cc.p(600, 210), this);
+            }
         }
 
         if (this.tiempoEfecto > 0){
@@ -998,6 +1001,11 @@ var LuchaLayer = cc.Layer.extend({
         this.pokemonJugador.impactado();
         this.tiempoEfectoPokemonJugador = 1;
         console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
+    },
+
+
+    crearPokeball:function(){
+        this.pokeball = new Pokeball(this.space, cc.p(300,150), this, this.enemigo);
     }
 
 });
@@ -1160,7 +1168,6 @@ var MenuLuchaLayer = cc.Layer.extend({
                 this.layer.menu = null;
                 break;
             case 50: //2
-                console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[1]);
                 this.layer.disparosJugador.push(this.pokemonJugador.ataque2(this.layer));
                 //this.layer.disparosJugador.push(new DisparoPikachuRayo(this.layer,cc.p(553,263), this.pokemonJugador));//Limites para que el rayo haga efecto
                 this.getParent().removeChild(this);
@@ -1172,6 +1179,10 @@ var MenuLuchaLayer = cc.Layer.extend({
                 this.layer.layer.jugador.body.p.y = 480;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
+            case 80:
+                this.layer.crearPokeball();
+                this.getParent().removeChild(this);
+                break;
         }
     }
 
