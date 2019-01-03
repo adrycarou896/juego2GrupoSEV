@@ -21,6 +21,7 @@
         "src/RayoAtaque.js",
         "src/DisparoPikachuRayo.js",
         "src/BolaFuegoAtaque.js",
-        "src/Pokeball.js"
+        "src/Pokeball.js",
+        "src/BolaAguaAtaque.js"
     ]
 }

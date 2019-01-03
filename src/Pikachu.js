@@ -88,6 +88,12 @@ var Pikachu = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
     },
+    ataque1:function(layer){
+        return new RayoAtaque(layer,cc.p(553,263), this);
+    },
+    ataque2:function(layer){
+        new DisparoPikachuRayo(layer,cc.p(230,115), this);
+    },
     actualizar:function(){
 
     }

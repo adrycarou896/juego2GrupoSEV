@@ -45,7 +45,9 @@ var res = {
     pokeball_volando: "res/pokeball/pokeball_volando.png",
     pokeball_volando_plist: "res/pokeball/pokeball_volando.plist",
     piplup_idle_png: "res/pokemon/piplup_idle.png",
-    piplup_idle_plist: "res/pokemon/piplup_idle.plist"
+    piplup_idle_plist: "res/pokemon/piplup_idle.plist",
+    bola_agua_png: "res/pokemon/bola_agua.png",
+    bola_agua_plist: "res/pokemon/bola_agua.plist"
 
 };
 

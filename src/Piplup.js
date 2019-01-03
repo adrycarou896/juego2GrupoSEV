@@ -13,7 +13,7 @@ var Piplup = cc.Class.extend({
     estado: parado,
     vida: 100,
     name: "Piplup",
-    ataques: ["Rayo", "Chispazo"],
+    ataques: ["Bola de agua", "Chispazo"],
     ctor:function () {
 
     },
@@ -87,6 +87,12 @@ var Piplup = cc.Class.extend({
 
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+    },
+    ataque1:function(layer){
+        return new BolaAguaAtaque(layer,cc.p(230,115), this);
+    },
+    ataque2:function(layer){
+        new DisparoPikachuRayo(layer,cc.p(230,115), this);
     },
     actualizar:function(){
 

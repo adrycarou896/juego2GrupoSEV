@@ -786,6 +786,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
 
 
@@ -1142,7 +1143,7 @@ var MenuLuchaLayer = cc.Layer.extend({
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(230,115)));
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
-                this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(553,263), this.pokemonJugador));//Limites para que el rayo haga efecto
+                this.layer.disparosJugador.push(this.pokemonJugador.ataque1(this.layer));//Limites para que el rayo haga efecto
                 //this.layer.pokemonJugador.vida = 0;
                 //var disparo = new DisparoPikachuRayo(this.layer,cc.p(230,115),this.pokemonJugador);
                 //this.layer.disparosJugador.push(disparo);
@@ -1152,8 +1153,8 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 50: //2
                 console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[1]);
-                ///this.layer.disparosJugador.push(new DisparoPikachuRayo(this.layer,cc.p(230,115), this.pokemonJugador));
-                this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(553,263), this.pokemonJugador));//Limites para que el rayo haga efecto
+                this.layer.disparosJugador.push(this.pokemonJugador.ataque2(this.layer));
+                //this.layer.disparosJugador.push(new DisparoPikachuRayo(this.layer,cc.p(553,263), this.pokemonJugador));//Limites para que el rayo haga efecto
                 this.getParent().removeChild(this);
                 this.layer.menu = null;
                 break;
