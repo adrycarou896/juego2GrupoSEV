@@ -35,8 +35,9 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.caballero_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
 
-       // Inicializar Space (sin gravedad)
+        // Inicializar Space (sin gravedad)
        this.space = new cp.Space();
 
        //this.depuracion = new cc.PhysicsDebugNode(this.space);
@@ -785,6 +786,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
 
 
         this.seleccionarPokemonAtaque();
@@ -837,7 +839,7 @@ var LuchaLayer = cc.Layer.extend({
     },
     crearPokemonJugador:function(){
         if(this.pokemonJugador != null) {
-            if ("Pikachu" == this.pokemonJugador.name) {
+            if ("Pikachu" == this.pokemonJugador.name || "Piplup" == this.pokemonJugador.name) {
                 this.pokemonJugador.mostrar(this.space, cc.p(230, 115), this);
                 return true;
             }
