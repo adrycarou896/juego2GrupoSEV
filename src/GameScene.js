@@ -951,9 +951,22 @@ var LuchaLayer = cc.Layer.extend({
             this.pokeball.actualizar();
             if (this.pokeball.estado == llena) {
                 this.pokeball.cambiarAModoCerrada(this.space, cc.p(600, 210), this);
+                if(this.pokeball.finAnimaciones <= 0){
+                    var mensaje = new MensajesLayer(6, this, this.jugador);
+                    this.getParent().addChild(mensaje);
+                    this.getParent().removeChild(this);
+                    mensaje.mostrar();
+                }
+
             }
             else if (this.pokeball.estado == vacia) {
                 this.pokeball.cambiarAModoAbierta(this.space, cc.p(600, 210), this);
+                if(this.pokeball.finAnimaciones <= 0){
+                    var mensaje = new MensajesLayer(7, this, this.jugador);
+                    this.getParent().addChild(mensaje);
+                    this.getParent().removeChild(this);
+                    mensaje.mostrar();
+                }
             }
         }
 
@@ -1052,6 +1065,14 @@ var MensajesLayer = cc.Layer.extend({
                 this.spriteFondo = cc.Sprite.create(res.mensaje_ganar_combate);
                 this.spriteFondo.setPosition(cc.p(650, 75));
                 break;
+            case 6:
+                this.spriteFondo = cc.Sprite.create(res.mensaje_atrapa_eevee);
+                this.spriteFondo.setPosition(cc.p(650, 75));
+                break;
+            case 7:
+                this.spriteFondo = cc.Sprite.create(res.mensaje_eevee_huido);
+                this.spriteFondo.setPosition(cc.p(650, 75));
+                break;
 
         }
 
@@ -1103,6 +1124,29 @@ var MensajesLayer = cc.Layer.extend({
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
+            case 6:
+                this.layer.enemigo.finModoLucha();
+                this.layer.layer.jugador.body.p.x = 416;
+                this.layer.layer.jugador.body.p.y = 480;
+                if(this.layer.menu != null){
+                    this.getParent().removeChild(this.layer.menu);
+                }
+                this.getParent().removeChild(this.layer.layer.menuLuchaLayer);
+                this.getParent().removeChild(this.layer);
+                this.getParent().removeChild(this);
+                break;
+            case 7:
+                this.layer.enemigo.finModoLucha();
+                this.layer.layer.jugador.body.p.x = 416;
+                this.layer.layer.jugador.body.p.y = 480;
+                if(this.layer.menu != null){
+                    this.getParent().removeChild(this.layer.menu);
+                }
+                this.getParent().removeChild(this.layer.layer.menuLuchaLayer);
+                this.getParent().removeChild(this.layer);
+                this.getParent().removeChild(this);
+                break;
+
 
         }
 

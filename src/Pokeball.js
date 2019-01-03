@@ -21,6 +21,7 @@ var Pokeball = cc.Class.extend({
     tiempoCaptura: 200,
     enemigo: null,
     llena: null,
+    finAnimaciones: 50,
     ctor:function (space, posicion, layer, enemigo) {
 
         // Inicializar Space
@@ -89,6 +90,9 @@ var Pokeball = cc.Class.extend({
                 }
             }
             this.tiempoCaptura--;
+        }
+        if(this.estado == llena || this.estado == vacia){
+            this.finAnimaciones--;
         }
     },
 
