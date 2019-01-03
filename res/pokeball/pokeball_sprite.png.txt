@@ -1,0 +1,1 @@
+font01_a.png.png 0 0, font02_b.png.png 23 0, font03_c.png.png 0 23, font04_d.png.png 23 23, font05_e.png.png 0 46, font06_f.png.png 23 46.

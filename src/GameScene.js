@@ -786,8 +786,6 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
 
-        this.pokeball = new Pokeball(this.space, cc.p(510,464), this);
-
 
         this.seleccionarPokemonAtaque();
 
@@ -802,6 +800,8 @@ var LuchaLayer = cc.Layer.extend({
         this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
 
         this.scheduleUpdate();
+
+        this.pokeball = new Pokeball(this.space, cc.p(300,150), this);
 
         //Colisión disparo jugador con enemigo
         this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
@@ -820,7 +820,7 @@ var LuchaLayer = cc.Layer.extend({
     },
 
     colisionPokeballEnemigo: function(){
-        this.pokeball.cambiarAModoCaptura();
+        this.pokeball.cambiarAModoCaptura(this.space, cc.p(600, 210), this );
     },
 
     finColisionPokeballEnemigo: function(){
@@ -939,6 +939,7 @@ var LuchaLayer = cc.Layer.extend({
             }
         }
         this.formasEliminar = [];
+        this.pokeball.actualizar();
 
         if (this.tiempoEfecto > 0){
             this.tiempoEfecto = this.tiempoEfecto - dt;
