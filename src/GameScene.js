@@ -11,8 +11,6 @@ var tipoJugadorPokemon = 7;
 var tipoDisparoEnemigo = 8;
 var tipoCentroPokemon = 9;
 var tipoPokeball = 10;
-//var tipoEnemigoDerecha = 4;
-//var tipoEnemigoIzquierda = 5;
 
 var GameLayer = cc.Layer.extend({
     jugador:null,
@@ -58,7 +56,7 @@ var GameLayer = cc.Layer.extend({
 
         //Colisión jugador con enemigo
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
-            null, null, this.collisionJugadorConEnemigo.bind(this), null);
+            null, null, this.collisionJugadorConEnemigo.bind(this), this.finColisionJugadorConEnemigo.bind(this));
 
        cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -79,6 +77,11 @@ var GameLayer = cc.Layer.extend({
        moverCamara(this.jugador, this.getContentSize(), this.mapaAncho, this.mapaAlto, this);
 
     },
+
+    finColisionJugadorConEnemigo:function(){
+        this.menuLuchaLayer = null;
+    },
+
     collisionJugadorConEnemigo:function (arbiter, space){
         var shapes = arbiter.getShapes();
         var shapeEnemigo = shapes[1];
@@ -92,6 +95,8 @@ var GameLayer = cc.Layer.extend({
                     this.menuLuchaLayer = new MenuLuchaLayer(layerLucha.pokemonJugador,layerLucha);
                     this.getParent().addChild(this.menuLuchaLayer);
                 }
+                this.jugador.body.p.x = 416;
+                this.jugador.body.p.y = 480;
 
             }
         }
@@ -1219,8 +1224,6 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 this.layer.enemigo.finModoLucha();
-                this.layer.layer.jugador.body.p.x = 416;
-                this.layer.layer.jugador.body.p.y = 480;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
