@@ -792,6 +792,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_cerrada_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_abierta_plist);
@@ -874,6 +875,10 @@ var LuchaLayer = cc.Layer.extend({
                     if (this.disparosJugador[j] instanceof RayoAtaque && !this.disparosJugador[j].activo) {
                         this.disparosJugador[j].activo = true;
                         this.tiempoRayo = 1;
+                    }
+                    else if(this.disparosJugador[j] instanceof CharcoAguaAtaque && !this.disparosJugador[j].activo){
+                        this.disparosJugador[j].activo = true;
+                        this.tiempoRayo = 2;
                     }
                 }
             }
@@ -1020,8 +1025,6 @@ var LuchaLayer = cc.Layer.extend({
         this.tiempoEfectoPokemonJugador = 1;
         console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
     },
-
-
     crearPokeball:function(){
         this.pokeball = new Pokeball(this.space, cc.p(300,150), this, this.enemigo);
     }

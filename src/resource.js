@@ -53,7 +53,9 @@ var res = {
     bola_agua_png: "res/pokemon/bola_agua.png",
     bola_agua_plist: "res/pokemon/bola_agua.plist",
     mensaje_eevee_huido: "res/fondoMensajes/mensaje_eevee_huido.png",
-    mensaje_atrapa_eevee: "res/fondoMensajes/mensaje_atrapa_eevee.png"
+    mensaje_atrapa_eevee: "res/fondoMensajes/mensaje_atrapa_eevee.png",
+    charco_agua_png: "res/pokemon/charco_agua.png",
+    charco_agua_plist: "res/pokemon/charco_agua.plist"
 
 };
 

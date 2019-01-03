@@ -92,7 +92,7 @@ var Piplup = cc.Class.extend({
         return new BolaAguaAtaque(layer,cc.p(230,115), this);
     },
     ataque2:function(layer){
-        new DisparoPikachuRayo(layer,cc.p(230,115), this);
+        return new CharcoAguaAtaque(layer,cc.p(560,200), this);
     },
     actualizar:function(){
 
