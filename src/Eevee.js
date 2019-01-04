@@ -1,5 +1,6 @@
 var parado = 1;
 var luchando = 2;
+var enCaptura = 3;
 
 var Eevee = cc.Class.extend({
     space:null,
