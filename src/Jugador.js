@@ -278,7 +278,7 @@ var Jugador = cc.Class.extend({
 
     inscribirTorneo(){
         if(this.layerInscripcionTorneo == null){
-            this.layerInscripcionTorneo = new LayerInscripcionTorneo();
+            this.layerInscripcionTorneo = new LayerInscripcionTorneo(this);
             this.layer.getParent().addChild(this.layerInscripcionTorneo);
         }
     },

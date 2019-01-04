@@ -318,6 +318,7 @@ function procesarKeyReleasedInscripcionTorneo(keyCode){
     switch (keyCode){
         case 83://s
             console.log("has pulsado siiiiiiiii");
+            this.getParent().addChild(new TorneoLayer(this.jugador));
             //Todo
             break;
         case 78: //n
@@ -331,7 +332,8 @@ function procesarKeyReleasedInscripcionTorneo(keyCode){
 var LayerInscripcionTorneo = cc.Layer.extend({
     space: null,
     nombre: "LayerInscripcionTorneo",
-    ctor:function () {
+    jugador: null,
+    ctor:function (jugador) {
         this._super();
         var size = cc.winSize;
 
@@ -339,6 +341,8 @@ var LayerInscripcionTorneo = cc.Layer.extend({
         var spriteFondoTitulo= new cc.Sprite(res.mensaje_inscripcion_torneo);
         // Asigno posición central
         spriteFondoTitulo.setPosition(cc.p(size.width / 2, size.height / 2));
+
+        this.jugador = jugador;
 
         // Añado Sprite a la escena
         this.addChild(spriteFondoTitulo);
@@ -584,11 +588,6 @@ var LayerGimnasio = cc.Layer.extend({
     }
 
 });
-
-
-
-
-
 
 
 var CentroPokemonLayer = cc.Layer.extend({
@@ -1021,7 +1020,263 @@ var LuchaLayer = cc.Layer.extend({
 });
 
 
+var TorneoLayer = cc.Layer.extend({
+    jugador:null,
+    enemigo:null,
+    space:null,
+    mapa:null,
+    mapaAncho:0,
+    mapaAlto:0,
+    pokemonJugador: null,
+    enemigos: [],
+    disparosJugador: [],
+    disparosEnemigo: [],
+    nombre: "TorneoLayer",
+    formasEliminar: [],
+    tiempoEfecto:0,
+    tiempoEfectoPokemonJugador:0,
+    tiempoDisparoEnemigo:0,
+    tiempoAtaquePokemonJugador:0,
+    menu: null,
+    pokeball: null,
+    mensaje: null,
+    menuLuchaLayer: null,
+    ctor:function (jugador) {
+        this._super();
+        var size = cc.winSize;
 
+        // Inicializar Space (sin gravedad)
+        this.space = new cp.Space();
+
+        cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.charizar_idle_plist);
+
+        // Fondo
+        this.spriteFondo = cc.Sprite.create(res.fondo_lucha_5);
+        this.spriteFondo.setPosition(cc.p(size.width/2 , size.height/2));
+        this.spriteFondo.setScale( size.width / this.spriteFondo.width );
+        this.addChild(this.spriteFondo);
+
+        this.jugador = jugador;
+
+        this.enemigos.push(new Charizar(this.space, cc.p(600,210), this));
+        this.enemigo = this.enemigos[0];
+
+        this.seleccionarPokemon();
+
+        this.mostrarPokemonJugador();
+
+        this.scheduleUpdate();
+
+        //Colisión disparo jugador con enemigo
+        this.space.addCollisionHandler(tipoDisparo, tipoEnemigo,
+            null, null, this.collisionDisparoConEnemigo.bind(this), this.finColisionDisparoConEnemigo.bind(this));
+
+        //Colision disparo enemigo con jugador
+        this.space.addCollisionHandler(tipoDisparoEnemigo, tipoJugadorPokemon,
+            null, null, this.collisionDisparoEnemigoConJugadorPokemon.bind(this), this.finColisionDisparoConEnemigo.bind(this));
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyReleased: this.procesarKeyReleasedSeleccionAtaque.bind(this)
+        }, this);
+
+        return true;
+
+    },
+    seleccionarPokemon:function(){
+        for (var i = 0; i < this.jugador.capturados.length; i++) {
+            if (this.jugador.capturados[i].vida > 0) {
+                this.pokemonJugador = this.jugador.capturados[i];
+                break;
+            }
+        }
+    },
+    mostrarPokemonJugador:function(){
+        if(this.pokemonJugador != null) {
+            if ("Pikachu" == this.pokemonJugador.name || "Piplup" == this.pokemonJugador.name) {
+                this.pokemonJugador.mostrar(this.space, cc.p(230, 115), this);
+                return true;
+            }
+        }
+        else{
+            return false;
+        }
+    },
+    collisionDisparoConEnemigo:function (arbiter, space){
+
+        if(this.enemigo.vida <= 0){
+            console.log("Enemigo derrotadoooo");
+            var mensaje = new MensajesLayer(5, this, this.jugador);
+            this.getParent().addChild(mensaje);
+            mensaje.mostrar();
+            //this.getParent().removeChild(this);
+        }
+        else {
+            var shapes = arbiter.getShapes();
+            for (var j = 0; j < this.disparosJugador.length; j++) {
+                if (this.disparosJugador[j].shape == shapes[0]) {
+                    if (this.disparosJugador[j] instanceof RayoAtaque && !this.disparosJugador[j].activo) {
+                        this.disparosJugador[j].activo = true;
+                        this.tiempoAtaquePokemonJugador = 1;
+                    }
+                    else if(this.disparosJugador[j] instanceof CharcoAguaAtaque && !this.disparosJugador[j].activo){
+                        this.disparosJugador[j].activo = true;
+                        this.tiempoAtaquePokemonJugador = 2;
+                    }
+                }
+            }
+            if (this.tiempoAtaquePokemonJugador == 0) {
+                this.formasEliminar.push(shapes[0]);
+                this.enemigo.impactado(this.disparosJugador[0]);
+                this.tiempoEfecto = 1;
+            }
+            console.log("COLISION DISPARO CON ENEMIGO");
+        }
+    },
+    finColisionDisparoConEnemigo:function(){
+        if(this.pokemonJugador.vida <= 0){
+            var layerTorneo = new TorneoLayer(this.jugador);
+            var opcion = layerTorneo.crearPokemonJugador();
+            this.getParent().addChild(layerTorneo);
+
+            if(!opcion){
+                var mensaje = new MensajesLayer(2, layerTorneo, this.jugador);
+                this.getParent().addChild(mensaje);
+                mensaje.mostrar();
+            }
+            else {
+
+                //Aviso cambio de pokemon
+                var mensaje = new MensajesLayer(1, layerTorneo, this.jugador);
+                this.getParent().addChild(mensaje);
+                mensaje.mostrar();
+
+            }
+            this.getParent().removeChild(this);
+        }
+        else if(this.enemigo.vida <= 0){
+            console.log("Enemigo derrotadoooo");
+            //var mensaje = new MensajesLayer(5, this, this.jugador);
+            //this.getParent().addChild(mensaje);
+            //mensaje.mostrar();
+        }
+        else {
+            if(this != null) {
+                if (this.menu == null) {
+                    this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
+                    this.getParent().addChild(this.menu);
+                }
+            }
+        }
+    },
+    update:function (dt) {
+        for(i=0; i < this.disparosJugador.length; i++){
+            this.disparosJugador[i].actualizar();
+        }
+        for(i=0; i < this.disparosEnemigo.length; i++){
+            this.disparosEnemigo[i].actualizar();
+        }
+
+        this.space.step(dt);
+
+        // Eliminar formas:
+        for (var i = 0; i < this.formasEliminar.length; i++) {
+            var shape = this.formasEliminar[i];
+
+            for (var j = 0; j < this.disparosJugador.length; j++) {
+                if (this.disparosJugador[j].shape == shape) {
+                    this.disparosJugador[j].eliminar();
+                    this.disparosJugador.splice(j, 1);
+                }
+            }
+
+            for (var j = 0; j < this.disparosEnemigo.length; j++) {
+                if (this.disparosEnemigo[j].shape == shape) {
+                    this.disparosEnemigo[j].eliminar();
+                    this.disparosEnemigo.splice(j, 1);
+                }
+            }
+        }
+        this.formasEliminar = [];
+
+        if (this.tiempoEfecto > 0){
+            this.tiempoEfecto = this.tiempoEfecto - dt;
+
+        }
+        if (this.tiempoEfecto < 0) {
+            //this.enemigo.cambiarAAnimacionDeLucha();
+            this.tiempoEfecto = 0;
+            this.tiempoDisparoEnemigo = 1;
+        }
+
+        if(this.tiempoDisparoEnemigo > 0){
+            this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
+        }
+        if(this.tiempoDisparoEnemigo < 0){
+            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+            this.tiempoDisparoEnemigo = 0;
+        }
+
+        if (this.tiempoEfectoPokemonJugador > 0){
+            this.tiempoEfectoPokemonJugador = this.tiempoEfectoPokemonJugador - dt;
+
+        }
+        if (this.tiempoEfectoPokemonJugador < 0) {
+            this.pokemonJugador.cambiarAAnimacionDeLucha();
+            this.tiempoEfectoPokemonJugador = 0;
+        }
+
+        if (this.tiempoAtaquePokemonJugador > 0){
+            this.tiempoAtaquePokemonJugador = this.tiempoAtaquePokemonJugador - dt;
+
+        }
+        if (this.tiempoAtaquePokemonJugador < 0) {
+            this.tiempoAtaquePokemonJugador = 0;
+        }
+    },
+    cargarMapa:function () {
+
+    },
+    collisionDisparoEnemigoConJugadorPokemon:function (arbiter, space){
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
+        this.pokemonJugador.impactado();
+        this.tiempoEfectoPokemonJugador = 1;
+        console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
+    },
+    procesarKeyReleasedSeleccionAtaque:function (keyCode){
+        var posicion = teclas.indexOf(keyCode);
+        teclas.splice(posicion, 1);
+        switch (keyCode){
+            case 49://1
+                //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(230,115)));
+                //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
+                //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
+                this.disparosJugador.push(this.pokemonJugador.ataque1(this));//Limites para que el rayo haga efecto
+                //this.pokemonJugador.vida = 0;
+                //var disparo = new DisparoPikachuRayo(this.layer,cc.p(230,115),this.pokemonJugador);
+                //this.layer.disparosJugador.push(disparo);
+
+                //this.getParent().removeChild(this);
+                //this.layer.menu = null;
+                break;
+            case 50: //2
+                this.disparosJugador.push(this.pokemonJugador.ataque2(this));
+                //this.getParent().removeChild(this);
+                //this.layer.menu = null;
+                break;
+        }
+    }
+
+});
 
 
 var MensajesLayer = cc.Layer.extend({
