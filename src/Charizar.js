@@ -12,7 +12,8 @@ var Charizar = cc.Class.extend({
     animacion:null,
     nivel: 3,
     estado: parado,
-    vida: 100,
+    vida: 150,
+    vidaCompleta: 150,
     posicion: null,
     defensa: 3,
     ctor:function (space, posicion, layer) {

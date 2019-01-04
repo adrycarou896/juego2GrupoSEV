@@ -774,6 +774,8 @@ var LuchaLayer = cc.Layer.extend({
     menu: null,
     pokeball: null,
     mensaje: null,
+    vidaPokemonJugadorLayer: null,
+    vidaEnemigoLayer: null,
     ctor:function (enemigo, jugador, layer) {
         this._super();
         var size = cc.winSize;
@@ -823,6 +825,11 @@ var LuchaLayer = cc.Layer.extend({
         //Colisión pokeball con enemigo
         this.space.addCollisionHandler(tipoPokeball, tipoEnemigo,
             null, null, this.colisionPokeballEnemigo.bind(this), this.finColisionPokeballEnemigo.bind(this));
+
+        this.vidaPokemonJugadorLayer = new VidaLayer(this, this.pokemonJugador);
+        this.addChild(this.vidaPokemonJugadorLayer);
+        this.vidaEnemigoLayer = new VidaLayer(this, this.enemigo);
+        this.addChild(this.vidaEnemigoLayer);
 
         return true;
 
@@ -877,8 +884,11 @@ var LuchaLayer = cc.Layer.extend({
             this.enemigo.impactado(this.disparosJugador[0]);
             this.tiempoEfecto = 1;
         }
+
+
     },
     finColisionDisparoConEnemigo:function(){
+        console.log("VIDA EEVEE" + this.enemigo.vida);
 
         if(this.enemigo.vida <= 0){
             this.crearPokeball();
@@ -999,9 +1009,21 @@ var LuchaLayer = cc.Layer.extend({
 
         }
         if (this.tiempoAtaquePokemonJugador < 0) {
-            console.log("NOUUUUUUU");
             this.tiempoAtaquePokemonJugador = 0;
         }
+
+        if(this.vidaPokemonJugadorLayer != null)
+            this.removeChild(this.vidaPokemonJugadorLayer);
+        if(this.vidaEnemigoLayer != null)
+            this.removeChild(this.vidaEnemigoLayer);
+        this.vidaPokemonJugadorLayer = new VidaLayer(this, this.pokemonJugador);
+        this.addChild(this.vidaPokemonJugadorLayer);
+
+        this.vidaEnemigoLayer = new VidaLayer(this, this.enemigo);
+        this.addChild(this.vidaEnemigoLayer);
+
+        this.vidaPokemonJugadorLayer.actualizar();
+        this.vidaEnemigoLayer.actualizar();
     },
     cargarMapa:function () {
 
@@ -1293,6 +1315,96 @@ var TorneoLayer = cc.Layer.extend({
 });
 
 
+var VidaLayer = cc.Layer.extend({
+    space: null,
+    mapaAncho: 0,
+    mapaAlto: 0,
+    layer: null,
+    nombre: "VidaLayer",
+    pokemon: null,
+    ctor: function(layer, pokemon){
+        this._super();
+
+        this.space = new cp.Space();
+        this.layer = layer;
+        this.pokemon = pokemon;
+
+        return true;
+    },
+    actualizar:function(){
+
+        switch (this.pokemon.nivel) {
+            case 1:
+                this.spriteNivel = cc.Sprite.create(res.nivel_1);
+                this.spriteNivel.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40));
+                break;
+            case 2:
+                this.spriteNivel = cc.Sprite.create(res.nivel_2);
+                this.spriteNivel.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40));
+                break;
+            case 3:
+                this.spriteNivel = cc.Sprite.create(res.nivel_3);
+                this.spriteNivel.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40));
+                break;
+            case 4:
+                this.spriteNivel = cc.Sprite.create(res.nivel_4);
+                this.spriteNivel.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40));
+                break;
+        }
+
+        var vida = (this.pokemon.vida*100)/this.pokemon.vidaCompleta;
+
+        if(vida <= 0){
+            this.spriteVida = cc.Sprite.create(res.vida_0);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida > 0 && vida < 10){
+            this.spriteVida = cc.Sprite.create(res.vida_10);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 10 && vida < 20){
+            this.spriteVida = cc.Sprite.create(res.vida_20);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 20 && vida < 30){
+            this.spriteVida = cc.Sprite.create(res.vida_30);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 30 && vida < 40){
+            this.spriteVida = cc.Sprite.create(res.vida_40);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 40 && vida < 50){
+            this.spriteVida = cc.Sprite.create(res.vida_50);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 50 && vida < 60){
+            this.spriteVida = cc.Sprite.create(res.vida_60);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 60 && vida < 70){
+            this.spriteVida = cc.Sprite.create(res.vida_70);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 70 && vida < 80){
+            this.spriteVida = cc.Sprite.create(res.vida_80);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 80 && vida < 90){
+            this.spriteVida = cc.Sprite.create(res.vida_90);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+        else if(vida >= 90){
+            this.spriteVida = cc.Sprite.create(res.vida_100);
+            this.spriteVida.setPosition(cc.p(this.pokemon.body.p.x + 130,this.pokemon.body.p.y - 40 -this.spriteNivel.height));
+        }
+
+        this.addChild(this.spriteNivel);
+        this.addChild(this.spriteVida);
+
+    }
+});
+
 var MensajesLayer = cc.Layer.extend({
     space: null,
     mapaAncho: 0,
@@ -1304,7 +1416,6 @@ var MensajesLayer = cc.Layer.extend({
     ctor: function (mensaje, layer, jugador) {
         this._super();
 
-        // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
         this.jugador = jugador;
         this.layer = layer;

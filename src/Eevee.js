@@ -18,6 +18,7 @@ var Eevee = cc.Class.extend({
     nivel: 1,
     estado: parado,
     vida: 100,
+    vidaCompleta: 100,
     posicion: null,
     defensa: 3,
     dentroPokeball: false,

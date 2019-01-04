@@ -61,7 +61,22 @@ var res = {
     charizar_idle_png: "res/pokemon/charizar_idle.png",
     charizar_idle_plist: "res/pokemon/charizar_idle.plist",
     charizar_ataque1_png: "res/pokemon/charizar_ataque1.png",
-    charizar_ataque1_plist: "res/pokemon/charizar_ataque1.plist"
+    charizar_ataque1_plist: "res/pokemon/charizar_ataque1.plist",
+    nivel_1: "res/vida/nivel_1.png",
+    nivel_2: "res/vida/nivel_2.png",
+    nivel_3: "res/vida/nivel_3.png",
+    nivel_4: "res/vida/nivel_4.png",
+    vida_0: "res/vida/vida_0.png",
+    vida_10: "res/vida/vida_10.png",
+    vida_20: "res/vida/vida_20.png",
+    vida_30: "res/vida/vida_30.png",
+    vida_40: "res/vida/vida_40.png",
+    vida_50: "res/vida/vida_50.png",
+    vida_60: "res/vida/vida_60.png",
+    vida_70: "res/vida/vida_70.png",
+    vida_80: "res/vida/vida_80.png",
+    vida_90: "res/vida/vida_90.png",
+    vida_100: "res/vida/vida_100.png"
 
 };
 

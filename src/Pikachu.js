@@ -12,6 +12,7 @@ var Pikachu = cc.Class.extend({
     nivel: 1,
     estado: parado,
     vida: 100,
+    vidaCompleta: 100,
     name: "Pikachu",
     defensa: 40,
     ataques: ["Rayo", "Chispazo"],

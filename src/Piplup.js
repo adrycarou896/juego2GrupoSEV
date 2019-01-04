@@ -12,6 +12,7 @@ var Piplup = cc.Class.extend({
     nivel: 1,
     estado: parado,
     vida: 100,
+    vidaCompleta: 100,
     name: "Piplup",
     ataques: ["Bola de agua", "Chispazo"],
     ctor:function () {
