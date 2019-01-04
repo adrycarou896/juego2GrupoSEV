@@ -9,7 +9,7 @@ var Charizar = cc.Class.extend({
     layer:null,
     animacion_idle:null,
     animacion:null,
-    nivel: 1,
+    nivel: 3,
     estado: parado,
     vida: 100,
     posicion: null,
@@ -103,5 +103,8 @@ var Charizar = cc.Class.extend({
         this.animacion = this.animacion_idle;
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+    },
+    finModoLucha:function () {
+
     }
 });
