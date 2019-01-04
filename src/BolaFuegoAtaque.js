@@ -2,7 +2,11 @@ var BolaFuegoAtaque = cc.Class.extend({
     gameLayer:null,
     sprite:null,
     shape:null,
-    ctor:function (gameLayer, posicion) {
+    eficacia: 20,
+    pokemon: null,
+    ctor:function (gameLayer, posicion, pokemon) {
+
+        this.pokemon = pokemon;
 
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#bola_fuego_01.png");
@@ -49,6 +53,9 @@ var BolaFuegoAtaque = cc.Class.extend({
 
         this.gameLayer = gameLayer;
 
+    },
+    daño: function(){
+        return this.eficacia*this.pokemon.nivel;
     },
     actualizar: function (){
         this.body.vx = -500;

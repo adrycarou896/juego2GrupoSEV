@@ -3,7 +3,7 @@ var BolaAguaAtaque = cc.Class.extend({
     sprite:null,
     shape:null,
     posicion: null,
-    eficacia: 30,
+    eficacia: 15,
     pokemon: null,
     ctor:function (gameLayer, posicion, pokemon) {
 

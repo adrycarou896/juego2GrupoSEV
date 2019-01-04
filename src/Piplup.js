@@ -60,7 +60,15 @@ var Piplup = cc.Class.extend({
 
         layer.addChild(this.sprite,10);
     },
-    impactado:function(){
+
+    subirNivel:function(){
+        if(this.nivel < 3) {
+            this.nivel ++;
+            return true;
+        }
+        return false;
+    },
+    impactado:function(disparo){
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
             var str = "piplup_idle_0" + i + ".png";
@@ -73,6 +81,8 @@ var Piplup = cc.Class.extend({
 
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+
+        this.vida -= disparo.daño();
     },
     cambiarAAnimacionDeLucha:function(){
         var framesAnimacion = [];

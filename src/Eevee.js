@@ -21,6 +21,7 @@ var Eevee = cc.Class.extend({
     posicion: null,
     defensa: 3,
     dentroPokeball: false,
+    name: "Eevee",
     ctor:function (space, posicion, layer) {
         this.posicion = posicion;
         // Crear Sprite - Cuerpo y forma
@@ -94,6 +95,13 @@ var Eevee = cc.Class.extend({
         this.space.addShape(this.shape);
 
     },
+    subirNivel:function(){
+        if(this.nivel < 3) {
+            this.nivel ++;
+            return true;
+        }
+        return false;
+    },
     impactado:function(disparo){
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
@@ -109,11 +117,7 @@ var Eevee = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
-        this.vida -= this.recibeDaño(disparo.daño());
-        console.log("Vida de Eevee: " + this.vida);
-    },
-    recibeDaño: function(daño){
-      return daño-(this.defensa*this.nivel);
+        this.vida -= disparo.daño();
     },
     cambiarAAnimacionDeLucha:function(){
         var framesAnimacion = [];
