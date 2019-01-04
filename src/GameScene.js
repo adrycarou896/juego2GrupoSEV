@@ -789,7 +789,8 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
-        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_izquierda_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_derecha_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
@@ -1073,7 +1074,7 @@ var TorneoLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
-        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_izquierda_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);

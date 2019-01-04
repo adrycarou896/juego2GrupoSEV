@@ -12,7 +12,10 @@ var BolaFuegoAtaque = cc.Class.extend({
         this.orientacion = orientacion;
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#bola_fuego_01.png");
+        if(this.orientacion == 1)
+            this.sprite = new cc.PhysicsSprite("#bola_fuego_1_01.png");
+        else
+            this.sprite = new cc.PhysicsSprite("#bola_fuego_2_01.png");
         // Cuerpo dinámico, SI le afectan las fuerzas
         this.body = new cp.Body(5, Infinity);
         this.body.setPos(posicion);
@@ -40,7 +43,7 @@ var BolaFuegoAtaque = cc.Class.extend({
         // Crear animación
         var framesAnimacion = [];
         for (var i = 1; i <= 3; i++) {
-            var str = "bola_fuego_0"+i+".png";
+            var str = "bola_fuego_izquierda_" + this.orientacion + "_0"+i+".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
