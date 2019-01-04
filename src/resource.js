@@ -76,7 +76,9 @@ var res = {
     vida_70: "res/vida/vida_70.png",
     vida_80: "res/vida/vida_80.png",
     vida_90: "res/vida/vida_90.png",
-    vida_100: "res/vida/vida_100.png"
+    vida_100: "res/vida/vida_100.png",
+    eevee_espalda_png: "res/pokemon/eevee_espalda.png",
+    eevee_espalda_plist: "res/pokemon/eevee_espalda.plist"
 
 };
 

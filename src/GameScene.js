@@ -798,6 +798,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_cerrada_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_abierta_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.eevee_espalda_plist);
 
 
         this.seleccionarPokemonAtaque();
@@ -826,10 +827,6 @@ var LuchaLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoPokeball, tipoEnemigo,
             null, null, this.colisionPokeballEnemigo.bind(this), this.finColisionPokeballEnemigo.bind(this));
 
-        this.vidaPokemonJugadorLayer = new VidaLayer(this, this.pokemonJugador);
-        this.addChild(this.vidaPokemonJugadorLayer);
-        this.vidaEnemigoLayer = new VidaLayer(this, this.enemigo);
-        this.addChild(this.vidaEnemigoLayer);
 
         return true;
 
@@ -855,10 +852,10 @@ var LuchaLayer = cc.Layer.extend({
     },
     crearPokemonJugador:function(){
         if(this.pokemonJugador != null) {
-            if ("Pikachu" == this.pokemonJugador.name || "Piplup" == this.pokemonJugador.name) {
+            //if ("Pikachu" == this.pokemonJugador.name || "Piplup" == this.pokemonJugador.name ) {
                 this.pokemonJugador.mostrar(this.space, cc.p(230, 115), this);
                 return true;
-            }
+            //}
         }
         else{
             return false;
@@ -990,7 +987,7 @@ var LuchaLayer = cc.Layer.extend({
         }
         if(this.tiempoDisparoEnemigo < 0){
             if(!this.enemigo.dentroPokeball){
-                this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.enemigo));
+                this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.enemigo, 1));
             }
             this.tiempoDisparoEnemigo = 0;
         }
@@ -1016,13 +1013,14 @@ var LuchaLayer = cc.Layer.extend({
             this.removeChild(this.vidaPokemonJugadorLayer);
         if(this.vidaEnemigoLayer != null)
             this.removeChild(this.vidaEnemigoLayer);
-        this.vidaPokemonJugadorLayer = new VidaLayer(this, this.pokemonJugador);
-        this.addChild(this.vidaPokemonJugadorLayer);
+        if(this.pokemonJugador != null) {
+            this.vidaPokemonJugadorLayer = new VidaLayer(this, this.pokemonJugador);
+            this.addChild(this.vidaPokemonJugadorLayer);
+            this.vidaPokemonJugadorLayer.actualizar();
+        }
 
         this.vidaEnemigoLayer = new VidaLayer(this, this.enemigo);
         this.addChild(this.vidaEnemigoLayer);
-
-        this.vidaPokemonJugadorLayer.actualizar();
         this.vidaEnemigoLayer.actualizar();
     },
     cargarMapa:function () {

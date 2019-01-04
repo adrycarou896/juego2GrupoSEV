@@ -4,9 +4,12 @@ var BolaFuegoAtaque = cc.Class.extend({
     shape:null,
     eficacia: 20,
     pokemon: null,
-    ctor:function (gameLayer, posicion, pokemon) {
+    orientacion: 1,
+    ctor:function (gameLayer, posicion, pokemon, orientacion) {
 
         this.pokemon = pokemon;
+
+        this.orientacion = orientacion;
 
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#bola_fuego_01.png");
@@ -24,7 +27,10 @@ var BolaFuegoAtaque = cc.Class.extend({
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width - 16,
             this.sprite.getContentSize().height - 16);
-        this.shape.setCollisionType(tipoDisparoEnemigo);
+        if(this.orientacion == 1)
+            this.shape.setCollisionType(tipoDisparoEnemigo);
+        else
+            this.shape.setCollisionType(tipoDisparo);
         // forma dinamica
         gameLayer.space.addShape(this.shape);
         // añadir sprite a la capa
@@ -49,7 +55,11 @@ var BolaFuegoAtaque = cc.Class.extend({
         this.sprite.runAction(actionAnimacionBucle);
 
         // Impulso inicial
-        this.body.applyImpulse(cp.v(-500, -550), cp.v(10, 15));
+        if(this.orientacion == 1) {//Es enemigo
+            this.body.applyImpulse(cp.v(-500, -550), cp.v(10, 15));
+        }else{
+            this.body.applyImpulse(cp.v(500, 550), cp.v(10, 15));
+        }
 
         this.gameLayer = gameLayer;
 
@@ -58,7 +68,12 @@ var BolaFuegoAtaque = cc.Class.extend({
         return this.eficacia*this.pokemon.nivel;
     },
     actualizar: function (){
-        this.body.vx = -500;
+        if(this.orientacion == 1) {
+            this.body.vx = -500;
+        }
+        else{
+            this.body.vx = 500;
+        }
     },
     eliminar: function (){
         // quita la forma

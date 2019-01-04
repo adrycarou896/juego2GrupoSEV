@@ -152,7 +152,7 @@ var Jugador = cc.Class.extend({
 
 
         this.capturados.push(new Piplup());
-        this.capturados.push(new Pikachu());
+        //this.capturados.push(new Pikachu());
 
     },
     actualizar:function(){
