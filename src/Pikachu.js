@@ -13,6 +13,7 @@ var Pikachu = cc.Class.extend({
     estado: parado,
     vida: 100,
     name: "Pikachu",
+    defensa: 40,
     ataques: ["Rayo", "Chispazo"],
     ctor:function () {
 
@@ -60,7 +61,7 @@ var Pikachu = cc.Class.extend({
 
         layer.addChild(this.sprite,10);
     },
-    impactado:function(){
+    impactado:function(disparo){
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
             var str = "pikachu_idle_0" + i + ".png";
@@ -73,7 +74,20 @@ var Pikachu = cc.Class.extend({
 
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
+
+        this.vida -= disparo.daño();
+
     },
+
+    subirNivel:function(){
+        if(this.nivel < 3) {
+            this.nivel ++;
+            return true;
+        }
+        return false;
+    },
+
+
     cambiarAAnimacionDeLucha:function(){
         var framesAnimacion = [];
         for (var i = 1; i <= 2; i++) {

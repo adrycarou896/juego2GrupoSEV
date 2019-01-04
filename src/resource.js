@@ -37,8 +37,7 @@ var res = {
     mensaje_hasta_otra: "res/fondoMensajes/mensaje_hasta_otra.png",
     rayo_png: "res/pokemon/rayo.png",
     rayo_plist: "res/pokemon/rayo.plist",
-    mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png",
-    mensaje_ganar_combate: "res/fondoMensajes/mensaje_gana_combate.png",
+    mensaje_subir_nivel: "res/fondoMensajes/mensaje_sube_nivel.png",
     pokeball_png: "res/pokeball/pokeball_sprite.png",
     pokeball_sprite: "res/pokeball/pokeball_sprite.png",
     pokeball_plist: "res/pokeball/pokeball.plist",
@@ -55,7 +54,9 @@ var res = {
     mensaje_eevee_huido: "res/fondoMensajes/mensaje_eevee_huido.png",
     mensaje_atrapa_eevee: "res/fondoMensajes/mensaje_atrapa_eevee.png",
     charco_agua_png: "res/pokemon/charco_agua.png",
-    charco_agua_plist: "res/pokemon/charco_agua.plist"
+    charco_agua_plist: "res/pokemon/charco_agua.plist",
+    mensaje_ataques_piplup: "res/fondoMensajes/mensaje_ataques_piplup.png",
+    mensaje_ataques_eevee: "res/fondoMensajes/mensaje_ataques_eevee.png"
 
 };
 

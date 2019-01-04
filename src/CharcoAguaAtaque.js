@@ -3,7 +3,7 @@ var CharcoAguaAtaque = cc.Class.extend({
     sprite:null,
     shape:null,
     posicion: null,
-    eficacia: 40,
+    eficacia: 20,
     pokemon: null,
     activo: false,
     ctor:function (gameLayer, posicion, pokemon) {
