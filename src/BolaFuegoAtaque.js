@@ -43,7 +43,7 @@ var BolaFuegoAtaque = cc.Class.extend({
         // Crear animación
         var framesAnimacion = [];
         for (var i = 1; i <= 3; i++) {
-            var str = "bola_fuego_izquierda_" + this.orientacion + "_0"+i+".png";
+            var str = "bola_fuego_" + this.orientacion + "_0"+i+".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
