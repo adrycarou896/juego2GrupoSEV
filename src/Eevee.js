@@ -109,7 +109,6 @@ var Eevee = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
-        console.log(this.vida);
         this.vida -= this.recibeDaño(disparo.daño());
         console.log("Vida de Eevee: " + this.vida);
     },

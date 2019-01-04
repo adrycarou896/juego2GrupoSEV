@@ -8,6 +8,7 @@ var Charizar = cc.Class.extend({
     body:null,
     layer:null,
     animacion_idle:null,
+    animacion_ataque:null,
     animacion:null,
     nivel: 3,
     estado: parado,
@@ -65,9 +66,10 @@ var Charizar = cc.Class.extend({
     actualizar:function(){
 
     },
-    impactado:function(disparo){
+    impactado:function(disparo, layer){
+        console.log("ES IMPACTADOO");
         var framesAnimacion = [];
-        for (var i = 1; i <= 1; i++) {
+        for (var i = 3; i <= 4; i++) {
             var str = "charizar_idle_0" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
@@ -80,25 +82,42 @@ var Charizar = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
-        console.log(this.vida);
         this.vida -= this.recibeDaño(disparo.daño());
         console.log("Vida de Eevee: " + this.vida);
     },
     recibeDaño: function(daño){
         return daño-(this.defensa*this.nivel);
     },
+    cambiarAAnimacionDeAtaque:function(){
+        var framesAnimacion = [];
+        for (var i = 1; i <= 3; i++) {
+            var str = "charizar_ataque1_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        for (var i = 2; i <= 2; i++) {
+            var str = "charizar_ataque1_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.2);
+        this.animacion_ataque =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        this.animacion = this.animacion_ataque;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+    },
     cambiarAAnimacionDeLucha:function(){
         var framesAnimacion = [];
-        for (var i = 1; i <= 1; i++) {
+        for (var i = 1; i <= 3; i++) {
             var str = "charizar_idle_0" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
-        var animacion = new cc.Animation(framesAnimacion, 0.5);
+        var animacion = new cc.Animation(framesAnimacion, 0.2);
         this.animacion_idle =
             new cc.RepeatForever(new cc.Animate(animacion));
-
-        //layer.addChild(this.sprite,10);
 
         this.animacion = this.animacion_idle;
         this.sprite.stopAllActions();

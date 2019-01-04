@@ -4,10 +4,10 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>charizar_idle_01.png</key>
+			<key>charizar_ataque1_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{6,0},{135,91}}</string>
+				<string>{{1,0},{122,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -17,10 +17,10 @@
 				<key>sourceSize</key>
 				<string>{73,62}</string>
 			</dict>
-			<key>charizar_idle_02.png</key>
+			<key>charizar_ataque1_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{142,0},{138,91}}</string>
+				<string>{{123,0},{109,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -30,10 +30,10 @@
 				<key>sourceSize</key>
 				<string>{73,62}</string>
 			</dict>
-			<key>charizar_idle_03.png</key>
+			<key>charizar_ataque1_03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{282,0},{138,91}}</string>
+				<string>{{231,0},{109,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -43,10 +43,49 @@
 				<key>sourceSize</key>
 				<string>{73,62}</string>
 			</dict>
-			<key>charizar_idle_04.png</key>
+			<key>charizar_ataque1_04.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1052,0},{190,91}}</string>
+				<string>{{405,0},{135,91}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{73,62}}</string>
+				<key>sourceSize</key>
+				<string>{73,62}</string>
+			</dict>
+			<key>charizar_ataque1_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{540,0},{135,91}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{73,62}}</string>
+				<key>sourceSize</key>
+				<string>{73,62}</string>
+			</dict>
+			<key>charizar_ataque1_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{540,0},{135,91}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{73,62}}</string>
+				<key>sourceSize</key>
+				<string>{73,62}</string>
+			</dict>
+			<key>charizar_ataque1_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{540,0},{135,91}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -63,13 +102,13 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>realTextureFileName</key>
-            <string>charizar_idle.png</string>
+            <string>charizar_ataque1.png</string>
 			<key>size</key>
-			<string>{1200,91}</string>
+			<string>{846,95}</string>
 			<key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:3d70b2498d34a6ce27ecd669974329db:d7e2a12efd5d53dc799168586e11d70e:b8e96a3b0eea864d9c309cc779337e95$</string>
             <key>textureFileName</key>
-			<string>charizar_idle.png</string>
+			<string>charizar_ataque1.png</string>
 		</dict>
 	</dict>
 </plist>

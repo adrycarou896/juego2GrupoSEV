@@ -58,7 +58,9 @@ var res = {
     charco_agua_png: "res/pokemon/charco_agua.png",
     charco_agua_plist: "res/pokemon/charco_agua.plist",
     charizar_idle_png: "res/pokemon/charizar_idle.png",
-    charizar_idle_plist: "res/pokemon/charizar_idle.plist"
+    charizar_idle_plist: "res/pokemon/charizar_idle.plist",
+    charizar_ataque1_png: "res/pokemon/charizar_ataque1.png",
+    charizar_ataque1_plist: "res/pokemon/charizar_ataque1.plist"
 
 };
 

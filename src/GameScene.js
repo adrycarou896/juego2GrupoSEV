@@ -1020,6 +1020,7 @@ var LuchaLayer = cc.Layer.extend({
 
         }
         if (this.tiempoAtaquePokemonJugador < 0) {
+            console.log("NOUUUUUUU");
             this.tiempoAtaquePokemonJugador = 0;
         }
     },
@@ -1057,6 +1058,7 @@ var TorneoLayer = cc.Layer.extend({
     tiempoEfectoPokemonJugador:0,
     tiempoDisparoEnemigo:0,
     tiempoAtaquePokemonJugador:0,
+    tiempoLanzarAtaqueEnemigo:0,
     menu: null,
     pokeball: null,
     mensaje: null,
@@ -1077,6 +1079,7 @@ var TorneoLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.charizar_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.charizar_ataque1_plist);
 
         // Fondo
         this.spriteFondo = cc.Sprite.create(res.fondo_lucha_5);
@@ -1232,7 +1235,7 @@ var TorneoLayer = cc.Layer.extend({
 
         }
         if (this.tiempoEfecto < 0) {
-            //this.enemigo.cambiarAAnimacionDeLucha();
+            this.enemigo.cambiarAAnimacionDeLucha();
             this.tiempoEfecto = 0;
             this.tiempoDisparoEnemigo = 1;
         }
@@ -1241,8 +1244,19 @@ var TorneoLayer = cc.Layer.extend({
             this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
         }
         if(this.tiempoDisparoEnemigo < 0){
+            this.enemigo.cambiarAAnimacionDeAtaque();
             this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
             this.tiempoDisparoEnemigo = 0;
+            this.tiempoLanzarAtaqueEnemigo = 1;
+        }
+
+        if (this.tiempoLanzarAtaqueEnemigo > 0){
+            this.tiempoLanzarAtaqueEnemigo = this.tiempoLanzarAtaqueEnemigo - dt;
+
+        }
+        if (this.tiempoLanzarAtaqueEnemigo < 0) {
+            this.enemigo.cambiarAAnimacionDeLucha();
+            this.tiempoLanzarAtaqueEnemigo = 0;
         }
 
         if (this.tiempoEfectoPokemonJugador > 0){
