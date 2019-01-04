@@ -4,10 +4,10 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>charco_agua_01.png</key>
+			<key>bola_agua_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,0},{233,110}}</string>
+				<string>{{2,0},{58,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -17,10 +17,10 @@
 				<key>sourceSize</key>
 				<string>{73,62}</string>
 			</dict>
-			<key>charco_agua_02.png</key>
+			<key>bola_agua_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{235,0},{233,110}}</string>
+				<string>{{58,0},{58,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -30,10 +30,49 @@
 				<key>sourceSize</key>
 				<string>{73,62}</string>
 			</dict>
-			<key>charco_agua_03.png</key>
+			<key>bola_agua_03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{470,0},{233,110}}</string>
+				<string>{{116,0},{58,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{73,62}}</string>
+				<key>sourceSize</key>
+				<string>{73,62}</string>
+			</dict>
+			<key>bola_agua_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{174,0},{58,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{73,62}}</string>
+				<key>sourceSize</key>
+				<string>{73,62}</string>
+			</dict>
+			<key>bola_agua_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{232,0},{58,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{73,62}}</string>
+				<key>sourceSize</key>
+				<string>{73,62}</string>
+			</dict>
+			<key>bola_agua_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{290,0},{58,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -50,13 +89,13 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>realTextureFileName</key>
-            <string>charco_agua.png</string>
+            <string>bola_agua.png</string>
 			<key>size</key>
-			<string>{700,110}</string>
+			<string>{350,60}</string>
 			<key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:3d70b2498d34a6ce27ecd669974329db:d7e2a12efd5d53dc799168586e11d70e:b8e96a3b0eea864d9c309cc779337e95$</string>
             <key>textureFileName</key>
-			<string>charco_agua.png</string>
+			<string>bola_agua.png</string>
 		</dict>
 	</dict>
 </plist>

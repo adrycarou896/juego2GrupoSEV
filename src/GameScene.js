@@ -771,7 +771,7 @@ var LuchaLayer = cc.Layer.extend({
     tiempoEfecto:0,
     tiempoEfectoPokemonJugador:0,
     tiempoDisparoEnemigo:0,
-    tiempoRayo:0,
+    tiempoAtaquePokemonJugador:0,
     menu: null,
     pokeball: null,
     mensaje: null,
@@ -793,6 +793,7 @@ var LuchaLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_volando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_cerrada_plist);
         cc.spriteFrameCache.addSpriteFrames(res.pokeball_abierta_plist);
@@ -833,7 +834,7 @@ var LuchaLayer = cc.Layer.extend({
     colisionPokeballEnemigo: function(){
         this.removeChild(this.enemigo.sprite);
         this.pokeball.cambiarAModoCaptura(this.space, cc.p(600, 210), this);
-
+        this.enemigo.dentroPokeball = true;
     },
 
     finColisionPokeballEnemigo: function(){
@@ -877,11 +878,15 @@ var LuchaLayer = cc.Layer.extend({
                 if (this.disparosJugador[j].shape == shapes[0]) {
                     if (this.disparosJugador[j] instanceof RayoAtaque && !this.disparosJugador[j].activo) {
                         this.disparosJugador[j].activo = true;
-                        this.tiempoRayo = 1;
+                        this.tiempoAtaquePokemonJugador = 1;
+                    }
+                    else if(this.disparosJugador[j] instanceof CharcoAguaAtaque && !this.disparosJugador[j].activo){
+                        this.disparosJugador[j].activo = true;
+                        this.tiempoAtaquePokemonJugador = 2;
                     }
                 }
             }
-            if (this.tiempoRayo == 0) {
+            if (this.tiempoAtaquePokemonJugador == 0) {
                 this.formasEliminar.push(shapes[0]);
                 this.enemigo.impactado(this.disparosJugador[0]);
                 this.tiempoEfecto = 1;
@@ -995,8 +1000,10 @@ var LuchaLayer = cc.Layer.extend({
         if(this.tiempoDisparoEnemigo > 0){
             this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
         }
-        if(this.tiempoDisparoEnemigo < 0 && this.enemigo.estado != enCaptura){
-            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+        if(this.tiempoDisparoEnemigo < 0){
+            if(!this.enemigo.dentroPokeball){
+                this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+            }
             this.tiempoDisparoEnemigo = 0;
         }
 
@@ -1009,12 +1016,12 @@ var LuchaLayer = cc.Layer.extend({
             this.tiempoEfectoPokemonJugador = 0;
         }
 
-        if (this.tiempoRayo > 0){
-            this.tiempoRayo = this.tiempoRayo - dt;
+        if (this.tiempoAtaquePokemonJugador > 0){
+            this.tiempoAtaquePokemonJugador = this.tiempoAtaquePokemonJugador - dt;
 
         }
-        if (this.tiempoRayo < 0) {
-            this.tiempoRayo = 0;
+        if (this.tiempoAtaquePokemonJugador < 0) {
+            this.tiempoAtaquePokemonJugador = 0;
         }
     },
     cargarMapa:function () {
@@ -1027,8 +1034,6 @@ var LuchaLayer = cc.Layer.extend({
         this.tiempoEfectoPokemonJugador = 1;
         console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
     },
-
-
     crearPokeball:function(){
         this.pokeball = new Pokeball(this.space, cc.p(300,150), this, this.enemigo);
     }
