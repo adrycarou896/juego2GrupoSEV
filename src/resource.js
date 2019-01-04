@@ -17,6 +17,7 @@ var res = {
     tiles_mapa: "res/mapas/tiles-mapa.png",
     mapa: "res/mapas/mapa.tmx",
     fondo_lucha_1: "res/fondoLucha/fondo1.png",
+    fondo_lucha_5: "res/fondoLucha/fondo5.png",
     fondo_mensaje_prohibido_gimnasio: "res/fondoMensajes/mensaje_prohibido_gimnasio.png",
     inside_tiles: "res/mapas/inside_tiles.png",
     mapa_gimnasio: "res/mapas/mapa_gimnasio.tmx",
@@ -55,7 +56,9 @@ var res = {
     mensaje_eevee_huido: "res/fondoMensajes/mensaje_eevee_huido.png",
     mensaje_atrapa_eevee: "res/fondoMensajes/mensaje_atrapa_eevee.png",
     charco_agua_png: "res/pokemon/charco_agua.png",
-    charco_agua_plist: "res/pokemon/charco_agua.plist"
+    charco_agua_plist: "res/pokemon/charco_agua.plist",
+    charizar_idle_png: "res/pokemon/charizar_idle.png",
+    charizar_idle_plist: "res/pokemon/charizar_idle.plist"
 
 };
 
