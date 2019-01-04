@@ -834,7 +834,7 @@ var LuchaLayer = cc.Layer.extend({
     colisionPokeballEnemigo: function(){
         this.removeChild(this.enemigo.sprite);
         this.pokeball.cambiarAModoCaptura(this.space, cc.p(600, 210), this);
-
+        this.enemigo.dentroPokeball = true;
     },
 
     finColisionPokeballEnemigo: function(){
@@ -996,7 +996,9 @@ var LuchaLayer = cc.Layer.extend({
             this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
         }
         if(this.tiempoDisparoEnemigo < 0){
-            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+            if(!this.enemigo.dentroPokeball){
+                this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+            }
             this.tiempoDisparoEnemigo = 0;
         }
 

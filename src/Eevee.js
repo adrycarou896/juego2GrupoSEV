@@ -19,6 +19,7 @@ var Eevee = cc.Class.extend({
     vida: 100,
     posicion: null,
     defensa: 3,
+    dentroPokeball: false,
     ctor:function (space, posicion, layer) {
         this.posicion = posicion;
         // Crear Sprite - Cuerpo y forma
