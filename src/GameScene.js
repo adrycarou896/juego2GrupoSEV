@@ -1498,6 +1498,8 @@ var MensajesLayer = cc.Layer.extend({
                 this.layer.getParent().removeChild(this.layer);
                 break;
             case 6:
+                this.jugador.capturados.push(this.layer.enemigo);
+                this.layer.layer.jugador.capturados = this.jugador.capturados;
                 if(this.layer.pokemonJugador.subirNivel()){
                     this.layer.mensaje = new MensajesLayer(5, this.layer, this.jugador);
                     this.getParent().addChild(this.layer.mensaje);
@@ -1580,13 +1582,7 @@ var MenuLuchaLayer = cc.Layer.extend({
         teclas.splice(posicion, 1);
         switch (keyCode){
             case 49://1
-                //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(230,115)));
-                //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
-                //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
                 this.layer.disparosJugador.push(this.pokemonJugador.ataque1(this.layer));//Limites para que el rayo haga efecto
-                //var disparo = new DisparoPikachuRayo(this.layer,cc.p(230,115),this.pokemonJugador);
-                //this.layer.disparosJugador.push(disparo);
-
                 this.getParent().removeChild(this);
                 this.layer.menu = null;
                 break;
