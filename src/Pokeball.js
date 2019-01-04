@@ -99,12 +99,19 @@ var Pokeball = cc.Class.extend({
 
     calcularAtrapa:function(){
         if(this.enemigo.vida<= 50){
-            var random = Math.random();
-            if(random >= 0.4){
+
+            if(this.enemigo.vida <= 0){
                 this.llena = true;
             }
-            else{
-                this.llena = false;
+
+            else {
+
+                var random = Math.random();
+
+                if (random >= 0.4)
+                    this.llena = true;
+                else
+                    this.llena = false;
             }
         }
         else

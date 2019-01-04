@@ -862,10 +862,13 @@ var LuchaLayer = cc.Layer.extend({
     collisionDisparoConEnemigo:function (arbiter, space){
 
         if(this.enemigo.vida <= 0){
-            console.log("Enemigo derrotadoooo");
+            /*console.log("Enemigo derrotadoooo");
             var mensaje = new MensajesLayer(5, this, this.jugador);
             this.getParent().addChild(mensaje);
-            mensaje.mostrar();
+            mensaje.mostrar();*/
+            this.crearPokeball();
+            this.enemigo.estado = enCaptura;
+
             //this.getParent().removeChild(this);
         }
         else {
@@ -907,12 +910,14 @@ var LuchaLayer = cc.Layer.extend({
             }
             this.getParent().removeChild(this);
         }
-        else if(this.enemigo.vida <= 0){
-            console.log("Enemigo derrotadoooo");
+        /*else if(this.enemigo.vida <= 0){
+            /!*console.log("Enemigo derrotadoooo");
             var mensaje = new MensajesLayer(5, this, this.jugador);
             this.getParent().addChild(mensaje);
-            mensaje.mostrar();
-        }
+            mensaje.mostrar();*!/
+            this.crearPokeball();
+
+        }*/
         else {
             if(this != null) {
                 if (this.menu == null) {
@@ -990,7 +995,7 @@ var LuchaLayer = cc.Layer.extend({
         if(this.tiempoDisparoEnemigo > 0){
             this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
         }
-        if(this.tiempoDisparoEnemigo < 0){
+        if(this.tiempoDisparoEnemigo < 0 && this.enemigo.estado != enCaptura){
             this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
             this.tiempoDisparoEnemigo = 0;
         }
@@ -1125,12 +1130,12 @@ var MensajesLayer = cc.Layer.extend({
                 break;
             case 5:
                 this.layer.enemigo.finModoLucha();
-                this.layer.layer.jugador.body.p.x = 416;
-                this.layer.layer.jugador.body.p.y = 480;
-                if(this.layer.menu != null){
+                /*his.layer.layer.jugador.body.p.x = 416;
+                this.layer.layer.jugador.body.p.y = 480;*/
+                /*if(this.layer.menu != null){
                     this.getParent().removeChild(this.layer.menu);
-                }
-                this.getParent().removeChild(this.layer.layer.menuLuchaLayer);
+                }*/
+                //this.getParent().removeChild(this.layer.layer.menuLuchaLayer);
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
@@ -1196,13 +1201,11 @@ var MenuLuchaLayer = cc.Layer.extend({
         teclas.splice(posicion, 1);
         switch (keyCode){
             case 49://1
-                console.log("Ejecutando ataqueeeee: " +  this.pokemonJugador.ataques[0]);
-
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(230,115)));
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
                 //this.layer.disparosJugador.push(new RayoAtaque(this.layer,cc.p(590,275)));
                 this.layer.disparosJugador.push(this.pokemonJugador.ataque1(this.layer));//Limites para que el rayo haga efecto
-                //this.layer.pokemonJugador.vida = 0;
+                //this.pokemonJugador.vida = 0;
                 //var disparo = new DisparoPikachuRayo(this.layer,cc.p(230,115),this.pokemonJugador);
                 //this.layer.disparosJugador.push(disparo);
 
