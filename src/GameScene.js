@@ -202,7 +202,8 @@ var GameLayer = cc.Layer.extend({
         var grupoEnemigosSalvajes = this.mapa.getObjectGroup("EnemigoSalvaje");
         var enemigosSavajesArray = grupoEnemigosSalvajes.getObjects();
         for (var i = 0; i < enemigosSavajesArray.length; i++) {
-            var enemigo = new Eevee(this.space,
+            var enemigo = new Eevee();
+            enemigo.mostrarEnCampo(this.space,
                 cc.p(enemigosSavajesArray[i]["x"],enemigosSavajesArray[i]["y"]),this);
             this.enemigos.push(enemigo);
         }
@@ -812,7 +813,7 @@ var LuchaLayer = cc.Layer.extend({
         this.spriteFondo.setScale( size.width / this.spriteFondo.width );
         this.addChild(this.spriteFondo);
 
-        this.enemigo.cambiarAModoLucha(this.space, cc.p(600,210), this);
+        this.enemigo.mostrarSiEsEnemigo(this.space, cc.p(600,210), this);
 
         this.scheduleUpdate();
 
@@ -879,7 +880,7 @@ var LuchaLayer = cc.Layer.extend({
         }
         if (this.tiempoAtaquePokemonJugador == 0) {
             this.formasEliminar.push(shapes[0]);
-            this.enemigo.impactado(this.disparosJugador[0]);
+            this.enemigo.impactadoSiEsEnemigo(this.disparosJugador[0]);
             this.tiempoEfecto = 1;
         }
 
@@ -978,7 +979,7 @@ var LuchaLayer = cc.Layer.extend({
 
         }
         if (this.tiempoEfecto < 0) {
-            this.enemigo.cambiarAAnimacionDeLucha();
+            this.enemigo.cambiarAModoLucha();
             this.tiempoEfecto = 0;
             this.tiempoDisparoEnemigo = 1;
         }
@@ -1159,7 +1160,7 @@ var TorneoLayer = cc.Layer.extend({
             }
             if (this.tiempoAtaquePokemonJugador == 0) {
                 this.formasEliminar.push(shapes[0]);
-                this.enemigo.impactado(this.disparosJugador[0]);
+                this.enemigo.impactadoSiEsEnemigo(this.disparosJugador[0]);
                 this.tiempoEfecto = 1;
             }
             console.log("COLISION DISPARO CON ENEMIGO");
@@ -1236,7 +1237,7 @@ var TorneoLayer = cc.Layer.extend({
 
         }
         if (this.tiempoEfecto < 0) {
-            this.enemigo.cambiarAAnimacionDeLucha();
+            this.enemigo.cambiarAModoLucha();
             this.tiempoEfecto = 0;
             this.tiempoDisparoEnemigo = 1;
         }
@@ -1256,7 +1257,7 @@ var TorneoLayer = cc.Layer.extend({
 
         }
         if (this.tiempoLanzarAtaqueEnemigo < 0) {
-            this.enemigo.cambiarAAnimacionDeLucha();
+            this.enemigo.cambiarAModoLucha();
             this.tiempoLanzarAtaqueEnemigo = 0;
         }
 

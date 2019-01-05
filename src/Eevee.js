@@ -23,7 +23,13 @@ var Eevee = cc.Class.extend({
     defensa: 3,
     dentroPokeball: false,
     name: "Eevee",
-    ctor:function (space, posicion, layer) {
+    ctor:function () {
+
+    },
+    actualizar:function(){
+
+    },
+    mostrarEnCampo:function(space, posicion, layer){
         this.posicion = posicion;
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_01.png");
@@ -38,15 +44,10 @@ var Eevee = cc.Class.extend({
         this.layerAnterior = this.layer;
         this.bodyAnterior = this.body;
         this.shapeAnterior = this.shape;
-
     },
-    actualizar:function(){
-
-    },
-
     mostrar(space, posicion, layer){
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#eevee_espalda.png");
+        this.sprite = new cc.PhysicsSprite("#eevee_espalda_01.png");
 
         this.space = space;
         this.layer = layer;
@@ -75,7 +76,7 @@ var Eevee = cc.Class.extend({
 
         var framesAnimacion = [];
         for (var i = 1; i <= 1; i++) {
-            var str = "eevee_espalda" + ".png";
+            var str = "eevee_espalda_0" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -95,14 +96,10 @@ var Eevee = cc.Class.extend({
     ataque2:function(layer){
         return new BolaFuegoAtaque(layer,cc.p(230,115), this, 2)
     },
-
-
-    cambiarAModoLucha:function (space, posicion, layer) {
-
-        // Crear Sprite - Cuerpo y forma
+    mostrarSiEsEnemigo:function (space, posicion, layer) {
         this.sprite = new cc.PhysicsSprite("#eevee_idle_01.png");
 
-        this.incluirEnVista(space, posicion, layer);
+        this.incluirEnVista(space,posicion,layer);
 
         var framesAnimacion = [];
         for (var i = 1; i <= 2; i++) {
@@ -120,6 +117,21 @@ var Eevee = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
+    },
+    cambiarAModoLucha:function(){
+        var framesAnimacion = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "eevee_idle_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.5);
+        this.animacion_idle =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        this.animacion = this.animacion_idle;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
     },
     incluirEnVista:function(space, posicion, layer){
         this.space = space;
@@ -157,7 +169,7 @@ var Eevee = cc.Class.extend({
         }
         return false;
     },
-    impactado:function(disparo){
+    impactadoSiEsEnemigo:function(disparo){
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
             var str = "eevee_idle_0" + i + ".png";
@@ -174,10 +186,27 @@ var Eevee = cc.Class.extend({
 
         this.vida -= disparo.daño();
     },
-    cambiarAAnimacionDeLucha:function(){
+    impactado:function(disparo){
         var framesAnimacion = [];
         for (var i = 1; i <= 2; i++) {
-            var str = "eevee_idle_0" + i + ".png";
+            var str = "eevee_espalda_0" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacion.push(frame);
+        }
+        var animacion = new cc.Animation(framesAnimacion, 0.05);
+        this.animacion_idle =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        this.animacion = this.animacion_idle;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animacion);
+
+        this.vida -= disparo.daño();
+    },
+    cambiarAAnimacionDeLucha:function(){
+        var framesAnimacion = [];
+        for (var i = 1; i <= 1; i++) {
+            var str = "eevee_espalda_0" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }

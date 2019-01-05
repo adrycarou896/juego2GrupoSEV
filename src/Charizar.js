@@ -16,7 +16,10 @@ var Charizar = cc.Class.extend({
     vidaCompleta: 150,
     posicion: null,
     defensa: 3,
-    ctor:function (space, posicion, layer) {
+    ctor:function () {
+
+    },
+    mostrarSiEsEnemigo:function(space, posicion, layer){
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#charizar_idle_01.png");
 
@@ -62,12 +65,11 @@ var Charizar = cc.Class.extend({
         this.animacion = this.animacion_idle;
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
-
     },
     actualizar:function(){
 
     },
-    impactado:function(disparo, layer){
+    impactadoSiEsEnemigo:function(disparo){
         console.log("ES IMPACTADOO");
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
@@ -109,7 +111,7 @@ var Charizar = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
     },
-    cambiarAAnimacionDeLucha:function(){
+    cambiarAModoLucha:function(){
         var framesAnimacion = [];
         for (var i = 1; i <= 3; i++) {
             var str = "charizar_idle_0" + i + ".png";
