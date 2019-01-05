@@ -1106,8 +1106,9 @@ var TorneoLayer = cc.Layer.extend({
 
         this.jugador = jugador;
 
-        this.enemigos.push(new Charizar(this.space, cc.p(600,210), this));
+        this.enemigos.push(new Charizar());
         this.enemigo = this.enemigos[0];
+        this.enemigo.mostrarSiEsEnemigo(this.space, cc.p(600,210), this);
 
         this.seleccionarPokemon();
 
