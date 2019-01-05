@@ -1095,8 +1095,10 @@ var TorneoLayer = cc.Layer.extend({
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.eevee_espalda_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_izquierda_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_derecha_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);
@@ -1112,8 +1114,9 @@ var TorneoLayer = cc.Layer.extend({
 
         this.jugador = jugador;
 
-        this.enemigos.push(new Charizar(this.space, cc.p(600,210), this));
+        this.enemigos.push(new Charizar());
         this.enemigo = this.enemigos[0];
+        this.enemigo.mostrarSiEsEnemigo(this.space, cc.p(600,210), this);
 
         this.seleccionarPokemon();
 
@@ -1184,22 +1187,25 @@ var TorneoLayer = cc.Layer.extend({
                 this.enemigo.impactadoSiEsEnemigo(this.disparosJugador[0]);
                 this.tiempoEfecto = 1;
             }
-            console.log("COLISION DISPARO CON ENEMIGO");
         }
     },
     finColisionDisparoConEnemigo:function(){
         if(this.pokemonJugador.vida <= 0){
+            if(this.menu != null){
+                this.getParent().removeChild(this.menu);
+            }
             var layerTorneo = new TorneoLayer(this.jugador);
-            var opcion = layerTorneo.crearPokemonJugador();
+            var opcion = layerTorneo.mostrarPokemonJugador();
             this.getParent().addChild(layerTorneo);
 
-            if(!opcion){
+            if (!opcion) {
+                if(this.menu != null){
+                    this.removeChild(this.menu);
+                }
                 var mensaje = new MensajesLayer(2, layerTorneo, this.jugador);
                 this.getParent().addChild(mensaje);
                 mensaje.mostrar();
-            }
-            else {
-
+            } else {
                 //Aviso cambio de pokemon
                 var mensaje = new MensajesLayer(1, layerTorneo, this.jugador);
                 this.getParent().addChild(mensaje);
@@ -1215,11 +1221,9 @@ var TorneoLayer = cc.Layer.extend({
             //mensaje.mostrar();
         }
         else {
-            if(this != null) {
-                if (this.menu == null) {
-                    this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
-                    this.getParent().addChild(this.menu);
-                }
+            if (this.menu == null && this.enemigo.vida > 0) {
+                this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
+                this.getParent().addChild(this.menu);
             }
         }
     },
@@ -1268,7 +1272,7 @@ var TorneoLayer = cc.Layer.extend({
         }
         if(this.tiempoDisparoEnemigo < 0){
             this.enemigo.cambiarAAnimacionDeAtaque();
-            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.pokemonJugador, 1));
             this.tiempoDisparoEnemigo = 0;
             this.tiempoLanzarAtaqueEnemigo = 1;
         }
@@ -1305,7 +1309,11 @@ var TorneoLayer = cc.Layer.extend({
     collisionDisparoEnemigoConJugadorPokemon:function (arbiter, space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
-        this.pokemonJugador.impactado();
+        for (var j = 0; j < this.disparosEnemigo.length; j++) {
+            if (this.disparosEnemigo[j].shape == shapes[0]) {
+                this.pokemonJugador.impactado(this.disparosEnemigo[j]);
+            }
+        }
         this.tiempoEfectoPokemonJugador = 1;
         console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
     },

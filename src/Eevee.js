@@ -46,6 +46,7 @@ var Eevee = cc.Class.extend({
         this.shapeAnterior = this.shape;
     },
     mostrar(space, posicion, layer){
+
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#eevee_espalda_01.png");
 

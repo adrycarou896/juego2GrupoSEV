@@ -85,11 +85,7 @@ var Charizar = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
-        this.vida -= this.recibeDaño(disparo.daño());
-        console.log("Vida de Eevee: " + this.vida);
-    },
-    recibeDaño: function(daño){
-        return daño-(this.defensa*this.nivel);
+        this.vida -= disparo.daño();
     },
     cambiarAAnimacionDeAtaque:function(){
         var framesAnimacion = [];
