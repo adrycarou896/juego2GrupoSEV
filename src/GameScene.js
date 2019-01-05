@@ -1627,7 +1627,7 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 this.layer.enemigo.finModoLucha();
-                this.getParent().removeChild(this.layer);
+                this.layer.layer.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
             case 80: //p
