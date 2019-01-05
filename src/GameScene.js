@@ -1089,8 +1089,10 @@ var TorneoLayer = cc.Layer.extend({
 
         cc.spriteFrameCache.addSpriteFrames(res.pikachu_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.eevee_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.eevee_espalda_plist);
         cc.spriteFrameCache.addSpriteFrames(res.disparo_jugador_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_izquierda_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bola_fuego_derecha_plist);
         cc.spriteFrameCache.addSpriteFrames(res.rayo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bola_agua_plist);
         cc.spriteFrameCache.addSpriteFrames(res.charco_agua_plist);
