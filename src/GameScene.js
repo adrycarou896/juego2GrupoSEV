@@ -104,6 +104,11 @@ var GameLayer = cc.Layer.extend({
                 }
             }
         }
+        else{
+            var mensaje = new MensajesLayer(8, this, this.jugador);
+            this.getParent().addChild(mensaje);
+            mensaje.mostrar();
+        }
     },
     cargarMapa:function (jugador) {
        this.mapa = new cc.TMXTiledMap(res.mapa);
@@ -471,6 +476,7 @@ var LayerGimnasio = cc.Layer.extend({
 
 
     colisionConMostrador:function(){
+        this.jugador.inscribirTorneo();
         this.jugador.inscribirTorneo();
     },
 
@@ -1476,6 +1482,10 @@ var MensajesLayer = cc.Layer.extend({
                 this.spriteFondo = cc.Sprite.create(res.mensaje_eevee_huido);
                 this.spriteFondo.setPosition(cc.p(650, 75));
                 break;
+            case 8:
+                this.spriteFondo = cc.Sprite.create(res.mensaje_curar_antes_combate);
+                this.spriteFondo.setPosition(cc.p(450, 150));
+                break;
 
         }
 
@@ -1539,6 +1549,9 @@ var MensajesLayer = cc.Layer.extend({
             case 7:
                 this.layer.enemigo.finModoLucha();
                 this.getParent().removeChild(this.layer);
+                this.getParent().removeChild(this);
+                break;
+            case 8:
                 this.getParent().removeChild(this);
                 break;
 
@@ -1614,7 +1627,7 @@ var MenuLuchaLayer = cc.Layer.extend({
                 break;
             case 27: //esc
                 this.layer.enemigo.finModoLucha();
-                this.getParent().removeChild(this.layer);
+                this.layer.layer.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;
             case 80: //p
