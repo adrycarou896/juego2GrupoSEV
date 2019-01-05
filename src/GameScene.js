@@ -21,7 +21,6 @@ var GameLayer = cc.Layer.extend({
     mapaAlto:0,
     nombre: "GameLayer",
     saleDe: 0,
-    menuLuchaLayer: null,
     ctor:function (jugador, saleDe) {
        this._super();
        var size = cc.winSize;
@@ -79,25 +78,30 @@ var GameLayer = cc.Layer.extend({
     },
 
     finColisionJugadorConEnemigo:function(){
-        this.menuLuchaLayer = null;
+        //this.getParent().removeChild(this.menuLuchaLayer)
+        //this.menuLuchaLayer = null;
     },
 
     collisionJugadorConEnemigo:function (arbiter, space){
-        var shapes = arbiter.getShapes();
-        var shapeEnemigo = shapes[1];
-        //console.log("tam->"+this.enemigos.length);
-        for (var j = 0; j < this.enemigos.length; j++) {
-            if (this.enemigos[j].shape == shapeEnemigo) {
-                var layerLucha = new LuchaLayer(this.enemigos[j], this.jugador, this);
-                layerLucha.crearPokemonJugador();
-                this.getParent().addChild(layerLucha);
-                if(this.menuLuchaLayer == null){
-                    this.menuLuchaLayer = new MenuLuchaLayer(layerLucha.pokemonJugador,layerLucha);
-                    this.getParent().addChild(this.menuLuchaLayer);
-                }
-                this.jugador.body.p.x = 416;
-                this.jugador.body.p.y = 480;
+        var pokemonConVida = this.jugador.pokemonVivos();
 
+        if(pokemonConVida) {
+            var shapes = arbiter.getShapes();
+            var shapeEnemigo = shapes[1];
+            //console.log("tam->"+this.enemigos.length);
+            for (var j = 0; j < this.enemigos.length; j++) {
+                if (this.enemigos[j].shape == shapeEnemigo) {
+                    var layerLucha = new LuchaLayer(this.enemigos[j], this.jugador, this);
+                    layerLucha.crearPokemonJugador();
+                    this.getParent().addChild(layerLucha);
+                    /*if(this.menuLuchaLayer == null){
+                        this.menuLuchaLayer = new MenuLuchaLayer(layerLucha.pokemonJugador,layerLucha);
+                        this.getParent().addChild(this.menuLuchaLayer);
+                    }*/
+                    this.jugador.body.p.x = 416;
+                    this.jugador.body.p.y = 480;
+
+                }
             }
         }
     },
@@ -828,6 +832,11 @@ var LuchaLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoPokeball, tipoEnemigo,
             null, null, this.colisionPokeballEnemigo.bind(this), this.finColisionPokeballEnemigo.bind(this));
 
+        if(this.pokemonJugador != null) {
+            this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
+            this.addChild(this.menu);
+        }
+
 
         return true;
 
@@ -886,7 +895,6 @@ var LuchaLayer = cc.Layer.extend({
 
     },
     finColisionDisparoConEnemigo:function(){
-        console.log("VIDA EEVEE" + this.enemigo.vida);
 
         if(this.enemigo.vida <= 0){
             this.crearPokeball();
@@ -894,11 +902,18 @@ var LuchaLayer = cc.Layer.extend({
         }
         else {
             if (this.pokemonJugador.vida <= 0) {
+                if(this.menu != null){
+                    this.getParent().removeChild(this.menu);
+                }
+
                 var layerLucha = new LuchaLayer(this.enemigo, this.jugador, this.layer);
                 var opcion = layerLucha.crearPokemonJugador();
                 this.getParent().addChild(layerLucha);
 
                 if (!opcion) {
+                    if(this.menu != null){
+                        this.removeChild(this.menu);
+                    }
                     var mensaje = new MensajesLayer(2, layerLucha, this.jugador);
                     this.getParent().addChild(mensaje);
                     mensaje.mostrar();
@@ -1125,10 +1140,10 @@ var TorneoLayer = cc.Layer.extend({
     },
     mostrarPokemonJugador:function(){
         if(this.pokemonJugador != null) {
-            if ("Pikachu" == this.pokemonJugador.name || "Piplup" == this.pokemonJugador.name) {
+            //if ("Pikachu" == this.pokemonJugador.name || "Piplup" == this.pokemonJugador.name) {
                 this.pokemonJugador.mostrar(this.space, cc.p(230, 115), this);
                 return true;
-            }
+            //}
         }
         else{
             return false;
@@ -1474,8 +1489,6 @@ var MensajesLayer = cc.Layer.extend({
                 break;
             case 2:
                 this.layer.enemigo.finModoLucha();
-                this.layer.layer.jugador.body.p.x = 416;
-                this.layer.layer.jugador.body.p.y = 480;
                 this.getParent().removeChild(this.layer);
                 this.getParent().removeChild(this);
                 break;

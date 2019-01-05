@@ -155,6 +155,15 @@ var Jugador = cc.Class.extend({
         //this.capturados.push(new Pikachu());
 
     },
+
+    pokemonVivos: function(){
+        for(var i=0; i< this.capturados.length; i++){
+            if(this.capturados[i].vida > 0){
+                return true;
+            }
+        }
+        return false;
+    },
     actualizar:function(){
         switch ( this.estado ){
             case estadoCaminando:
