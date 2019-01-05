@@ -108,7 +108,7 @@ var Pokeball = cc.Class.extend({
 
                 var random = Math.random();
 
-                if (random >= 0)
+                if (random >= 0.42)
                     this.llena = true;
                 else
                     this.llena = false;
