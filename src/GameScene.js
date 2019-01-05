@@ -1187,7 +1187,7 @@ var TorneoLayer = cc.Layer.extend({
     finColisionDisparoConEnemigo:function(){
         if(this.pokemonJugador.vida <= 0){
             var layerTorneo = new TorneoLayer(this.jugador);
-            var opcion = layerTorneo.crearPokemonJugador();
+            var opcion = layerTorneo.mostrarPokemonJugador();
             this.getParent().addChild(layerTorneo);
 
             if(!opcion){
@@ -1265,7 +1265,7 @@ var TorneoLayer = cc.Layer.extend({
         }
         if(this.tiempoDisparoEnemigo < 0){
             this.enemigo.cambiarAAnimacionDeAtaque();
-            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210)));
+            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.pokemonJugador, 1));
             this.tiempoDisparoEnemigo = 0;
             this.tiempoLanzarAtaqueEnemigo = 1;
         }
@@ -1302,7 +1302,11 @@ var TorneoLayer = cc.Layer.extend({
     collisionDisparoEnemigoConJugadorPokemon:function (arbiter, space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
-        this.pokemonJugador.impactado();
+        for (var j = 0; j < this.disparosEnemigo.length; j++) {
+            if (this.disparosEnemigo[j].shape == shapes[0]) {
+                this.pokemonJugador.impactado(this.disparosEnemigo[j]);
+            }
+        }
         this.tiempoEfectoPokemonJugador = 1;
         console.log("COLISION DISPARO ENEMIGO CON JUGADOR");
     },
