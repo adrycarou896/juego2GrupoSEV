@@ -1181,22 +1181,25 @@ var TorneoLayer = cc.Layer.extend({
                 this.enemigo.impactadoSiEsEnemigo(this.disparosJugador[0]);
                 this.tiempoEfecto = 1;
             }
-            console.log("COLISION DISPARO CON ENEMIGO");
         }
     },
     finColisionDisparoConEnemigo:function(){
         if(this.pokemonJugador.vida <= 0){
+            if(this.menu != null){
+                this.getParent().removeChild(this.menu);
+            }
             var layerTorneo = new TorneoLayer(this.jugador);
             var opcion = layerTorneo.mostrarPokemonJugador();
             this.getParent().addChild(layerTorneo);
 
-            if(!opcion){
+            if (!opcion) {
+                if(this.menu != null){
+                    this.removeChild(this.menu);
+                }
                 var mensaje = new MensajesLayer(2, layerTorneo, this.jugador);
                 this.getParent().addChild(mensaje);
                 mensaje.mostrar();
-            }
-            else {
-
+            } else {
                 //Aviso cambio de pokemon
                 var mensaje = new MensajesLayer(1, layerTorneo, this.jugador);
                 this.getParent().addChild(mensaje);
@@ -1212,11 +1215,9 @@ var TorneoLayer = cc.Layer.extend({
             //mensaje.mostrar();
         }
         else {
-            if(this != null) {
-                if (this.menu == null) {
-                    this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
-                    this.getParent().addChild(this.menu);
-                }
+            if (this.menu == null && this.enemigo.vida > 0) {
+                this.menu = new MenuLuchaLayer(this.pokemonJugador, this);
+                this.getParent().addChild(this.menu);
             }
         }
     },
