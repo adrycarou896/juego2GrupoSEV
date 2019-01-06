@@ -391,7 +391,6 @@ var LayerSolicitarCuracion = cc.Layer.extend({
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
-            onKeyPressed: this.procesarKeyReleasedSolicitarCuracion.bind(this),
             onKeyReleased: this.procesarKeyReleasedSolicitarCuracion.bind(this)
         }, this);
 
@@ -1120,7 +1119,7 @@ var TorneoLayer = cc.Layer.extend({
         }
         else {
             this.enemigos.push(new Charizar());
-            this.enemigos.push(new Charizar());
+            this.enemigos.push(new Gyarados());
         }
 
         this.seleccionarEnemigo();
