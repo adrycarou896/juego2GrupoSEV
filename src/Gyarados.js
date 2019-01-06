@@ -85,8 +85,8 @@ var Gyarados = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
-        //this.vida -= disparo.daño();
-        this.vida =0;
+        this.vida -= disparo.daño();
+        //this.vida =0;
     },
     cambiarAAnimacionDeAtaque:function(){
 

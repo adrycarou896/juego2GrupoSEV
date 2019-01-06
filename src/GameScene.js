@@ -1120,8 +1120,8 @@ var TorneoLayer = cc.Layer.extend({
         }
         else {
 
-            this.enemigos.push(new Gyarados());
             this.enemigos.push(new Dialga());
+            this.enemigos.push(new Gyarados());
         }
 
         this.seleccionarEnemigo();
@@ -1304,7 +1304,15 @@ var TorneoLayer = cc.Layer.extend({
         }
         if(this.tiempoDisparoEnemigo < 0 && this.enemigo.vida > 0){
             this.enemigo.cambiarAAnimacionDeAtaque();
-            this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.pokemonJugador, 1));
+            if(this.enemigo instanceof Dialga){
+                this.disparosEnemigo.push(new DragonAtaque(this,cc.p(450, 380), this.pokemonJugador));
+            }
+            else if(this.enemigo instanceof Gyarados){
+                this.disparosEnemigo.push(new BolaAguaAtaque(this,cc.p(550, 210), this.pokemonJugador, 1));
+            }
+            else{
+                this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.pokemonJugador, 1));
+            }
             this.tiempoDisparoEnemigo = 0;
             this.tiempoLanzarAtaqueEnemigo = 1;
         }
