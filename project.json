@@ -25,6 +25,8 @@
         "src/BolaAguaAtaque.js",
         "src/CharcoAguaAtaque.js",
         "src/Charizar.js",
-        "src/Gyarados.js"
+        "src/Gyarados.js",
+        "src/Dialga.js",
+        "src/DragonAtaque.js"
     ]
 }

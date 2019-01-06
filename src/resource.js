@@ -88,7 +88,12 @@ var res = {
     mensaje_ataques_torneo_pikachu: "res/fondoMensajes/mensaje_ataques_torneo_pikachu.png",
     mensaje_ataques_torneo_piplup: "res/fondoMensajes/mensaje_ataques_torneo_piplup.png",
     mensaje_ataques_torneo_eevee: "res/fondoMensajes/mensaje_ataques_torneo_eevee.png",
-    mensaje_ganar_torneo: "res/fondoMensajes/mensaje_ganar_torneo.png"
+    mensaje_ganar_torneo: "res/fondoMensajes/mensaje_ganar_torneo.png",
+    dialga_idle_png: "res/legendario/dialga_idle.png",
+    dialga_idle_plist: "res/legendario/dialga_idle.plist",
+    ataque_dialga_1_png: "res/legendario/ataque_dialga_1.png",
+    ataque_dialga_1_plist: "res/legendario/ataque_dialga_1.plist"
+
 
 };
 
