@@ -100,7 +100,7 @@ var Piplup = cc.Class.extend({
         this.sprite.runAction(this.animacion);
     },
     ataque1:function(layer){
-        return new BolaAguaAtaque(layer,cc.p(230,115), this);
+        return new BolaAguaAtaque(layer,cc.p(230,115), this, 2);
     },
     ataque2:function(layer){
         return new CharcoAguaAtaque(layer,cc.p(560,200), this);
