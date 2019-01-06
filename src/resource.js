@@ -62,6 +62,8 @@ var res = {
     mensaje_ataques_eevee: "res/fondoMensajes/mensaje_ataques_eevee.png",
     charizar_idle_png: "res/pokemon/charizar_idle.png",
     charizar_idle_plist: "res/pokemon/charizar_idle.plist",
+    gyarados_idle_png: "res/pokemon/gyarados_idle.png",
+    gyarados_idle_plist: "res/pokemon/gyarados_idle.plist",
     charizar_ataque1_png: "res/pokemon/charizar_ataque1.png",
     charizar_ataque1_plist: "res/pokemon/charizar_ataque1.plist",
     nivel_1: "res/vida/nivel_1.png",
