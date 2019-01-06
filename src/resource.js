@@ -81,7 +81,12 @@ var res = {
     vida_100: "res/vida/vida_100.png",
     eevee_espalda_png: "res/pokemon/eevee_espalda.png",
     eevee_espalda_plist: "res/pokemon/eevee_espalda.plist",
-    mensaje_curar_antes_combate: "res/fondoMensajes/mensaje_curar_antes_combate.png"
+    mensaje_curar_antes_combate: "res/fondoMensajes/mensaje_curar_antes_combate.png",
+    mensaje_derrotado_oponente_torneo: "res/fondoMensajes/mensaje_derrotado_oponente_torneo.png",
+    mensaje_ataques_torneo_pikachu: "res/fondoMensajes/mensaje_ataques_torneo_pikachu.png",
+    mensaje_ataques_torneo_piplup: "res/fondoMensajes/mensaje_ataques_torneo_piplup.png",
+    mensaje_ataques_torneo_eevee: "res/fondoMensajes/mensaje_ataques_torneo_eevee.png",
+    mensaje_ganar_torneo: "res/fondoMensajes/mensaje_ganar_torneo.png"
 
 };
 

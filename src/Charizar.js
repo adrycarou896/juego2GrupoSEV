@@ -85,7 +85,8 @@ var Charizar = cc.Class.extend({
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animacion);
 
-        this.vida -= disparo.daño();
+        //this.vida -= disparo.daño();
+        this.vida =0;
     },
     cambiarAAnimacionDeAtaque:function(){
         var framesAnimacion = [];
@@ -123,6 +124,7 @@ var Charizar = cc.Class.extend({
         this.sprite.runAction(this.animacion);
     },
     finModoLucha:function () {
-
+        this.space.removeShape(this.shape);
+        this.layer.removeChild(this.sprite);
     }
 });
