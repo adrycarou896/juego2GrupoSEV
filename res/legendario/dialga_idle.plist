@@ -241,6 +241,19 @@
 				<key>sourceSize</key>
 				<string>{283,297}</string>
 			</dict>
+			<key>dialga_idle_18.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{823,0},{300,297}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{259,297}}</string>
+				<key>sourceSize</key>
+				<string>{259,297}</string>
+			</dict>
 
 		</dict>
 

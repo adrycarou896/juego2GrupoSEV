@@ -75,9 +75,9 @@ var Dialga = cc.Class.extend({
     },
     impactadoSiEsEnemigo:function(disparo){
         console.log("ES IMPACTADOO");
-        /*var framesAnimacion = [];
-        for (var i = 3; i <= 4; i++) {
-            var str = "charizar_idle_0" + i + ".png";
+        var framesAnimacion = [];
+        for (var i = 17; i <= 18; i++) {
+            var str = "dialga_idle_" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -87,7 +87,7 @@ var Dialga = cc.Class.extend({
 
         this.animacion = this.animacion_idle;
         this.sprite.stopAllActions();
-        this.sprite.runAction(this.animacion);*/
+        this.sprite.runAction(this.animacion);
 
         this.vida -= disparo.daño();
         //this.vida =0;
@@ -113,9 +113,13 @@ var Dialga = cc.Class.extend({
         this.sprite.runAction(this.animacion);*/
     },
     cambiarAModoLucha:function(){
-        /*var framesAnimacion = [];
-        for (var i = 1; i <= 3; i++) {
-            var str = "charizar_idle_0" + i + ".png";
+        var framesAnimacion = [];
+        for (var i = 1; i <= 17; i++) {
+            if(i<10)
+                var str = "dialga_idle_0" + i + ".png";
+            else
+                var str = "dialga_idle_" + i + ".png";
+
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -125,7 +129,7 @@ var Dialga = cc.Class.extend({
 
         this.animacion = this.animacion_idle;
         this.sprite.stopAllActions();
-        this.sprite.runAction(this.animacion);*/
+        this.sprite.runAction(this.animacion);
     },
     finModoLucha:function () {
         this.space.removeShape(this.shape);

@@ -52,7 +52,7 @@ var DragonAtaque = cc.Class.extend({
         this.sprite.runAction(actionAnimacionBucle);
 
 
-        this.body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
+        this.body.applyImpulse(cp.v(-500, -550), cp.v(10, 15));
 
         this.gameLayer = gameLayer;
 
@@ -62,7 +62,7 @@ var DragonAtaque = cc.Class.extend({
     },
     actualizar: function (){
         this.body.vx = -500;
-        this.body.vy = -500;
+        this.body.vy = -550;
     },
     eliminar: function (){
         // quita la forma
