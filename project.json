@@ -24,6 +24,7 @@
         "src/Pokeball.js",
         "src/BolaAguaAtaque.js",
         "src/CharcoAguaAtaque.js",
-        "src/Charizar.js"
+        "src/Charizar.js",
+        "src/Gyarados.js"
     ]
 }

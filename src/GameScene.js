@@ -1105,6 +1105,7 @@ var TorneoLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.piplup_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.charizar_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.charizar_ataque1_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.gyarados_idle_plist);
 
         // Fondo
         this.spriteFondo = cc.Sprite.create(res.fondo_lucha_5);
@@ -1120,7 +1121,6 @@ var TorneoLayer = cc.Layer.extend({
         else {
             this.enemigos.push(new Charizar());
             this.enemigos.push(new Charizar());
-
         }
 
         this.seleccionarEnemigo();
