@@ -1316,7 +1316,7 @@ var TorneoLayer = cc.Layer.extend({
         if(this.tiempoDisparoEnemigo > 0){
             this.tiempoDisparoEnemigo = this.tiempoDisparoEnemigo - dt;
         }
-        if(this.tiempoDisparoEnemigo < 0){
+        if(this.tiempoDisparoEnemigo < 0 && this.enemigo.vida > 0){
             this.enemigo.cambiarAAnimacionDeAtaque();
             this.disparosEnemigo.push(new BolaFuegoAtaque(this,cc.p(550, 210), this.pokemonJugador, 1));
             this.tiempoDisparoEnemigo = 0;
