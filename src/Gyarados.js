@@ -71,7 +71,6 @@ var Gyarados = cc.Class.extend({
 
     },
     impactadoSiEsEnemigo:function(disparo){
-        console.log("ES IMPACTADOO");
         var framesAnimacion = [];
         for (var i = 3; i <= 4; i++) {
             var str = "gyarados_idle_0" + i + ".png";

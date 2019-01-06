@@ -1,7 +1,7 @@
 var res = {
     HelloWorld_png : "res/HelloWorld.png",
     boton_jugar_png : "res/boton_jugar.png",
-    menu_titulo_png : "res/menu_titulo.png",
+    menu_titulo_png : "res/fondo.png",
     jugador_png: "res/jugador/jugador.png",
     jugador_plist: "res/jugador/jugador.plist",
     eevee_png: "res/pokemon/eevee_imagen.png",

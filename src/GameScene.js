@@ -1119,8 +1119,9 @@ var TorneoLayer = cc.Layer.extend({
             this.enemigos = enemigos;
         }
         else {
-            this.enemigos.push(new Dialga());
+
             this.enemigos.push(new Gyarados());
+            this.enemigos.push(new Dialga());
         }
 
         this.seleccionarEnemigo();
