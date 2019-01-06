@@ -356,6 +356,7 @@ var LayerInscripcionTorneo = cc.Layer.extend({
         switch (keyCode){
             case 83://s
                 this.getParent().addChild(new TorneoLayer(this.jugador, null));
+                this.jugador.body.p.y = this.jugador.body.p.y - 50;
                 //Todo
                 break;
             case 78: //n
@@ -474,7 +475,6 @@ var LayerGimnasio = cc.Layer.extend({
 
 
     colisionConMostrador:function(){
-        this.jugador.inscribirTorneo();
         this.jugador.inscribirTorneo();
     },
 
