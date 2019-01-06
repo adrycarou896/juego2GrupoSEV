@@ -1695,13 +1695,13 @@ var MensajesLayer = cc.Layer.extend({
                 var layerTorneo = new TorneoLayer(this.layer.jugador, this.layer.enemigos);
                 this.layer.getParent().addChild(layerTorneo);
 
-                this.getParent().removeChild(this.layer);
-                this.getParent().removeChild(this);
+                this.layer.getParent().removeChild(this.layer);
+                this.layer.getParent().removeChild(this);
                 break;
             case 10:
-                //this.layer.enemigo.finModoLucha();
-                this.getParent().removeChild(this.layer);
-                this.getParent().removeChild(this);
+                console.log("nombre al borrarrrrrrr: " + this.layer.nombre);
+                this.layer.getParent().removeChild(this.layer);
+                this.layer.getParent().removeChild(this);
                 break;
 
 
