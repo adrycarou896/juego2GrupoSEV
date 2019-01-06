@@ -322,21 +322,6 @@ function moverCamara(jugador, contentSize, mapaAncho, mapaAlto, layer){
 }
 
 
-function procesarKeyReleasedInscripcionTorneo(keyCode){
-    var posicion = teclas.indexOf(keyCode);
-    teclas.splice(posicion, 1);
-    switch (keyCode){
-        case 83://s
-            console.log("has pulsado siiiiiiiii");
-            this.getParent().addChild(new TorneoLayer(this.jugador, null));
-            //Todo
-            break;
-        case 78: //n
-            console.log("has pulsado nooooooo");
-            //Todo
-            break;
-    }
-}
 
 
 var LayerInscripcionTorneo = cc.Layer.extend({
@@ -359,12 +344,26 @@ var LayerInscripcionTorneo = cc.Layer.extend({
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
-            onKeyReleased: procesarKeyReleasedInscripcionTorneo.bind(this)
+            onKeyReleased: this.procesarKeyReleasedInscripcionTorneo.bind(this)
         }, this);
 
-
         return true;
+    },
+
+    procesarKeyReleasedInscripcionTorneo: function(keyCode){
+        var posicion = teclas.indexOf(keyCode);
+        teclas.splice(posicion, 1);
+        switch (keyCode){
+            case 83://s
+                this.getParent().addChild(new TorneoLayer(this.jugador, null));
+                //Todo
+                break;
+            case 78: //n
+                //Todo
+                break;
+        }
     }
+
 
 });
 
