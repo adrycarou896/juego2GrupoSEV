@@ -225,7 +225,12 @@ var GameLayer = cc.Layer.extend({
 
 
     finColisionConGimnasio:function (arbiter, space) {
-        this.getParent().removeChild(this.jugador.layer);
+        if(!this.jugador.layerGimnasio.prohibido)
+            this.getParent().removeChild(this.jugador.layer);
+        else {
+            this.getParent().removeChild(this.jugador.layerGimnasio);
+            this.jugador.layerGimnasio = null;
+        }
     },
 
     colisionConCentroPokemon:function (arbiter, space) {
@@ -432,7 +437,7 @@ var LayerGimnasio = cc.Layer.extend({
     mapaAlto:0,
     nombre: "LayerGimnasio",
     personaMostrador: null,
-
+    prohibido: false,
 
     ctor:function (jugador, prohibido) {
         this._super();
@@ -441,8 +446,10 @@ var LayerGimnasio = cc.Layer.extend({
         // Inicializar Space (sin gravedad)
         this.space = new cp.Space();
 
+        this.prohibido = prohibido;
+
         // Fondo
-        if(prohibido) {
+        if(this.prohibido) {
             this.spriteFondo = cc.Sprite.create(res.fondo_mensaje_prohibido_gimnasio);
             this.spriteFondo.setPosition(cc.p(size.width - (Math.abs(jugador.body.p.x - size.width)) - (this.spriteFondo.width),
                 size.height - (Math.abs(size.height - jugador.body.p.y)) + this.spriteFondo.height));

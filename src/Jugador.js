@@ -153,8 +153,6 @@ var Jugador = cc.Class.extend({
 
         this.capturados.push(new Pikachu());
         this.capturados.push(new Piplup());
-        this.capturados.push(new Eevee());
-        this.capturados.push(new Eevee());
 
     },
 
@@ -266,11 +264,14 @@ var Jugador = cc.Class.extend({
         }
 
         if(pokemonNivel2 >= 2){
-            //Todo
+            if(this.layerGimnasio == null){
+                this.layerGimnasio =  new LayerGimnasio(this, false);
+                this.layer.getParent().addChild(this.layerGimnasio);
+            }
         }
         else{
             if(this.layerGimnasio == null){
-                this.layerGimnasio =  new LayerGimnasio(this, false);
+                this.layerGimnasio =  new LayerGimnasio(this, true);
                 this.layer.getParent().addChild(this.layerGimnasio);
             }
         }
