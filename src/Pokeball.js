@@ -106,6 +106,7 @@ var Pokeball = cc.Class.extend({
 
             else {
 
+
                 var random = Math.random();
 
                 if (random >= 0.42)

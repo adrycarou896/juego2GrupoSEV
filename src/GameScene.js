@@ -194,6 +194,7 @@ var GameLayer = cc.Layer.extend({
             var arrayJugador = grupoJugador.getObjects();
             this.jugador = new Jugador(this.space,
                 cc.p(arrayJugador[0]["x"], arrayJugador[0]["y"]), this);
+            this.jugador.iniciarPokemonJugador();
         }
         else{
             if(this.saleDe == 1) { //Sale del gimnasio
@@ -1241,7 +1242,7 @@ var TorneoLayer = cc.Layer.extend({
                 var layerTorneo = new TorneoLayer(this.jugador, this.enemigos);
                 this.getParent().addChild(layerTorneo);
 
-                if (!layerTorneo.pokemonJugador == null) {
+                if (layerTorneo.pokemonJugador == null) {
                     if (this.menu != null) {
                         this.getParent().removeChild(this.menu);
                     }
@@ -1259,7 +1260,7 @@ var TorneoLayer = cc.Layer.extend({
 
                 this.getParent().removeChild(this);
             } else {
-                if (this.menu == null && this.enemigo.vida > 0) {
+                if (this.menu == null && this.enemigo.vida > 0 && this.pokemonJugador!= null && this.pokemonJugador.vida > 0) {
                     this.menu = new MenuLuchaTorneoLayer(this.pokemonJugador, this);
                     this.getParent().addChild(this.menu);
                 }
@@ -1611,10 +1612,12 @@ var MensajesLayer = cc.Layer.extend({
         switch (this.mensaje) {
             case 1:
                 this.getParent().removeChild(this);
-                if(this.layer.menu == null) {
-                    var menu = new MenuLuchaLayer(this.layer.pokemonJugador, this.layer);
-                    this.layer.menu = menu;
-                    this.layer.getParent().addChild(this.layer.menu);
+                if(this.layer.nombre == "LuchaLayer") {
+                    if (this.layer.menu == null) {
+                        var menu = new MenuLuchaLayer(this.layer.pokemonJugador, this.layer);
+                        this.layer.menu = menu;
+                        this.layer.getParent().addChild(this.layer.menu);
+                    }
                 }
                 break;
             case 2:
@@ -1640,6 +1643,7 @@ var MensajesLayer = cc.Layer.extend({
                 this.layer.getParent().removeChild(this.layer);
                 break;
             case 6:
+                console.log("ejecutando pusssssssssshhhhh");
                 this.jugador.capturados.push(this.layer.enemigo);
                 this.layer.layer.jugador.capturados = this.jugador.capturados;
                 if(this.layer.pokemonJugador.subirNivel()){
@@ -1670,7 +1674,7 @@ var MensajesLayer = cc.Layer.extend({
                 this.layer.getParent().addChild(layerTorneo);
 
                 this.layer.getParent().removeChild(this.layer);
-                this.layer.getParent().removeChild(this);
+                this.layer.removeChild(this);
                 break;
             case 10:
                 console.log("nombre al borrarrrrrrr: " + this.layer.nombre);

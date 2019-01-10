@@ -2,7 +2,7 @@ var BolaFuegoAtaque = cc.Class.extend({
     gameLayer:null,
     sprite:null,
     shape:null,
-    eficacia: 50,
+    eficacia: 20,
     pokemon: null,
     orientacion: 1,
     ctor:function (gameLayer, posicion, pokemon, orientacion) {
